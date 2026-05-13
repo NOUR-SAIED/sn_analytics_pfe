@@ -5,3 +5,4 @@ __pycache__/
 logs/
 .github/
 .vscode/
+*.egg-info/ # Ignore Python package metadata

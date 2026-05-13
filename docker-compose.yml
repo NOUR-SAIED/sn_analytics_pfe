@@ -91,6 +91,7 @@ x-airflow-common:
     POSTGRES_CONN_HOST: ${POSTGRES_CONN_HOST}
     POSTGRES_CONN_PORT: ${POSTGRES_CONN_PORT}
   volumes:
+    - ./etl_core:/opt/airflow/etl_core
     - ./config:/opt/airflow/config
     - ./dags:/opt/airflow/dags
     - ./data:/opt/airflow/data

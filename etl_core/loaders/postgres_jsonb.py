@@ -149,3 +149,67 @@ class PostgresJSONBLoader:
             with conn.cursor() as cur:
                 cur.execute(sql.SQL("SELECT COUNT(*) FROM {}").format(full_table))
                 return cur.fetchone()[0]
+
+    # -------------------------
+    # READ: fetch bronze records
+    # -------------------------
+    def fetch_records(
+        self,
+        table_name: str = "raw_incidents",
+        source_table: Optional[str] = None,
+        limit: Optional[int] = None,
+    ) -> List[Dict[str, Any]]:
+        """
+        Fetch records from a bronze table, returning them as dicts
+        with record_json unfolded alongside envelope columns.
+
+        Args:
+            table_name: Bronze table name (e.g. 'raw_incidents')
+            source_table: Optional filter by source_table column
+            limit: Optional row limit
+
+        Returns:
+            List of dicts combining envelope columns + record_json contents
+        """
+        schema = "bronze"
+
+        full_table = sql.SQL("{}.{}").format(
+            sql.Identifier(schema),
+            sql.Identifier(table_name)
+        )
+
+        query = sql.SQL("""
+            SELECT id, source_table, sys_id, record_json, loaded_at, extraction_run_id
+            FROM {}
+        """).format(full_table)
+
+        conditions = []
+        if source_table:
+            conditions.append(sql.SQL("source_table = {}").format(sql.Literal(source_table)))
+
+        if conditions:
+            query = sql.SQL("{} WHERE {}").format(
+                query, sql.SQL(" AND ").join(conditions)
+            )
+
+        query = sql.SQL("{} ORDER BY id ASC").format(query)
+
+        if limit:
+            query = sql.SQL("{} LIMIT {}").format(query, sql.Literal(limit))
+
+        with self._get_connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(query)
+                rows = cur.fetchall()
+                columns = [desc[0] for desc in cur.description]
+
+        records = []
+        for row in rows:
+            d = dict(zip(columns, row))
+            record_json = d.pop("record_json", {})
+            if isinstance(record_json, dict):
+                d.update(record_json)
+            records.append(d)
+
+        print(f"[INFO] Read {len(records)} records from bronze.{table_name}")
+        return records
