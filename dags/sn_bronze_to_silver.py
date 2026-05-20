@@ -1,13 +1,9 @@
 """
-Airflow DAG: Bronze → Silver transformation.
+Airflow DAG: Bronze → Silver (flattening step).
 
-Orchestrates the transformation of bronze JSONB records into
-typed silver tables. Reusable: any table registered in
-etl_core.config.silver_mappings can be transformed.
-
-Schema migration:
-  Set RECREATE_TABLES = True below, run the DAG once, then set back to False.
-  This drops and recreates all silver tables with the latest schema.
+Transforms bronze JSONB records into flattened silver tables.
+This is the ONE-TIME flatten — only bronze.raw_incidents → silver.incidents_flat.
+Do NOT add other tables here.
 """
 
 from datetime import datetime, timedelta
@@ -17,10 +13,9 @@ from airflow.operators.python import PythonOperator
 from etl_core.loaders.postgres_jsonb import PostgresJSONBLoader
 from etl_core.loaders.postgres_silver import PostgresSilverLoader
 from etl_core.transformers.silver import SilverTransformer
-from etl_core.config.silver_mappings import get_config, REGISTRY
+from etl_core.config.silver_mappings import get_config
 
 
-# Set to True for schema migrations (drops + recreates all silver tables)
 RECREATE_TABLES = True
 
 
@@ -37,25 +32,16 @@ dag = DAG(
     start_date=datetime(2026, 5, 1),
     schedule="@daily",
     catchup=False,
-    tags=["servicenow", "silver", "transform"],
+    tags=["servicenow", "bronze", "silver", "flatten"],
 )
 
 
 def transform_table(bronze_table: str, **context):
-    """
-    Transform a single bronze table to silver.
-
-    Steps:
-        1. Read records from bronze table
-        2. Transform using SilverTransformer
-        3. Upsert into silver table
-    """
     config = get_config(bronze_table)
     run_id = context["run_id"]
 
     print(f"[PIPELINE] Starting bronze → silver for '{bronze_table}'")
 
-    # Step 1: Read from bronze
     bronze_loader = PostgresJSONBLoader(host="postgres")
     bronze_records = bronze_loader.fetch_records(
         table_name=config.bronze_table,
@@ -68,13 +54,11 @@ def transform_table(bronze_table: str, **context):
         print("[PIPELINE] No records to transform. Skipping.")
         return
 
-    # Step 2: Transform
     transformer = SilverTransformer(config)
     silver_records = transformer.transform(bronze_records)
 
     print(f"[PIPELINE] Transformed {len(silver_records)} records for silver.{config.target_table}")
 
-    # Step 3: Load to silver
     silver_loader = PostgresSilverLoader(host="postgres")
 
     if RECREATE_TABLES:
@@ -82,14 +66,12 @@ def transform_table(bronze_table: str, **context):
         silver_loader.drop_table(config)
 
     silver_loader.ensure_table(config)
-
     loaded = silver_loader.upsert_records(config, silver_records)
 
     print(f"[PIPELINE] Upserted {loaded} records into silver.{config.target_table}")
 
 
 def verify_silver(bronze_table: str, **context):
-    """Verify silver table has data."""
     config = get_config(bronze_table)
     loader = PostgresSilverLoader(host="postgres")
     count = loader.get_record_count(config)
@@ -100,21 +82,18 @@ def verify_silver(bronze_table: str, **context):
         raise ValueError("No data found in silver layer!")
 
 
-# ── Create dynamic tasks for every registered bronze table ───────────────────
+transform_task = PythonOperator(
+    task_id="transform_raw_incidents_flat_to_silver",
+    python_callable=transform_table,
+    op_kwargs={"bronze_table": "raw_incidents_flat"},
+    dag=dag,
+)
 
-for bronze_table_name in REGISTRY:
-    transform_task = PythonOperator(
-        task_id=f"transform_{bronze_table_name}_to_silver",
-        python_callable=transform_table,
-        op_kwargs={"bronze_table": bronze_table_name},
-        dag=dag,
-    )
+verify_task = PythonOperator(
+    task_id="verify_raw_incidents_flat_silver",
+    python_callable=verify_silver,
+    op_kwargs={"bronze_table": "raw_incidents_flat"},
+    dag=dag,
+)
 
-    verify_task = PythonOperator(
-        task_id=f"verify_{bronze_table_name}_silver",
-        python_callable=verify_silver,
-        op_kwargs={"bronze_table": bronze_table_name},
-        dag=dag,
-    )
-
-    transform_task >> verify_task
+transform_task >> verify_task

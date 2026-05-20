@@ -11,7 +11,7 @@ import psycopg2
 from psycopg2 import sql
 from psycopg2.extras import execute_values
 
-from etl_core.config.silver_mappings import SilverTableConfig, FieldMapping, ComputedField
+from etl_core.config.silver_mappings import SilverTableConfig, FieldMapping
 
 
 class PostgresSilverLoader:
@@ -93,12 +93,6 @@ class PostgresSilverLoader:
             pg_type = type_map.get(f.type, "TEXT")
             nullable = " NOT NULL" if f.required else ""
             col_defs.append(f"{f.column} {pg_type}{nullable}")
-
-        for c in config.computed:
-            if c.column in base_cols:
-                continue
-            pg_type = type_map.get(c.type, "BIGINT")
-            col_defs.append(f"{c.column} {pg_type}")
 
         col_defs.extend([
             "loaded_at TIMESTAMPTZ DEFAULT NOW()",
@@ -255,3 +249,44 @@ class PostgresSilverLoader:
                 conn.commit()
 
         print(f"[INFO] Truncated {schema}.{table}")
+
+    def fetch_records_for_dimensions(
+        self,
+        config: SilverTableConfig,
+        sys_id_field: Optional[str] = None,
+        limit: Optional[int] = None,
+    ) -> List[Dict[str, Any]]:
+        schema = config.target_schema
+        source_table = config.source_silver_table or config.target_table
+
+        full_table = sql.SQL("{}.{}").format(
+            sql.Identifier(schema),
+            sql.Identifier(source_table)
+        )
+
+        where_clause = sql.SQL("")
+        if sys_id_field:
+            where_clause = sql.SQL(" WHERE {} IS NOT NULL AND {} != ''").format(
+                sql.Identifier(sys_id_field),
+                sql.Identifier(sys_id_field),
+            )
+
+        limit_clause = sql.SQL("")
+        if limit:
+            limit_clause = sql.SQL(" LIMIT {}").format(sql.Literal(limit))
+
+        query = sql.SQL("SELECT * FROM {}{}{}").format(
+            full_table,
+            where_clause,
+            limit_clause,
+        )
+
+        rows = []
+        with self._get_connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(query)
+                cols = [desc[0] for desc in cur.description]
+                for row in cur.fetchall():
+                    rows.append(dict(zip(cols, row)))
+
+        return rows

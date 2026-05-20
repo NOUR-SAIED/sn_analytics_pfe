@@ -1,25 +1,25 @@
 """
 Silver layer transformer.
 
-Takes bronze records (JSONB dicts from ServiceNow API format) and a
-SilverTableConfig, returns typed flat dicts ready for silver table insertion.
+Takes bronze/silver raw records and a SilverTableConfig,
+returns typed flat dicts ready for silver table insertion.
+
+Computed fields (response_time_s, resolution_time_s, etc.)
+are deferred to the gold layer — documented in docs/gold_computed_fields.md
 """
 
 from datetime import datetime, date, timezone
-from typing import List, Dict, Any, Optional, Callable
+from typing import List, Dict, Any, Optional
 
-from etl_core.config.silver_mappings import SilverTableConfig, FieldMapping, ComputedField
-
-
-EPOCH = datetime(1970, 1, 1, tzinfo=timezone.utc)
+from etl_core.config.silver_mappings import SilverTableConfig, FieldMapping
 
 
 class SilverTransformer:
     """
-    Transforms bronze JSONB records into typed silver records.
+    Transforms bronze/silver raw records into typed silver records.
 
     Usage:
-        config = get_config("raw_incidents")
+        config = get_config("raw_incidents_flat")
         transformer = SilverTransformer(config)
         silver_records = transformer.transform(bronze_records)
     """
@@ -27,45 +27,18 @@ class SilverTransformer:
     def __init__(self, config: SilverTableConfig):
         self.config = config
         self._output_columns = {f.column for f in config.fields}
-        self._computed_cols = {c.column for c in config.computed}
 
-    # -- Public API ----------------------------------------------------------
-
-    def transform(self, bronze_records: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        """Transform a list of bronze JSONB records into silver records."""
+    def transform(self, records: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """Transform a list of bronze/silver records into silver records."""
         result = []
-        for record in bronze_records:
+        for record in records:
             transformed = self._transform_one(record)
             if transformed is not None:
                 result.append(transformed)
         return result
 
-    def derive_silver_ddl(self) -> List[str]:
-        """Generate CREATE TABLE column definitions from config (for reference)."""
-        type_map = {
-            "TEXT": "TEXT",
-            "INTEGER": "BIGINT",
-            "FLOAT": "NUMERIC",
-            "BOOLEAN": "BOOLEAN",
-            "TIMESTAMP": "TIMESTAMPTZ",
-            "DATE": "DATE",
-            "DURATION": "BIGINT",
-            "JSONB": "JSONB",
-        }
-        cols = []
-        for f in self.config.fields:
-            pg_type = type_map.get(f.type, "TEXT")
-            nullable = "" if f.required else ""
-            cols.append(f"    {f.column} {pg_type}{nullable}")
-        for c in self.config.computed:
-            pg_type = type_map.get(c.type, "BIGINT")
-            cols.append(f"    {c.column} {pg_type}")
-        return cols
-
-    # -- Internals -----------------------------------------------------------
-
     def _transform_one(self, record: Dict[str, Any]) -> Optional[Dict[str, Any]]:
-        """Transform a single bronze record. Returns None if required field missing."""
+        """Transform a single record. Returns None if required field missing."""
         out: Dict[str, Any] = {}
 
         out["bronze_id"] = record.get("id")
@@ -82,23 +55,7 @@ class SilverTransformer:
             if typed is not None:
                 out[field_cfg.column] = typed
 
-        self._compute_derived(out)
-
         return out
-
-    _COMPUTED_HANDLERS: Dict[str, Callable] = {}
-
-    @classmethod
-    def _register_computed(cls, name: str, handler: Callable):
-        cls._COMPUTED_HANDLERS[name] = handler
-
-    def _compute_derived(self, out: Dict[str, Any]) -> None:
-        for cf in self.config.computed:
-            handler = self._COMPUTED_HANDLERS.get(cf.column)
-            if handler:
-                result = handler(out)
-                if result is not None:
-                    out[cf.column] = result
 
     def _extract_field(
         self,
@@ -204,22 +161,3 @@ class SilverTransformer:
             return int(float(s))
         except (ValueError, TypeError):
             return default
-
-
-# -- Register computed field handlers ------------------------------------------
-
-def _duration_diff(out, end_field, start_field):
-    end = out.get(end_field)
-    start = out.get(start_field)
-    if end and start and isinstance(end, datetime) and isinstance(start, datetime):
-        return int((end - start).total_seconds())
-    return None
-
-SilverTransformer._register_computed("response_time_s",
-    lambda o: _duration_diff(o, "first_response_time", "opened_at"))
-SilverTransformer._register_computed("resolution_time_s",
-    lambda o: _duration_diff(o, "resolved_at", "opened_at"))
-SilverTransformer._register_computed("assign_time_s",
-    lambda o: _duration_diff(o, "assigned_at", "opened_at"))
-SilverTransformer._register_computed("closure_lag_s",
-    lambda o: _duration_diff(o, "closed_at", "resolved_at"))
