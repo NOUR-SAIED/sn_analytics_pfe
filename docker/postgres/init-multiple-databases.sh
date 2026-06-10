@@ -25,4 +25,7 @@ create_user_and_database $CELERY_BACKEND_NAME $CELERY_BACKEND_USERNAME $CELERY_B
 # ELT database
 create_user_and_database $ELT_DATABASE_NAME $ELT_DATABASE_USERNAME $ELT_DATABASE_PASSWORD
 
+#superset database
+create_user_and_database $SUPERSET_DATABASE_NAME $SUPERSET_DATABASE_USERNAME $SUPERSET_DATABASE_PASSWORD
+
 echo "All databases and users created successfully"

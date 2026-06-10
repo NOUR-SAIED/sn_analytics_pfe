@@ -94,6 +94,7 @@ x-airflow-common:
     - ./etl_core:/opt/airflow/etl_core
     - ./config:/opt/airflow/config
     - ./dags:/opt/airflow/dags
+    - ./sql:/opt/airflow/sql:ro
     - ./data:/opt/airflow/data
     - ./include:/opt/airflow/include
     - ./logs:/opt/airflow/logs
@@ -106,6 +107,28 @@ x-airflow-common:
       condition: service_healthy
     postgres:
       condition: service_healthy
+
+x-superset-common:
+  &superset-common
+  build:
+    context: ./docker/superset
+    dockerfile: Dockerfile
+  image: sn_analytics_superset:latest
+  environment:
+    POSTGRES_CONN_USERNAME: ${POSTGRES_CONN_USERNAME}
+    POSTGRES_CONN_PASSWORD: ${POSTGRES_CONN_PASSWORD}
+    POSTGRES_CONN_HOST: ${POSTGRES_CONN_HOST}
+    POSTGRES_CONN_PORT: ${POSTGRES_CONN_PORT}
+    SUPERSET_DATABASE_NAME: ${SUPERSET_DATABASE_NAME}
+    SUPERSET_DATABASE_USERNAME: ${SUPERSET_DATABASE_USERNAME}
+    SUPERSET_DATABASE_PASSWORD: ${SUPERSET_DATABASE_PASSWORD}
+    SUPERSET_SECRET_KEY: ${SUPERSET_SECRET_KEY}
+    PYTHONPATH: /app/pythonpath
+    REDIS_HOST: redis
+    REDIS_PORT: 6379
+    REDIS_DB: 1
+  volumes:
+    - ./docker/superset/superset_config.py:/app/pythonpath/superset_config.py
  
 services:
   postgres:
@@ -129,6 +152,10 @@ services:
       - CELERY_BACKEND_PASSWORD=${CELERY_BACKEND_PASSWORD}
       - POSTGRES_CONN_HOST=${POSTGRES_CONN_HOST}
       - POSTGRES_CONN_PORT=${POSTGRES_CONN_PORT}
+      # ── Superset metadata database ──────────────────────────────────────────
+      - SUPERSET_DATABASE_NAME=${SUPERSET_DATABASE_NAME}
+      - SUPERSET_DATABASE_USERNAME=${SUPERSET_DATABASE_USERNAME}
+      - SUPERSET_DATABASE_PASSWORD=${SUPERSET_DATABASE_PASSWORD}
     ports:
       - 5432:5432
     volumes:
@@ -305,7 +332,61 @@ services:
       - bash
       - -c
       - airflow
- 
+
+  # ── Apache Superset ─────────────────────────────────────────────────────────
+  #
+  # superset-init   runs once: DB migration + admin user creation
+  # superset-app    the persistent web UI on port 8088
+  #
+  # Superset stores its own metadata (dashboards, charts, slices) in a dedicated
+  # database on the shared Postgres instance.  Add the connection string to your
+  # ELT database via the Superset UI (Settings → Database Connections) so it can
+  # query your pipeline output.
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  superset-init:
+    <<: *superset-common
+    container_name: superset-init
+    # Run DB migrations, then create the admin user, then exit
+    command: >
+      bash -c "
+        superset db upgrade &&
+        superset fab create-admin --username '${SUPERSET_ADMIN_USERNAME}' --firstname Admin --lastname User --email '${SUPERSET_ADMIN_EMAIL}' --password '${SUPERSET_ADMIN_PASSWORD}' &&
+        superset init
+      "
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: on-failure
+
+  superset-app:
+    <<: *superset-common
+    container_name: superset-app
+    command: >
+      /bin/sh -c "gunicorn
+      --bind 0.0.0.0:8088
+      --workers 2
+      --worker-class gthread
+      --threads 20
+      --timeout 120
+      'superset.app:create_app()'"
+    ports:
+      - "8088:8088"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      superset-init:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8088/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: always
+
   # # You can enable flower by adding "--profile flower" option e.g. docker-compose --profile flower up
   # # or by explicitly targeted on the command line e.g. docker-compose up flower.
   # # See: https://docs.docker.com/compose/profiles/

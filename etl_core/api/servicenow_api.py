@@ -53,7 +53,8 @@ class ServiceNowAPIClient:
         table: str,
         query: str,
         limit: int,
-        offset: int
+        offset: int,
+        fields: Optional[str] = None
     ) -> List[Dict[str, Any]]:
         """
         Fetch a single page from the API with retries.
@@ -63,6 +64,7 @@ class ServiceNowAPIClient:
             query: sysparm_query filter string
             limit: Number of records per page
             offset: Starting position
+            fields: Comma-separated list of fields to return (sysparm_fields)
             
         Returns:
             List of records from this page
@@ -77,6 +79,9 @@ class ServiceNowAPIClient:
             "sysparm_offset": offset,
             "sysparm_display_value": "all"
         }
+        
+        if fields:
+            params["sysparm_fields"] = fields
 
         for attempt in range(self.config.MAX_RETRIES + 1):
             self._rate_limit_wait()
@@ -131,27 +136,31 @@ class ServiceNowAPIClient:
     def fetch_all_records(
         self,
         table: str,
-        account_query: Optional[str] = None
+        query_filter: Optional[str] = None,
+        fields: Optional[str] = None
     ) -> List[Dict[str, Any]]:
         """
         Fetch all records from a table, filtered by account.
         
         Args:
             table: ServiceNow table name
-            account_query: Optional override for account filter (uses config default if None)
+            query_filter: Specific query string for the table (e.g. account=123)
+            fields: Optional comma-separated list of fields to return
             
         Returns:
             List of all records matching the query
         """
-        query = account_query or self.config.ACCOUNT_QUERY
+        query = query_filter or self.config.ACCOUNT_QUERY
         if not query:
-            raise ValueError("No account query provided")
+            raise ValueError(f"No query filter provided for table '{table}'. Subsidiary filtering is strictly required.")
 
         all_records: List[Dict[str, Any]] = []
         offset = 0
 
         print(f"\n[EXTRACT] Fetching records from table '{table}'")
         print(f"   Query filter: {query}")
+        if fields:
+            print(f"   Fields: {fields}")
         print(f"   Batch size: {self.config.BATCH_SIZE}")
         print("-" * 60)
 
@@ -162,7 +171,8 @@ class ServiceNowAPIClient:
                 table=table,
                 query=query,
                 limit=self.config.BATCH_SIZE,
-                offset=offset
+                offset=offset,
+                fields=fields
             )
 
             if not batch:

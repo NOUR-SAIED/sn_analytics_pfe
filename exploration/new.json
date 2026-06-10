@@ -1,0 +1,4108 @@
+{
+    "result": [
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-06-09 16:29:58",
+            "business_time_left": "1970-01-01 00:24:16",
+            "duration": "1970-01-01 00:05:44",
+            "sys_id": "0188a6d13386aa107bf1e97c2d5c7b39",
+            "time_left": "1970-01-01 00:24:16",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-06-09 16:24:14",
+            "percentage": "19.11",
+            "original_breach_time": "2025-06-09 16:54:14",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "19.11",
+            "end_time": "2025-06-09 16:29:58",
+            "sys_mod_count": "3",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-06-09 16:24:14",
+            "business_duration": "1970-01-01 00:05:44",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/75382e5d3346aa107bf1e97c2d5c7bb4",
+                "value": "75382e5d3346aa107bf1e97c2d5c7bb4"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-06-09 16:54:14",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-05-14 12:52:49",
+            "business_time_left": "1970-01-01 00:05:02",
+            "duration": "1970-01-01 00:04:58",
+            "sys_id": "02ad73f433adea907bf1e97c2d5c7b7e",
+            "time_left": "1970-01-01 00:05:02",
+            "sys_updated_by": "Sukhra.Hemchand",
+            "sys_created_on": "2025-05-14 12:47:51",
+            "percentage": "49.67",
+            "original_breach_time": "2025-05-14 12:57:51",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "49.67",
+            "end_time": "2025-05-14 12:52:49",
+            "sys_mod_count": "7",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-05-14 12:47:51",
+            "business_duration": "1970-01-01 00:04:58",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/6d3d3b7433adea907bf1e97c2d5c7b38",
+                "value": "6d3d3b7433adea907bf1e97c2d5c7b38"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-05-14 12:57:51",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-07-07 16:43:46",
+            "business_time_left": "1970-01-01 00:18:27",
+            "duration": "1970-01-01 00:11:33",
+            "sys_id": "07d632da4766a690a003b1af016d4317",
+            "time_left": "1970-01-01 00:18:27",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-07-07 16:32:13",
+            "percentage": "38.5",
+            "original_breach_time": "2025-07-07 17:02:13",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "38.5",
+            "end_time": "2025-07-07 16:43:46",
+            "sys_mod_count": "3",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-07-07 16:32:13",
+            "business_duration": "1970-01-01 00:11:33",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/16267ede4726a690a003b1af016d4300",
+                "value": "16267ede4726a690a003b1af016d4300"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-07-07 17:02:13",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-07-30 08:29:12",
+            "business_time_left": "1970-01-01 00:10:00",
+            "duration": "1970-01-01 08:18:33",
+            "sys_id": "09c2b9a9474b2e50a003b1af016d430a",
+            "time_left": "1970-01-01 03:40:48",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-07-30 00:10:39",
+            "percentage": "69.31",
+            "original_breach_time": "2025-07-30 12:10:00",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "0",
+            "end_time": "2025-07-30 08:29:12",
+            "sys_mod_count": "11",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-07-30 00:10:39",
+            "business_duration": "1970-01-01 00:00:00",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/8952f121474b2e50a003b1af016d4360",
+                "value": "8952f121474b2e50a003b1af016d4360"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-07-30 12:10:00",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-09-16 00:52:01",
+            "business_time_left": "1970-01-01 00:23:52",
+            "duration": "1970-01-01 00:06:08",
+            "sys_id": "0d2781413bc832903624ba2a85e45a85",
+            "time_left": "1970-01-01 00:23:52",
+            "sys_updated_by": "Sukhra.Hemchand",
+            "sys_created_on": "2025-09-16 00:45:53",
+            "percentage": "20.44",
+            "original_breach_time": "2025-09-16 01:15:53",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "20.44",
+            "end_time": "2025-09-16 00:52:01",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-09-16 00:45:53",
+            "business_duration": "1970-01-01 00:06:08",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/3695418d3b8832903624ba2a85e45aac",
+                "value": "3695418d3b8832903624ba2a85e45aac"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-09-16 01:15:53",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-06-15 00:45:54",
+            "business_time_left": "1970-01-01 00:06:45",
+            "duration": "1970-01-01 00:03:15",
+            "sys_id": "0f8a464f47c2e6d0a003b1af016d43fe",
+            "time_left": "1970-01-01 00:06:45",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-06-15 00:42:40",
+            "percentage": "32.5",
+            "original_breach_time": "2025-06-15 00:52:39",
+            "sys_created_by": "Mel Wijesinghe",
+            "business_percentage": "32.5",
+            "end_time": "2025-06-15 00:45:54",
+            "sys_mod_count": "5",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-06-15 00:42:39",
+            "business_duration": "1970-01-01 00:03:15",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/48a906cb47c2e6d0a003b1af016d43a1",
+                "value": "48a906cb47c2e6d0a003b1af016d43a1"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-06-15 00:52:39",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-06-29 12:21:43",
+            "business_time_left": "1970-01-01 00:10:00",
+            "duration": "1970-01-01 00:04:49",
+            "sys_id": "15bfe4f733526a507bf1e97c2d5c7bbf",
+            "time_left": "1970-01-01 23:48:17",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-06-29 12:16:55",
+            "percentage": "0.34",
+            "original_breach_time": "2025-06-30 12:10:00",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "0",
+            "end_time": "2025-06-29 12:21:43",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-06-29 12:16:54",
+            "business_duration": "1970-01-01 00:00:00",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/245fa8bb33126a507bf1e97c2d5c7bb7",
+                "value": "245fa8bb33126a507bf1e97c2d5c7bb7"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-06-30 12:10:00",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-07-25 15:54:00",
+            "business_time_left": "1970-01-01 00:27:34",
+            "duration": "1970-01-01 00:02:26",
+            "sys_id": "1b2a5f4c470b6250a003b1af016d4335",
+            "time_left": "1970-01-01 00:27:34",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-07-25 15:51:34",
+            "percentage": "8.11",
+            "original_breach_time": "2025-07-25 16:21:34",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "8.11",
+            "end_time": "2025-07-25 15:54:00",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-07-25 15:51:34",
+            "business_duration": "1970-01-01 00:02:26",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/7cb7db40470b6250a003b1af016d43e5",
+                "value": "7cb7db40470b6250a003b1af016d43e5"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-07-25 16:21:34",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-05-06 18:42:56",
+            "business_time_left": "1970-01-01 00:07:52",
+            "duration": "1970-01-01 00:22:08",
+            "sys_id": "1d2db31e339562507bf1e97c2d5c7ba0",
+            "time_left": "1970-01-01 00:07:52",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-05-06 18:20:49",
+            "percentage": "73.78",
+            "original_breach_time": "2025-05-06 18:50:48",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "73.78",
+            "end_time": "2025-05-06 18:42:56",
+            "sys_mod_count": "7",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-05-06 18:20:48",
+            "business_duration": "1970-01-01 00:22:08",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/28cc33da339562507bf1e97c2d5c7b91",
+                "value": "28cc33da339562507bf1e97c2d5c7b91"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-05-06 18:50:48",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-05-13 20:24:13",
+            "business_time_left": "1970-01-01 00:14:02",
+            "duration": "1970-01-01 00:15:58",
+            "sys_id": "1fd8983847a5a290a003b1af016d4309",
+            "time_left": "1970-01-01 00:14:02",
+            "sys_updated_by": "Sukhra.Hemchand",
+            "sys_created_on": "2025-05-13 20:08:15",
+            "percentage": "53.22",
+            "original_breach_time": "2025-05-13 20:38:15",
+            "sys_created_by": "Christine.Balde.1",
+            "business_percentage": "53.22",
+            "end_time": "2025-05-13 20:24:13",
+            "sys_mod_count": "5",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-05-13 20:08:15",
+            "business_duration": "1970-01-01 00:15:58",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/6b1210b44765a290a003b1af016d4328",
+                "value": "6b1210b44765a290a003b1af016d4328"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-05-13 20:38:15",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-06-13 20:10:44",
+            "business_time_left": "1970-01-01 00:07:26",
+            "duration": "1970-01-01 00:02:34",
+            "sys_id": "202244b633c6a2107bf1e97c2d5c7b80",
+            "time_left": "1970-01-01 00:07:26",
+            "sys_updated_by": "Peshimam.Adil",
+            "sys_created_on": "2025-06-13 20:08:10",
+            "percentage": "25.67",
+            "original_breach_time": "2025-06-13 20:18:10",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "25.67",
+            "end_time": "2025-06-13 20:10:44",
+            "sys_mod_count": "5",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-06-13 20:08:10",
+            "business_duration": "1970-01-01 00:02:34",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/b0d1c07233c6a2107bf1e97c2d5c7bea",
+                "value": "b0d1c07233c6a2107bf1e97c2d5c7bea"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-06-13 20:18:10",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-07-07 18:17:28",
+            "business_time_left": "1970-01-01 00:08:57",
+            "duration": "1970-01-01 00:21:03",
+            "sys_id": "242a4716472aa690a003b1af016d435f",
+            "time_left": "1970-01-01 00:08:57",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-07-07 17:56:25",
+            "percentage": "70.17",
+            "original_breach_time": "2025-07-07 18:26:25",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "70.17",
+            "end_time": "2025-07-07 18:17:28",
+            "sys_mod_count": "6",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-07-07 17:56:25",
+            "business_duration": "1970-01-01 00:21:03",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/87d9cbd2472aa690a003b1af016d4308",
+                "value": "87d9cbd2472aa690a003b1af016d4308"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-07-07 18:26:25",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-07-10 20:32:26",
+            "business_time_left": "1970-01-01 00:23:57",
+            "duration": "1970-01-01 00:06:03",
+            "sys_id": "2a398717332662147bf1e97c2d5c7b92",
+            "time_left": "1970-01-01 00:23:57",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-07-10 20:26:23",
+            "percentage": "20.17",
+            "original_breach_time": "2025-07-10 20:56:23",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "20.17",
+            "end_time": "2025-07-10 20:32:26",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-07-10 20:26:23",
+            "business_duration": "1970-01-01 00:06:03",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/5fc54f5b33e262147bf1e97c2d5c7bd9",
+                "value": "5fc54f5b33e262147bf1e97c2d5c7bd9"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-07-10 20:56:23",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-08-12 21:08:47",
+            "business_time_left": "1970-01-01 00:50:19",
+            "duration": "1970-01-01 00:09:41",
+            "sys_id": "2b2d81463b97625091e0703a85e45a4f",
+            "time_left": "1970-01-01 00:50:19",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-08-12 20:59:06",
+            "percentage": "16.14",
+            "original_breach_time": "2025-08-12 21:59:06",
+            "sys_created_by": "Joshua.David",
+            "business_percentage": "16.14",
+            "end_time": "2025-08-12 21:08:47",
+            "sys_mod_count": "4",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-08-12 20:59:06",
+            "business_duration": "1970-01-01 00:09:41",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/76c9cd4e3b57625091e0703a85e45ac8",
+                "value": "76c9cd4e3b57625091e0703a85e45ac8"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-12 21:59:06",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-06-03 13:10:00",
+            "business_time_left": "1970-01-01 00:28:19",
+            "duration": "1970-01-01 00:01:41",
+            "sys_id": "2c22c3db4735ee10a003b1af016d437d",
+            "time_left": "1970-01-01 00:28:19",
+            "sys_updated_by": "Sukhra.Hemchand",
+            "sys_created_on": "2025-06-03 13:08:19",
+            "percentage": "5.61",
+            "original_breach_time": "2025-06-03 13:38:18",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "5.61",
+            "end_time": "2025-06-03 13:09:59",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-06-03 13:08:18",
+            "business_duration": "1970-01-01 00:01:41",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/856083d74735ee10a003b1af016d4325",
+                "value": "856083d74735ee10a003b1af016d4325"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-06-03 13:38:18",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-05-12 16:39:36",
+            "business_time_left": "1970-01-01 00:27:50",
+            "duration": "1970-01-01 00:02:10",
+            "sys_id": "2d0fd2d833ad26907bf1e97c2d5c7bbd",
+            "time_left": "1970-01-01 00:27:50",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-05-12 16:37:27",
+            "percentage": "7.22",
+            "original_breach_time": "2025-05-12 17:07:26",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "7.22",
+            "end_time": "2025-05-12 16:39:36",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-05-12 16:37:26",
+            "business_duration": "1970-01-01 00:02:10",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/337e529833ad26907bf1e97c2d5c7b6d",
+                "value": "337e529833ad26907bf1e97c2d5c7b6d"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-05-12 17:07:26",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-07-30 14:14:56",
+            "business_time_left": "1970-01-01 00:28:39",
+            "duration": "1970-01-01 00:01:21",
+            "sys_id": "30b370f547cfae50a003b1af016d4382",
+            "time_left": "1970-01-01 00:28:39",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-07-30 14:13:35",
+            "percentage": "4.5",
+            "original_breach_time": "2025-07-30 14:43:35",
+            "sys_created_by": "Rosemary.Cosentino",
+            "business_percentage": "4.5",
+            "end_time": "2025-07-30 14:14:56",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-07-30 14:13:35",
+            "business_duration": "1970-01-01 00:01:21",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/4b4374f147cfae50a003b1af016d4335",
+                "value": "4b4374f147cfae50a003b1af016d4335"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-07-30 14:43:35",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-08-12 21:07:12",
+            "business_time_left": "1970-01-01 00:21:47",
+            "duration": "1970-01-01 00:08:13",
+            "sys_id": "312d49463b1362903624ba2a85e45a7f",
+            "time_left": "1970-01-01 00:21:47",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-08-12 20:58:59",
+            "percentage": "27.39",
+            "original_breach_time": "2025-08-12 21:28:59",
+            "sys_created_by": "Rosemary.Cosentino",
+            "business_percentage": "27.39",
+            "end_time": "2025-08-12 21:07:12",
+            "sys_mod_count": "3",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-08-12 20:58:59",
+            "business_duration": "1970-01-01 00:08:13",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/23c9054e3bdf22903624ba2a85e45a91",
+                "value": "23c9054e3bdf22903624ba2a85e45a91"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-12 21:28:59",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-09-26 20:15:11",
+            "business_time_left": "1970-01-01 00:24:10",
+            "duration": "1970-01-01 00:05:50",
+            "sys_id": "3551f0283bd0f25091e0703a85e45ad2",
+            "time_left": "1970-01-01 00:24:10",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-09-26 20:09:21",
+            "percentage": "19.44",
+            "original_breach_time": "2025-09-26 20:39:21",
+            "sys_created_by": "ryan.sanita",
+            "business_percentage": "19.44",
+            "end_time": "2025-09-26 20:15:11",
+            "sys_mod_count": "3",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-09-26 20:09:21",
+            "business_duration": "1970-01-01 00:05:50",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/e0707ca03bd0f25091e0703a85e45a07",
+                "value": "e0707ca03bd0f25091e0703a85e45a07"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-09-26 20:39:21",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-06-04 19:01:54",
+            "business_time_left": "1970-01-01 00:26:30",
+            "duration": "1970-01-01 00:03:30",
+            "sys_id": "36db9177477de250a003b1af016d4395",
+            "time_left": "1970-01-01 00:26:30",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-06-04 18:58:25",
+            "percentage": "11.67",
+            "original_breach_time": "2025-06-04 19:28:24",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "11.67",
+            "end_time": "2025-06-04 19:01:54",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-06-04 18:58:24",
+            "business_duration": "1970-01-01 00:03:30",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/3edad5f3477de250a003b1af016d43e0",
+                "value": "3edad5f3477de250a003b1af016d43e0"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-06-04 19:28:24",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-08-06 19:56:01",
+            "business_time_left": "1970-01-01 00:46:13",
+            "duration": "1970-01-01 00:13:47",
+            "sys_id": "3e02c2cc3b5bee1091e0703a85e45aba",
+            "time_left": "1970-01-01 00:46:13",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-08-06 19:42:13",
+            "percentage": "22.97",
+            "original_breach_time": "2025-08-06 20:42:13",
+            "sys_created_by": "Parneyta.Parneyta",
+            "business_percentage": "22.97",
+            "end_time": "2025-08-06 19:56:00",
+            "sys_mod_count": "4",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-08-06 19:42:13",
+            "business_duration": "1970-01-01 00:13:47",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/708ff9483b5bee1091e0703a85e45a20",
+                "value": "708ff9483b5bee1091e0703a85e45a20"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-06 20:42:13",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-04-10 18:34:48",
+            "business_time_left": "1970-01-01 00:25:30",
+            "duration": "1970-01-01 00:04:30",
+            "sys_id": "3ef5ca463b706ed091e0703a85e45abd",
+            "time_left": "1970-01-01 00:25:30",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-04-10 18:30:18",
+            "percentage": "15",
+            "original_breach_time": "2025-04-10 19:00:18",
+            "sys_created_by": "Christine.Balde",
+            "business_percentage": "15",
+            "end_time": "2025-04-10 18:34:48",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-04-10 18:30:18",
+            "business_duration": "1970-01-01 00:04:30",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/287402c23b706ed091e0703a85e45acb",
+                "value": "287402c23b706ed091e0703a85e45acb"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-04-10 19:00:18",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-08-21 14:54:58",
+            "business_time_left": "1970-01-01 00:27:18",
+            "duration": "1970-01-01 00:02:42",
+            "sys_id": "428fc2b83b2faa9091e0703a85e45a10",
+            "time_left": "1970-01-01 00:27:18",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-08-21 14:52:17",
+            "percentage": "9",
+            "original_breach_time": "2025-08-21 15:22:16",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "9",
+            "end_time": "2025-08-21 14:54:58",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-08-21 14:52:16",
+            "business_duration": "1970-01-01 00:02:42",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/d9ae0e743b2faa9091e0703a85e45a16",
+                "value": "d9ae0e743b2faa9091e0703a85e45a16"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-21 15:22:16",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-06-13 17:27:54",
+            "business_time_left": "1970-01-01 00:24:21",
+            "duration": "1970-01-01 00:05:39",
+            "sys_id": "462cdf2647cae2d0a003b1af016d4341",
+            "time_left": "1970-01-01 00:24:21",
+            "sys_updated_by": "Peshimam.Adil",
+            "sys_created_on": "2025-06-13 17:22:16",
+            "percentage": "18.83",
+            "original_breach_time": "2025-06-13 17:52:15",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "18.83",
+            "end_time": "2025-06-13 17:27:54",
+            "sys_mod_count": "3",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-06-13 17:22:15",
+            "business_duration": "1970-01-01 00:05:39",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/bddb5b6247cae2d0a003b1af016d4357",
+                "value": "bddb5b6247cae2d0a003b1af016d4357"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-06-13 17:52:15",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-05-26 17:47:25",
+            "business_time_left": "1970-01-01 00:28:01",
+            "duration": "1970-01-01 00:01:59",
+            "sys_id": "46d4b23447f1a290a003b1af016d4361",
+            "time_left": "1970-01-01 00:28:01",
+            "sys_updated_by": "Peshimam.Adil",
+            "sys_created_on": "2025-05-26 17:45:27",
+            "percentage": "6.61",
+            "original_breach_time": "2025-05-26 18:15:26",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "6.61",
+            "end_time": "2025-05-26 17:47:25",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-05-26 17:45:26",
+            "business_duration": "1970-01-01 00:01:59",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/bfc3b2b047f1a290a003b1af016d43c6",
+                "value": "bfc3b2b047f1a290a003b1af016d43c6"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-05-26 18:15:26",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-08-06 19:43:48",
+            "business_time_left": "1970-01-01 00:59:48",
+            "duration": "1970-01-01 00:00:12",
+            "sys_id": "47520a483b9b6e103624ba2a85e45aab",
+            "time_left": "1970-01-01 00:59:48",
+            "sys_updated_by": "Edward.Vuong",
+            "sys_created_on": "2025-08-06 19:43:36",
+            "percentage": "0.33",
+            "original_breach_time": "2025-08-06 20:43:36",
+            "sys_created_by": "Edward.Vuong",
+            "business_percentage": "0.33",
+            "end_time": "2025-08-06 19:43:48",
+            "sys_mod_count": "1",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-08-06 19:43:36",
+            "business_duration": "1970-01-01 00:00:12",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/fd224a083b9b6e103624ba2a85e45acc",
+                "value": "fd224a083b9b6e103624ba2a85e45acc"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-06 20:43:36",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-08-06 19:58:43",
+            "business_time_left": "1970-01-01 00:43:23",
+            "duration": "1970-01-01 00:16:37",
+            "sys_id": "49020e083b9b6e103624ba2a85e45a41",
+            "time_left": "1970-01-01 00:43:23",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-08-06 19:42:06",
+            "percentage": "27.69",
+            "original_breach_time": "2025-08-06 20:42:06",
+            "sys_created_by": "Edward.Vuong",
+            "business_percentage": "27.69",
+            "end_time": "2025-08-06 19:58:43",
+            "sys_mod_count": "6",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-08-06 19:42:06",
+            "business_duration": "1970-01-01 00:16:37",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/918ff9003b9b6e103624ba2a85e45af7",
+                "value": "918ff9003b9b6e103624ba2a85e45af7"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-06 20:42:06",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-04-29 15:35:34",
+            "business_time_left": "1970-01-01 00:28:19",
+            "duration": "1970-01-01 00:01:41",
+            "sys_id": "4cd3d7883395aa107bf1e97c2d5c7b07",
+            "time_left": "1970-01-01 00:28:19",
+            "sys_updated_by": "Michael.Janowski",
+            "sys_created_on": "2025-04-29 15:33:53",
+            "percentage": "5.61",
+            "original_breach_time": "2025-04-29 16:03:53",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "5.61",
+            "end_time": "2025-04-29 15:35:34",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-04-29 15:33:53",
+            "business_duration": "1970-01-01 00:01:41",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/2f4397483395aa107bf1e97c2d5c7be6",
+                "value": "2f4397483395aa107bf1e97c2d5c7be6"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-04-29 16:03:53",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-08-06 18:30:50",
+            "business_time_left": "1970-01-01 00:26:39",
+            "duration": "1970-01-01 00:03:21",
+            "sys_id": "4cf079c83b1b6e103624ba2a85e45a5c",
+            "time_left": "1970-01-01 00:26:39",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-08-06 18:27:29",
+            "percentage": "11.17",
+            "original_breach_time": "2025-08-06 18:57:29",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "11.17",
+            "end_time": "2025-08-06 18:30:50",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-08-06 18:27:29",
+            "business_duration": "1970-01-01 00:03:21",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/163fa1c43b1b6e103624ba2a85e45a5c",
+                "value": "163fa1c43b1b6e103624ba2a85e45a5c"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-06 18:57:29",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-10-06 15:26:26",
+            "business_time_left": "1970-01-01 00:27:31",
+            "duration": "1970-01-01 00:02:29",
+            "sys_id": "4eef4ba73b5cfe103624ba2a85e45a8e",
+            "time_left": "1970-01-01 00:27:31",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-10-06 15:23:56",
+            "percentage": "8.28",
+            "original_breach_time": "2025-10-06 15:53:56",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "8.28",
+            "end_time": "2025-10-06 15:26:25",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-10-06 15:23:56",
+            "business_duration": "1970-01-01 00:02:29",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/9afd4b6f3b1cfe103624ba2a85e45ab1",
+                "value": "9afd4b6f3b1cfe103624ba2a85e45ab1"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-10-06 15:53:56",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-04-10 18:48:22",
+            "business_time_left": "1970-01-01 00:27:52",
+            "duration": "1970-01-01 00:02:08",
+            "sys_id": "50a902023bb06ed091e0703a85e45a03",
+            "time_left": "1970-01-01 00:27:52",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-04-10 18:46:14",
+            "percentage": "7.11",
+            "original_breach_time": "2025-04-10 19:16:14",
+            "sys_created_by": "Christine.Balde",
+            "business_percentage": "7.11",
+            "end_time": "2025-04-10 18:48:22",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-04-10 18:46:14",
+            "business_duration": "1970-01-01 00:02:08",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/3cb6ce863b706ed091e0703a85e45a92",
+                "value": "3cb6ce863b706ed091e0703a85e45a92"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-04-10 19:16:14",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-08-12 20:06:25",
+            "business_time_left": "1970-01-01 00:25:16",
+            "duration": "1970-01-01 00:04:44",
+            "sys_id": "6200454e3b9f22903624ba2a85e45a33",
+            "time_left": "1970-01-01 00:25:16",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-08-12 20:01:42",
+            "percentage": "15.78",
+            "original_breach_time": "2025-08-12 20:31:41",
+            "sys_created_by": "Rosemary.Cosentino",
+            "business_percentage": "15.78",
+            "end_time": "2025-08-12 20:06:25",
+            "sys_mod_count": "3",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-08-12 20:01:41",
+            "business_duration": "1970-01-01 00:04:44",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/3dcb388e3b5f22903624ba2a85e45a1b",
+                "value": "3dcb388e3b5f22903624ba2a85e45a1b"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-12 20:31:41",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-04-23 16:14:25",
+            "business_time_left": "1970-01-01 00:05:28",
+            "duration": "1970-01-01 00:24:32",
+            "sys_id": "63ed909a3b412e1091e0703a85e45afc",
+            "time_left": "1970-01-01 00:05:28",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-04-23 15:49:53",
+            "percentage": "81.78",
+            "original_breach_time": "2025-04-23 16:19:52",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "81.78",
+            "end_time": "2025-04-23 16:14:24",
+            "sys_mod_count": "11",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-04-23 15:49:52",
+            "business_duration": "1970-01-01 00:24:32",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/ee8d145a3b412e1091e0703a85e45a7d",
+                "value": "ee8d145a3b412e1091e0703a85e45a7d"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-04-23 16:19:52",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-06-27 21:05:24",
+            "business_time_left": "1970-01-01 00:08:36",
+            "duration": "1970-01-01 00:06:48",
+            "sys_id": "6be394df47922a10a003b1af016d43b9",
+            "time_left": "1970-01-03 15:03:12",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-06-27 20:58:36",
+            "percentage": "0.18",
+            "original_breach_time": "2025-06-30 12:08:36",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "14",
+            "end_time": "2025-06-27 21:05:24",
+            "sys_mod_count": "1",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-06-27 20:58:36",
+            "business_duration": "1970-01-01 00:01:24",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/2983101f47922a10a003b1af016d43a4",
+                "value": "2983101f47922a10a003b1af016d43a4"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-06-30 12:08:36",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-08-05 14:31:04",
+            "business_time_left": "1970-01-01 00:25:19",
+            "duration": "1970-01-01 00:04:41",
+            "sys_id": "6e20b7673b4f6a103624ba2a85e45a20",
+            "time_left": "1970-01-01 00:25:19",
+            "sys_updated_by": "Sukhra.Hemchand",
+            "sys_created_on": "2025-08-05 14:26:23",
+            "percentage": "15.61",
+            "original_breach_time": "2025-08-05 14:56:23",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "15.61",
+            "end_time": "2025-08-05 14:31:04",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-08-05 14:26:23",
+            "business_duration": "1970-01-01 00:04:41",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/eb9fa3af3b0f6a103624ba2a85e45a3a",
+                "value": "eb9fa3af3b0f6a103624ba2a85e45a3a"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-05 14:56:23",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-08-05 20:30:01",
+            "business_time_left": "1970-01-01 00:23:20",
+            "duration": "1970-01-01 00:06:40",
+            "sys_id": "73d181773b832e1091e0703a85e45ac0",
+            "time_left": "1970-01-01 00:23:20",
+            "sys_updated_by": "Sukhra.Hemchand",
+            "sys_created_on": "2025-08-05 20:23:21",
+            "percentage": "22.22",
+            "original_breach_time": "2025-08-05 20:53:21",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "22.22",
+            "end_time": "2025-08-05 20:30:01",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-08-05 20:23:21",
+            "business_duration": "1970-01-01 00:06:40",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/32b049b33b832e1091e0703a85e45a63",
+                "value": "32b049b33b832e1091e0703a85e45a63"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-05 20:53:21",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-05-06 14:09:30",
+            "business_time_left": "1970-01-01 00:25:29",
+            "duration": "1970-01-01 00:04:31",
+            "sys_id": "75924396339d22507bf1e97c2d5c7b4c",
+            "time_left": "1970-01-01 00:25:29",
+            "sys_updated_by": "Sukhra.Hemchand",
+            "sys_created_on": "2025-05-06 14:04:59",
+            "percentage": "15.06",
+            "original_breach_time": "2025-05-06 14:34:59",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "15.06",
+            "end_time": "2025-05-06 14:09:30",
+            "sys_mod_count": "3",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-05-06 14:04:59",
+            "business_duration": "1970-01-01 00:04:31",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/72328716339d22507bf1e97c2d5c7b2e",
+                "value": "72328716339d22507bf1e97c2d5c7b2e"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-05-06 14:34:59",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-08-22 22:25:29",
+            "business_time_left": "1970-01-01 00:30:00",
+            "duration": "1970-01-01 00:04:20",
+            "sys_id": "7adf78953ba726143624ba2a85e45ada",
+            "time_left": "1970-01-03 14:04:31",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-08-22 22:21:09",
+            "percentage": "0.12",
+            "original_breach_time": "2025-08-25 12:30:00",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "0",
+            "end_time": "2025-08-22 22:25:29",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-08-22 22:21:09",
+            "business_duration": "1970-01-01 00:00:00",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/051fbc153ba726143624ba2a85e45a9d",
+                "value": "051fbc153ba726143624ba2a85e45a9d"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-25 12:30:00",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-05-23 15:10:09",
+            "business_time_left": "1970-01-01 00:07:39",
+            "duration": "1970-01-01 00:02:21",
+            "sys_id": "7bf3b2b74729e650a003b1af016d4390",
+            "time_left": "1970-01-01 00:07:39",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-05-23 15:07:48",
+            "percentage": "23.5",
+            "original_breach_time": "2025-05-23 15:17:48",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "23.5",
+            "end_time": "2025-05-23 15:10:09",
+            "sys_mod_count": "4",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-05-23 15:07:48",
+            "business_duration": "1970-01-01 00:02:21",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/5a12bef747e5e650a003b1af016d434d",
+                "value": "5a12bef747e5e650a003b1af016d434d"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-05-23 15:17:48",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-04-29 15:39:33",
+            "business_time_left": "1970-01-01 00:24:19",
+            "duration": "1970-01-01 00:05:41",
+            "sys_id": "7fc357883395aa107bf1e97c2d5c7ba9",
+            "time_left": "1970-01-01 00:24:19",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-04-29 15:33:52",
+            "percentage": "18.94",
+            "original_breach_time": "2025-04-29 16:03:52",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "18.94",
+            "end_time": "2025-04-29 15:39:33",
+            "sys_mod_count": "3",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-04-29 15:33:52",
+            "business_duration": "1970-01-01 00:05:41",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/19729fc43395aa107bf1e97c2d5c7b9d",
+                "value": "19729fc43395aa107bf1e97c2d5c7b9d"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-04-29 16:03:52",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-04-09 14:49:58",
+            "business_time_left": "1970-01-01 00:21:01",
+            "duration": "1970-01-01 00:08:59",
+            "sys_id": "82e7cc713bbceed03624ba2a85e45a6c",
+            "time_left": "1970-01-01 00:21:01",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-04-09 14:41:00",
+            "percentage": "29.94",
+            "original_breach_time": "2025-04-09 15:10:59",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "29.94",
+            "end_time": "2025-04-09 14:49:58",
+            "sys_mod_count": "4",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-04-09 14:40:59",
+            "business_duration": "1970-01-01 00:08:59",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/2a574cf13b7ceed03624ba2a85e45ac2",
+                "value": "2a574cf13b7ceed03624ba2a85e45ac2"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-04-09 15:10:59",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-09-19 00:56:41",
+            "business_time_left": "1970-01-01 00:30:00",
+            "duration": "1970-01-01 00:02:46",
+            "sys_id": "8cc5ec4e3b0cfe1091e0703a85e45a93",
+            "time_left": "1970-01-01 11:33:19",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-09-19 00:53:55",
+            "percentage": "0.4",
+            "original_breach_time": "2025-09-19 12:30:00",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "0",
+            "end_time": "2025-09-19 00:56:41",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-09-19 00:53:55",
+            "business_duration": "1970-01-01 00:00:00",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/d7a468ca3b0cfe1091e0703a85e45a3a",
+                "value": "d7a468ca3b0cfe1091e0703a85e45a3a"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-09-19 12:30:00",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-05-12 16:20:30",
+            "business_time_left": "1970-01-01 00:28:45",
+            "duration": "1970-01-01 00:01:15",
+            "sys_id": "8fdade9033ad26907bf1e97c2d5c7b5f",
+            "time_left": "1970-01-01 00:28:45",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-05-12 16:19:15",
+            "percentage": "4.17",
+            "original_breach_time": "2025-05-12 16:49:15",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "4.17",
+            "end_time": "2025-05-12 16:20:30",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-05-12 16:19:15",
+            "business_duration": "1970-01-01 00:01:15",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/cfd456d4336d26907bf1e97c2d5c7bb9",
+                "value": "cfd456d4336d26907bf1e97c2d5c7bb9"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-05-12 16:49:15",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-10-06 19:37:13",
+            "business_time_left": "1970-01-01 00:03:43",
+            "duration": "1970-01-01 00:06:17",
+            "sys_id": "9078043f3bd032503624ba2a85e45a4b",
+            "time_left": "1970-01-01 00:03:43",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-10-06 19:30:57",
+            "percentage": "62.83",
+            "original_breach_time": "2025-10-06 19:40:56",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "62.83",
+            "end_time": "2025-10-06 19:37:13",
+            "sys_mod_count": "10",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-10-06 19:30:56",
+            "business_duration": "1970-01-01 00:06:17",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/a997c8733bd032503624ba2a85e45aaa",
+                "value": "a997c8733bd032503624ba2a85e45aaa"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-10-06 19:40:56",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-05-06 14:21:58",
+            "business_time_left": "1970-01-01 00:16:15",
+            "duration": "1970-01-01 00:13:45",
+            "sys_id": "91534b1a339d22507bf1e97c2d5c7b15",
+            "time_left": "1970-01-01 00:16:15",
+            "sys_updated_by": "Sukhra.Hemchand",
+            "sys_created_on": "2025-05-06 14:08:13",
+            "percentage": "45.83",
+            "original_breach_time": "2025-05-06 14:38:13",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "45.83",
+            "end_time": "2025-05-06 14:21:58",
+            "sys_mod_count": "4",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-05-06 14:08:13",
+            "business_duration": "1970-01-01 00:13:45",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/e4d203d6339d22507bf1e97c2d5c7be9",
+                "value": "e4d203d6339d22507bf1e97c2d5c7be9"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-05-06 14:38:13",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-09-08 12:38:36",
+            "business_time_left": "1970-01-01 00:28:05",
+            "duration": "1970-01-01 00:01:55",
+            "sys_id": "971d1a623b7fe6103624ba2a85e45a18",
+            "time_left": "1970-01-01 00:28:05",
+            "sys_updated_by": "Sukhra.Hemchand",
+            "sys_created_on": "2025-09-08 12:36:42",
+            "percentage": "6.39",
+            "original_breach_time": "2025-09-08 13:06:41",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "6.39",
+            "end_time": "2025-09-08 12:38:36",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-09-08 12:36:41",
+            "business_duration": "1970-01-01 00:01:55",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/00db9aea3bfbe6103624ba2a85e45ace",
+                "value": "00db9aea3bfbe6103624ba2a85e45ace"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-09-08 13:06:41",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-06-03 02:39:38",
+            "business_time_left": "1970-01-01 00:42:43",
+            "duration": "1970-01-01 00:17:17",
+            "sys_id": "9a4ee0db47b56e10a003b1af016d43fe",
+            "time_left": "1970-01-01 00:42:43",
+            "sys_updated_by": "Sukhra.Hemchand",
+            "sys_created_on": "2025-06-03 02:22:21",
+            "percentage": "28.81",
+            "original_breach_time": "2025-06-03 03:22:21",
+            "sys_created_by": "Mel Wijesinghe",
+            "business_percentage": "28.81",
+            "end_time": "2025-06-03 02:39:38",
+            "sys_mod_count": "3",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-06-03 02:22:21",
+            "business_duration": "1970-01-01 00:17:17",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/28ece81f47756e10a003b1af016d4337",
+                "value": "28ece81f47756e10a003b1af016d4337"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-06-03 03:22:21",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-06-18 15:12:23",
+            "business_time_left": "1970-01-01 00:28:01",
+            "duration": "1970-01-01 00:01:59",
+            "sys_id": "9bede4d83352a2507bf1e97c2d5c7bfc",
+            "time_left": "1970-01-01 00:28:01",
+            "sys_updated_by": "Peshimam.Adil",
+            "sys_created_on": "2025-06-18 15:10:24",
+            "percentage": "6.61",
+            "original_breach_time": "2025-06-18 15:40:24",
+            "sys_created_by": "Christine.Balde.1",
+            "business_percentage": "6.61",
+            "end_time": "2025-06-18 15:12:23",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-06-18 15:10:24",
+            "business_duration": "1970-01-01 00:01:59",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/256be05c3312a2507bf1e97c2d5c7b2e",
+                "value": "256be05c3312a2507bf1e97c2d5c7b2e"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-06-18 15:40:24",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-10-03 12:32:31",
+            "business_time_left": "1970-01-01 00:27:11",
+            "duration": "1970-01-01 00:02:49",
+            "sys_id": "a44b8baa3b94ba9091e0703a85e45a39",
+            "time_left": "1970-01-01 00:27:11",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-10-03 12:29:42",
+            "percentage": "9.39",
+            "original_breach_time": "2025-10-03 12:59:41",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "9.39",
+            "end_time": "2025-10-03 12:32:30",
+            "sys_mod_count": "3",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-10-03 12:29:41",
+            "business_duration": "1970-01-01 00:02:49",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/8aca076a3b94ba9091e0703a85e45a5e",
+                "value": "8aca076a3b94ba9091e0703a85e45a5e"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-10-03 12:59:41",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-09-24 13:43:57",
+            "business_time_left": "1970-01-01 00:27:32",
+            "duration": "1970-01-01 00:02:28",
+            "sys_id": "a4654db33b40b2103624ba2a85e45af1",
+            "time_left": "1970-01-01 00:27:32",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-09-24 13:41:30",
+            "percentage": "8.22",
+            "original_breach_time": "2025-09-24 14:11:29",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "8.22",
+            "end_time": "2025-09-24 13:43:57",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-09-24 13:41:29",
+            "business_duration": "1970-01-01 00:02:28",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/895441f73b00b2103624ba2a85e45ae4",
+                "value": "895441f73b00b2103624ba2a85e45ae4"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-09-24 14:11:29",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-05-25 21:51:14",
+            "business_time_left": "1970-01-01 00:56:41",
+            "duration": "1970-01-01 00:03:19",
+            "sys_id": "a4c2aea4337d66507bf1e97c2d5c7bdb",
+            "time_left": "1970-01-01 00:56:41",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-05-25 21:47:56",
+            "percentage": "5.53",
+            "original_breach_time": "2025-05-25 22:47:55",
+            "sys_created_by": "mahmoud.almeshal",
+            "business_percentage": "5.53",
+            "end_time": "2025-05-25 21:51:14",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-05-25 21:47:55",
+            "business_duration": "1970-01-01 00:03:19",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/3112e220337d66507bf1e97c2d5c7bc5",
+                "value": "3112e220337d66507bf1e97c2d5c7bc5"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-05-25 22:47:55",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-08-12 20:05:00",
+            "business_time_left": "1970-01-01 01:00:00",
+            "duration": "1970-01-01 00:03:07",
+            "sys_id": "a5108d023b57625091e0703a85e45a5f",
+            "time_left": "1970-01-01 10:55:00",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-08-12 20:01:54",
+            "percentage": "0.47",
+            "original_breach_time": "2025-08-13 07:00:00",
+            "sys_created_by": "Gus.Georgakopoulos",
+            "business_percentage": "0",
+            "end_time": "2025-08-12 20:05:00",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-08-12 20:01:53",
+            "business_duration": "1970-01-01 00:00:00",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/c1cb7c023b17625091e0703a85e45a7c",
+                "value": "c1cb7c023b17625091e0703a85e45a7c"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-13 07:00:00",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-08-21 19:26:28",
+            "business_time_left": "1970-01-01 00:16:42",
+            "duration": "1970-01-01 00:13:18",
+            "sys_id": "a73bc7303beb22143624ba2a85e45a22",
+            "time_left": "1970-01-01 00:16:42",
+            "sys_updated_by": "Sukhra.Hemchand",
+            "sys_created_on": "2025-08-21 19:13:10",
+            "percentage": "44.33",
+            "original_breach_time": "2025-08-21 19:43:10",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "44.33",
+            "end_time": "2025-08-21 19:26:28",
+            "sys_mod_count": "6",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-08-21 19:13:10",
+            "business_duration": "1970-01-01 00:13:18",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/8d4ac3783bab22143624ba2a85e45a81",
+                "value": "8d4ac3783bab22143624ba2a85e45a81"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-21 19:43:10",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-07-07 17:22:17",
+            "business_time_left": "1970-01-01 00:11:06",
+            "duration": "1970-01-01 00:18:54",
+            "sys_id": "a7fdbe1e47a6a690a003b1af016d4347",
+            "time_left": "1970-01-01 00:11:06",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-07-07 17:03:23",
+            "percentage": "63",
+            "original_breach_time": "2025-07-07 17:33:23",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "63",
+            "end_time": "2025-07-07 17:22:17",
+            "sys_mod_count": "5",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-07-07 17:03:23",
+            "business_duration": "1970-01-01 00:18:54",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/f7adbeda47a6a690a003b1af016d43da",
+                "value": "f7adbeda47a6a690a003b1af016d43da"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-07-07 17:33:23",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-08-24 15:21:43",
+            "business_time_left": "1970-01-01 00:09:20",
+            "duration": "1970-01-01 00:00:40",
+            "sys_id": "ace235f13be762103624ba2a85e45a3a",
+            "time_left": "1970-01-01 00:09:20",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-08-24 15:21:03",
+            "percentage": "6.67",
+            "original_breach_time": "2025-08-24 15:31:03",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "6.67",
+            "end_time": "2025-08-24 15:21:43",
+            "sys_mod_count": "3",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-08-24 15:21:03",
+            "business_duration": "1970-01-01 00:00:40",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/f4b235b13be762103624ba2a85e45a4d",
+                "value": "f4b235b13be762103624ba2a85e45a4d"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-24 15:31:03",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-05-06 16:10:10",
+            "business_time_left": "1970-01-01 00:27:00",
+            "duration": "1970-01-01 00:03:00",
+            "sys_id": "af8edf5a33d162507bf1e97c2d5c7b91",
+            "time_left": "1970-01-01 00:27:00",
+            "sys_updated_by": "Sukhra.Hemchand",
+            "sys_created_on": "2025-05-06 16:07:09",
+            "percentage": "10",
+            "original_breach_time": "2025-05-06 16:37:09",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "10",
+            "end_time": "2025-05-06 16:10:09",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-05-06 16:07:09",
+            "business_duration": "1970-01-01 00:03:00",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/534d93d633d162507bf1e97c2d5c7b3a",
+                "value": "534d93d633d162507bf1e97c2d5c7b3a"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-05-06 16:37:09",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-08-06 20:00:19",
+            "business_time_left": "1970-01-01 00:11:46",
+            "duration": "1970-01-01 00:18:14",
+            "sys_id": "b4020e083b9b6e103624ba2a85e45a0f",
+            "time_left": "1970-01-01 00:11:46",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-08-06 19:42:06",
+            "percentage": "60.78",
+            "original_breach_time": "2025-08-06 20:12:05",
+            "sys_created_by": "Rosemary.Cosentino",
+            "business_percentage": "60.78",
+            "end_time": "2025-08-06 20:00:19",
+            "sys_mod_count": "5",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-08-06 19:42:05",
+            "business_duration": "1970-01-01 00:18:14",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/808f3d003b9b6e103624ba2a85e45a75",
+                "value": "808f3d003b9b6e103624ba2a85e45a75"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-06 20:12:05",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-09-11 16:23:11",
+            "business_time_left": "1970-01-01 00:26:37",
+            "duration": "1970-01-01 00:03:23",
+            "sys_id": "b4fc2a233b7fe21491e0703a85e45a54",
+            "time_left": "1970-01-01 00:26:37",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-09-11 16:19:49",
+            "percentage": "11.28",
+            "original_breach_time": "2025-09-11 16:49:48",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "11.28",
+            "end_time": "2025-09-11 16:23:11",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-09-11 16:19:48",
+            "business_duration": "1970-01-01 00:03:23",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/078cee273b3fe21491e0703a85e45a9b",
+                "value": "078cee273b3fe21491e0703a85e45a9b"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-09-11 16:49:48",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-08-21 18:45:41",
+            "business_time_left": "1970-01-01 00:26:35",
+            "duration": "1970-01-01 00:03:25",
+            "sys_id": "b6240ffc3b6b22143624ba2a85e45aec",
+            "time_left": "1970-01-01 00:26:35",
+            "sys_updated_by": "Sukhra.Hemchand",
+            "sys_created_on": "2025-08-21 18:42:16",
+            "percentage": "11.39",
+            "original_breach_time": "2025-08-21 19:12:16",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "11.39",
+            "end_time": "2025-08-21 18:45:41",
+            "sys_mod_count": "4",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-08-21 18:42:16",
+            "business_duration": "1970-01-01 00:03:25",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/5fa2c3383b6b22143624ba2a85e45ab7",
+                "value": "5fa2c3383b6b22143624ba2a85e45ab7"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-21 19:12:16",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-07-30 15:23:52",
+            "business_time_left": "1970-01-01 00:17:11",
+            "duration": "1970-01-01 00:12:49",
+            "sys_id": "b6d049f94743ee50a003b1af016d43bd",
+            "time_left": "1970-01-01 00:17:11",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-07-30 15:11:04",
+            "percentage": "42.72",
+            "original_breach_time": "2025-07-30 15:41:03",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "42.72",
+            "end_time": "2025-07-30 15:23:52",
+            "sys_mod_count": "7",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-07-30 15:11:03",
+            "business_duration": "1970-01-01 00:12:49",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/05af38794743ee50a003b1af016d4359",
+                "value": "05af38794743ee50a003b1af016d4359"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-07-30 15:41:03",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-06-10 18:39:29",
+            "business_time_left": "1970-01-01 00:26:39",
+            "duration": "1970-01-01 00:03:21",
+            "sys_id": "c340dcf947422a90a003b1af016d43b9",
+            "time_left": "1970-01-01 00:26:39",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-06-10 18:36:08",
+            "percentage": "11.17",
+            "original_breach_time": "2025-06-10 19:06:08",
+            "sys_created_by": "Manish.JHA",
+            "business_percentage": "11.17",
+            "end_time": "2025-06-10 18:39:29",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-06-10 18:36:08",
+            "business_duration": "1970-01-01 00:03:21",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/fcbf40b947422a90a003b1af016d4378",
+                "value": "fcbf40b947422a90a003b1af016d4378"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-06-10 19:06:08",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-09-08 18:29:23",
+            "business_time_left": "1970-01-01 00:09:04",
+            "duration": "1970-01-01 00:20:56",
+            "sys_id": "cb09efee3bb32ad091e0703a85e45ac1",
+            "time_left": "1970-01-01 00:09:04",
+            "sys_updated_by": "AlBaghdadi.Haider",
+            "sys_created_on": "2025-09-08 18:08:27",
+            "percentage": "69.78",
+            "original_breach_time": "2025-09-08 18:38:27",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "69.78",
+            "end_time": "2025-09-08 18:29:23",
+            "sys_mod_count": "7",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-09-08 18:08:27",
+            "business_duration": "1970-01-01 00:20:56",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/4928a7263bb32ad091e0703a85e45a72",
+                "value": "4928a7263bb32ad091e0703a85e45a72"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-09-08 18:38:27",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-05-26 16:24:45",
+            "business_time_left": "1970-01-01 00:02:21",
+            "duration": "1970-01-01 00:07:39",
+            "sys_id": "cca02ef033752a507bf1e97c2d5c7b2a",
+            "time_left": "1970-01-01 00:02:21",
+            "sys_updated_by": "Peshimam.Adil",
+            "sys_created_on": "2025-05-26 16:17:06",
+            "percentage": "76.5",
+            "original_breach_time": "2025-05-26 16:27:06",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "76.5",
+            "end_time": "2025-05-26 16:24:45",
+            "sys_mod_count": "12",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-05-26 16:17:06",
+            "business_duration": "1970-01-01 00:07:39",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/a5602a7033752a507bf1e97c2d5c7bd0",
+                "value": "a5602a7033752a507bf1e97c2d5c7bd0"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-05-26 16:27:06",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-06-29 13:01:39",
+            "business_time_left": "1970-01-01 00:08:33",
+            "duration": "1970-01-01 00:01:27",
+            "sys_id": "d399f43333d26a507bf1e97c2d5c7b0a",
+            "time_left": "1970-01-01 00:08:33",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-06-29 13:00:12",
+            "percentage": "14.5",
+            "original_breach_time": "2025-06-29 13:10:12",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "14.5",
+            "end_time": "2025-06-29 13:01:39",
+            "sys_mod_count": "4",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-06-29 13:00:12",
+            "business_duration": "1970-01-01 00:01:27",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/a549303b33926a507bf1e97c2d5c7b39",
+                "value": "a549303b33926a507bf1e97c2d5c7b39"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-06-29 13:10:12",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-07-07 19:11:40",
+            "business_time_left": "1970-01-01 00:56:46",
+            "duration": "1970-01-01 00:03:14",
+            "sys_id": "db9ad71633ee66d07bf1e97c2d5c7be9",
+            "time_left": "1970-01-01 00:56:46",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-07-07 19:08:26",
+            "percentage": "5.39",
+            "original_breach_time": "2025-07-07 20:08:26",
+            "sys_created_by": "Manish.JHA",
+            "business_percentage": "5.39",
+            "end_time": "2025-07-07 19:11:40",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-07-07 19:08:26",
+            "business_duration": "1970-01-01 00:03:14",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/1239575233ee66d07bf1e97c2d5c7b44",
+                "value": "1239575233ee66d07bf1e97c2d5c7b44"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-07-07 20:08:26",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-06-12 14:12:33",
+            "business_time_left": "1970-01-01 00:07:03",
+            "duration": "1970-01-01 00:02:57",
+            "sys_id": "de76e1924746ee90a003b1af016d43f0",
+            "time_left": "1970-01-01 00:07:03",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-06-12 14:09:37",
+            "percentage": "29.5",
+            "original_breach_time": "2025-06-12 14:19:36",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "29.5",
+            "end_time": "2025-06-12 14:12:33",
+            "sys_mod_count": "5",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-06-12 14:09:36",
+            "business_duration": "1970-01-01 00:02:57",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/4355e55a4706ee90a003b1af016d43f1",
+                "value": "4355e55a4706ee90a003b1af016d43f1"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-06-12 14:19:36",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-05-09 17:26:39",
+            "business_time_left": "1970-01-01 00:17:51",
+            "duration": "1970-01-01 00:12:09",
+            "sys_id": "dfba875747d16650a003b1af016d4365",
+            "time_left": "1970-01-01 00:17:51",
+            "sys_updated_by": "Peshimam.Adil",
+            "sys_created_on": "2025-05-09 17:14:31",
+            "percentage": "40.5",
+            "original_breach_time": "2025-05-09 17:44:30",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "40.5",
+            "end_time": "2025-05-09 17:26:39",
+            "sys_mod_count": "5",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-05-09 17:14:30",
+            "business_duration": "1970-01-01 00:12:09",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/ee3a87df47916650a003b1af016d43cc",
+                "value": "ee3a87df47916650a003b1af016d43cc"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-05-09 17:44:30",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-08-03 18:40:37",
+            "business_time_left": "1970-01-01 00:10:00",
+            "duration": "1970-01-01 00:03:24",
+            "sys_id": "e56696433b0326103624ba2a85e45a34",
+            "time_left": "1970-01-01 17:29:23",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-08-03 18:37:14",
+            "percentage": "0.32",
+            "original_breach_time": "2025-08-04 12:10:00",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "0",
+            "end_time": "2025-08-03 18:40:37",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-08-03 18:37:13",
+            "business_duration": "1970-01-01 00:00:00",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/e225d6cf3bcfe2103624ba2a85e45aa4",
+                "value": "e225d6cf3bcfe2103624ba2a85e45aa4"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-04 12:10:00",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-08-24 15:20:05",
+            "business_time_left": "1970-01-01 00:59:28",
+            "duration": "1970-01-01 00:00:32",
+            "sys_id": "ea82b9b13be762103624ba2a85e45a5a",
+            "time_left": "1970-01-01 00:59:28",
+            "sys_updated_by": "John.Simon",
+            "sys_created_on": "2025-08-24 15:19:33",
+            "percentage": "0.89",
+            "original_breach_time": "2025-08-24 16:19:33",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "0.89",
+            "end_time": "2025-08-24 15:20:05",
+            "sys_mod_count": "1",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-08-24 15:19:33",
+            "business_duration": "1970-01-01 00:00:32",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/dd127d713be762103624ba2a85e45a5d",
+                "value": "dd127d713be762103624ba2a85e45a5d"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-24 16:19:33",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-06-11 21:29:44",
+            "business_time_left": "1970-01-01 00:07:20",
+            "duration": "1970-01-01 00:02:40",
+            "sys_id": "ec018646470a2e90a003b1af016d43e8",
+            "time_left": "1970-01-01 00:07:20",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-06-11 21:27:03",
+            "percentage": "26.67",
+            "original_breach_time": "2025-06-11 21:37:03",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "26.67",
+            "end_time": "2025-06-11 21:29:43",
+            "sys_mod_count": "5",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-06-11 21:27:03",
+            "business_duration": "1970-01-01 00:02:40",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/4a20c28e47c62e90a003b1af016d431d",
+                "value": "4a20c28e47c62e90a003b1af016d431d"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-06-11 21:37:03",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-08-06 18:30:06",
+            "business_time_left": "1970-01-01 00:16:29",
+            "duration": "1970-01-01 00:13:31",
+            "sys_id": "ec7eed443b1b6e103624ba2a85e45a3f",
+            "time_left": "1970-01-01 00:16:29",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-08-06 18:16:36",
+            "percentage": "45.06",
+            "original_breach_time": "2025-08-06 18:46:35",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "45.06",
+            "end_time": "2025-08-06 18:30:06",
+            "sys_mod_count": "3",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-08-06 18:16:35",
+            "business_duration": "1970-01-01 00:13:31",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/997d2dcc3bd76e103624ba2a85e45ad3",
+                "value": "997d2dcc3bd76e103624ba2a85e45ad3"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-06 18:46:35",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-05-23 15:21:18",
+            "business_time_left": "1970-01-01 00:28:10",
+            "duration": "1970-01-01 00:01:50",
+            "sys_id": "f2a6b2bf4729e650a003b1af016d43da",
+            "time_left": "1970-01-01 00:28:10",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-05-23 15:19:29",
+            "percentage": "6.11",
+            "original_breach_time": "2025-05-23 15:49:28",
+            "sys_created_by": "Mel Wijesinghe",
+            "business_percentage": "6.11",
+            "end_time": "2025-05-23 15:21:18",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-05-23 15:19:28",
+            "business_duration": "1970-01-01 00:01:50",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/c8b4baf74729e650a003b1af016d4300",
+                "value": "c8b4baf74729e650a003b1af016d4300"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-05-23 15:49:28",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-05-15 13:14:59",
+            "business_time_left": "1970-01-01 00:27:39",
+            "duration": "1970-01-01 00:02:21",
+            "sys_id": "f2ec4951336dee907bf1e97c2d5c7b8b",
+            "time_left": "1970-01-01 00:27:39",
+            "sys_updated_by": "Sukhra.Hemchand",
+            "sys_created_on": "2025-05-15 13:12:38",
+            "percentage": "7.83",
+            "original_breach_time": "2025-05-15 13:42:38",
+            "sys_created_by": "lamouchi.rafik.tpa",
+            "business_percentage": "7.83",
+            "end_time": "2025-05-15 13:14:59",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-05-15 13:12:38",
+            "business_duration": "1970-01-01 00:02:21",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/36ec4951336dee907bf1e97c2d5c7b87",
+                "value": "36ec4951336dee907bf1e97c2d5c7b87"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-05-15 13:42:38",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-04-29 01:02:42",
+            "business_time_left": "1970-01-01 00:07:54",
+            "duration": "1970-01-01 00:02:06",
+            "sys_id": "f3eb44c433512a107bf1e97c2d5c7b26",
+            "time_left": "1970-01-01 00:07:54",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-04-29 01:00:36",
+            "percentage": "21",
+            "original_breach_time": "2025-04-29 01:10:36",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "21",
+            "end_time": "2025-04-29 01:02:42",
+            "sys_mod_count": "4",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-04-29 01:00:36",
+            "business_duration": "1970-01-01 00:02:06",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/f96b488c33112a107bf1e97c2d5c7b61",
+                "value": "f96b488c33112a107bf1e97c2d5c7b61"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-04-29 01:10:36",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-07-31 17:47:18",
+            "business_time_left": "1970-01-01 00:30:00",
+            "duration": "1970-01-01 00:00:18",
+            "sys_id": "f42ee20e4707a290a003b1af016d43e2",
+            "time_left": "1970-01-01 12:42:42",
+            "sys_updated_by": "Sukhra.Hemchand",
+            "sys_created_on": "2025-07-31 17:47:01",
+            "percentage": "0.04",
+            "original_breach_time": "2025-08-01 06:30:00",
+            "sys_created_by": "Sukhra.Hemchand",
+            "business_percentage": "0",
+            "end_time": "2025-07-31 17:47:18",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-07-31 17:47:00",
+            "business_duration": "1970-01-01 00:00:00",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/599da2ca4707a290a003b1af016d430a",
+                "value": "599da2ca4707a290a003b1af016d430a"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-01 06:30:00",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-10-06 20:22:19",
+            "business_time_left": "1970-01-01 00:30:00",
+            "duration": "1970-01-01 00:04:14",
+            "sys_id": "f63310bb3b1432503624ba2a85e45afb",
+            "time_left": "1970-01-01 10:07:41",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-10-06 20:18:05",
+            "percentage": "0.69",
+            "original_breach_time": "2025-10-07 06:30:00",
+            "sys_created_by": "Edward.Vuong",
+            "business_percentage": "0",
+            "end_time": "2025-10-06 20:22:19",
+            "sys_mod_count": "4",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-10-06 20:18:05",
+            "business_duration": "1970-01-01 00:00:00",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/424158f73b1432503624ba2a85e45a5e",
+                "value": "424158f73b1432503624ba2a85e45a5e"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-10-07 06:30:00",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-06-08 00:25:13",
+            "business_time_left": "1970-01-01 00:57:26",
+            "duration": "1970-01-01 00:02:34",
+            "sys_id": "fdd202f4470eae50a003b1af016d432e",
+            "time_left": "1970-01-01 00:57:26",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-06-08 00:22:40",
+            "percentage": "4.28",
+            "original_breach_time": "2025-06-08 01:22:39",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "4.28",
+            "end_time": "2025-06-08 00:25:13",
+            "sys_mod_count": "3",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-06-08 00:22:39",
+            "business_duration": "1970-01-01 00:02:34",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/f192c2f0470eae50a003b1af016d4331",
+                "value": "f192c2f0470eae50a003b1af016d4331"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-06-08 01:22:39",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-06-02 20:48:41",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 00:32:41",
+            "sys_id": "376ad38b47f92e10a003b1af016d43dc",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Sukhra.Hemchand",
+            "sys_created_on": "2025-06-02 20:16:00",
+            "percentage": "326.83",
+            "original_breach_time": "2025-06-02 20:26:00",
+            "sys_created_by": "Mel Wijesinghe",
+            "business_percentage": "326.83",
+            "end_time": "2025-06-02 20:48:41",
+            "sys_mod_count": "14",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-06-02 20:16:00",
+            "business_duration": "1970-01-01 00:32:41",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/2fa95f4347f92e10a003b1af016d4300",
+                "value": "2fa95f4347f92e10a003b1af016d4300"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-06-02 20:26:00",
+            "has_breached": "true"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-07-08 20:32:50",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 00:33:51",
+            "sys_id": "39cfe8b633ea6ad07bf1e97c2d5c7b4c",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Sukhra.Hemchand",
+            "sys_created_on": "2025-07-08 19:58:59",
+            "percentage": "112.83",
+            "original_breach_time": "2025-07-08 20:28:59",
+            "sys_created_by": "Colin Tran.Tran",
+            "business_percentage": "112.83",
+            "end_time": "2025-07-08 20:32:50",
+            "sys_mod_count": "16",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-07-08 19:58:59",
+            "business_duration": "1970-01-01 00:33:51",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/29cb24fe33aa6ad07bf1e97c2d5c7b5a",
+                "value": "29cb24fe33aa6ad07bf1e97c2d5c7b5a"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-07-08 20:28:59",
+            "has_breached": "true"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-08-28 17:52:44",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 00:40:21",
+            "sys_id": "4ab2fa0b3b6bae103624ba2a85e45a48",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-08-28 17:12:22",
+            "percentage": "134.5",
+            "original_breach_time": "2025-08-28 17:42:22",
+            "sys_created_by": "Rosemary.Cosentino",
+            "business_percentage": "134.5",
+            "end_time": "2025-08-28 17:52:43",
+            "sys_mod_count": "16",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-08-28 17:12:22",
+            "business_duration": "1970-01-01 00:40:21",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/369fa6c33b6bae103624ba2a85e45ad7",
+                "value": "369fa6c33b6bae103624ba2a85e45ad7"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-28 17:42:22",
+            "has_breached": "true"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-07-11 15:51:58",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 00:52:03",
+            "sys_id": "4e1803af336a26147bf1e97c2d5c7b5a",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-07-11 14:59:55",
+            "percentage": "173.5",
+            "original_breach_time": "2025-07-11 15:29:55",
+            "sys_created_by": "Colin Tran.Tran",
+            "business_percentage": "173.5",
+            "end_time": "2025-07-11 15:51:58",
+            "sys_mod_count": "16",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-07-11 14:59:55",
+            "business_duration": "1970-01-01 00:52:03",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/d235c3a7336a26147bf1e97c2d5c7b8a",
+                "value": "d235c3a7336a26147bf1e97c2d5c7b8a"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-07-11 15:29:55",
+            "has_breached": "true"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-09-23 15:28:45",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 00:24:05",
+            "sys_id": "55decc2b3b88ba103624ba2a85e45a8c",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-09-23 15:04:40",
+            "percentage": "240.83",
+            "original_breach_time": "2025-09-23 15:14:40",
+            "sys_created_by": "Parneyta.Parneyta",
+            "business_percentage": "240.83",
+            "end_time": "2025-09-23 15:28:45",
+            "sys_mod_count": "14",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-09-23 15:04:40",
+            "business_duration": "1970-01-01 00:24:05",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/d74d08233b88ba103624ba2a85e45a64",
+                "value": "d74d08233b88ba103624ba2a85e45a64"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-09-23 15:14:40",
+            "has_breached": "true"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-07-11 15:53:02",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 00:42:53",
+            "sys_id": "807a4f2733aa26147bf1e97c2d5c7b43",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-07-11 15:10:10",
+            "percentage": "142.94",
+            "original_breach_time": "2025-07-11 15:40:09",
+            "sys_created_by": "Colin Tran.Tran",
+            "business_percentage": "142.94",
+            "end_time": "2025-07-11 15:53:02",
+            "sys_mod_count": "16",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-07-11 15:10:09",
+            "business_duration": "1970-01-01 00:42:53",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/cef8032333aa26147bf1e97c2d5c7b08",
+                "value": "cef8032333aa26147bf1e97c2d5c7b08"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-07-11 15:40:09",
+            "has_breached": "true"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-04-05 02:34:53",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 01:44:53",
+            "sys_id": "9e53acd03bf06a9091e0703a85e45aca",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Sukhra.Hemchand",
+            "sys_created_on": "2025-04-05 00:50:00",
+            "percentage": "1048.83",
+            "original_breach_time": "2025-04-05 01:00:00",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "1048.83",
+            "end_time": "2025-04-05 02:34:53",
+            "sys_mod_count": "12",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-04-05 00:50:00",
+            "business_duration": "1970-01-01 01:44:53",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/3c12e4183bb06a9091e0703a85e45a8a",
+                "value": "3c12e4183bb06a9091e0703a85e45a8a"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-04-05 01:00:00",
+            "has_breached": "true"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-05-29 20:29:49",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 00:30:30",
+            "sys_id": "b8407ef547bd6210a003b1af016d438b",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Sukhra.Hemchand",
+            "sys_created_on": "2025-05-29 19:59:20",
+            "percentage": "101.67",
+            "original_breach_time": "2025-05-29 20:29:19",
+            "sys_created_by": "Colin Tran.Tran",
+            "business_percentage": "101.67",
+            "end_time": "2025-05-29 20:29:49",
+            "sys_mod_count": "16",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-05-29 19:59:19",
+            "business_duration": "1970-01-01 00:30:30",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/e64e6ebd477d6210a003b1af016d4398",
+                "value": "e64e6ebd477d6210a003b1af016d4398"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-05-29 20:29:19",
+            "has_breached": "true"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-05-13 13:39:42",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 01:00:07",
+            "sys_id": "c722baa833ade6907bf1e97c2d5c7be7",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-05-13 12:39:35",
+            "percentage": "200.39",
+            "original_breach_time": "2025-05-13 13:09:35",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "200.39",
+            "end_time": "2025-05-13 13:39:42",
+            "sys_mod_count": "15",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-05-13 12:39:35",
+            "business_duration": "1970-01-01 01:00:07",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/8d417e2433ade6907bf1e97c2d5c7bc4",
+                "value": "8d417e2433ade6907bf1e97c2d5c7bc4"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-05-13 13:09:35",
+            "has_breached": "true"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-04-01 15:56:36",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 00:21:23",
+            "sys_id": "de970bc33b2c26903624ba2a85e45a0f",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-04-01 15:35:13",
+            "percentage": "213.83",
+            "original_breach_time": "2025-04-01 15:45:12",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "213.83",
+            "end_time": "2025-04-01 15:56:35",
+            "sys_mod_count": "15",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-04-01 15:35:12",
+            "business_duration": "1970-01-01 00:21:23",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/2a06070b3be826903624ba2a85e45ac2",
+                "value": "2a06070b3be826903624ba2a85e45ac2"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-04-01 15:45:12",
+            "has_breached": "true"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-06-21 02:14:13",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 00:10:40",
+            "sys_id": "e296914533d6aa507bf1e97c2d5c7b14",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Sukhra.Hemchand",
+            "sys_created_on": "2025-06-21 02:03:33",
+            "percentage": "106.67",
+            "original_breach_time": "2025-06-21 02:13:33",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "106.67",
+            "end_time": "2025-06-21 02:14:13",
+            "sys_mod_count": "15",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-06-21 02:03:33",
+            "business_duration": "1970-01-01 00:10:40",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/ccf555c13396aa507bf1e97c2d5c7b49",
+                "value": "ccf555c13396aa507bf1e97c2d5c7b49"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-06-21 02:13:33",
+            "has_breached": "true"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-05-20 22:32:23",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 00:15:56",
+            "sys_id": "e559b00f47adea10a003b1af016d43e3",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-05-20 22:16:27",
+            "percentage": "159.33",
+            "original_breach_time": "2025-05-20 22:26:27",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "159.33",
+            "end_time": "2025-05-20 22:32:23",
+            "sys_mod_count": "13",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-05-20 22:16:27",
+            "business_duration": "1970-01-01 00:15:56",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/6929fc4b47adea10a003b1af016d43d9",
+                "value": "6929fc4b47adea10a003b1af016d43d9"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-05-20 22:26:27",
+            "has_breached": "true"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-05-15 13:26:21",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 00:19:39",
+            "sys_id": "f38b4d5d332dee907bf1e97c2d5c7b87",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Sukhra.Hemchand",
+            "sys_created_on": "2025-05-15 13:06:42",
+            "percentage": "196.5",
+            "original_breach_time": "2025-05-15 13:16:42",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "196.5",
+            "end_time": "2025-05-15 13:26:21",
+            "sys_mod_count": "14",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-05-15 13:06:42",
+            "business_duration": "1970-01-01 00:19:39",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/52b8055933e9ee907bf1e97c2d5c7bbe",
+                "value": "52b8055933e9ee907bf1e97c2d5c7bbe"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-05-15 13:16:42",
+            "has_breached": "true"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-04-11 08:37:33",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 07:14:35",
+            "sys_id": "ff642b4e3b70aed091e0703a85e45a7a",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-04-11 01:22:59",
+            "percentage": "724.31",
+            "original_breach_time": "2025-04-11 02:22:58",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "724.31",
+            "end_time": "2025-04-11 08:37:33",
+            "sys_mod_count": "19",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/6e4aa021c36c6e50021caddc7a0131b1",
+                "value": "6e4aa021c36c6e50021caddc7a0131b1"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-04-11 01:22:58",
+            "business_duration": "1970-01-01 07:14:35",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/0093a7ca3b30aed091e0703a85e45a43",
+                "value": "0093a7ca3b30aed091e0703a85e45a43"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-04-11 02:22:58",
+            "has_breached": "true"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-08-24 15:20:05",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 00:00:32",
+            "sys_id": "ea82b9b13be762103624ba2a85e45a63",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "John.Simon",
+            "sys_created_on": "2025-08-24 15:19:33",
+            "percentage": "0",
+            "original_breach_time": "2025-08-24 15:19:33",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "",
+            "end_time": "2025-08-24 15:20:05",
+            "sys_mod_count": "2",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/fefbe26fc38322d0021caddc7a0131d5",
+                "value": "fefbe26fc38322d0021caddc7a0131d5"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-08-24 15:19:33",
+            "business_duration": "1970-01-01 00:00:32",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/dd127d713be762103624ba2a85e45a5d",
+                "value": "dd127d713be762103624ba2a85e45a5d"
+            },
+            "stage": "cancelled",
+            "planned_end_time": "2025-08-24 15:19:33",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-09-19 01:30:16",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 00:36:20",
+            "sys_id": "00c5ec4e3b0cfe1091e0703a85e45a9f",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-09-19 00:53:55",
+            "percentage": "0",
+            "original_breach_time": "2025-09-19 00:53:55",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "",
+            "end_time": "2025-09-19 01:30:15",
+            "sys_mod_count": "6",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/fefbe26fc38322d0021caddc7a0131d5",
+                "value": "fefbe26fc38322d0021caddc7a0131d5"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-09-19 00:53:55",
+            "business_duration": "1970-01-01 00:00:00",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/d7a468ca3b0cfe1091e0703a85e45a3a",
+                "value": "d7a468ca3b0cfe1091e0703a85e45a3a"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-09-19 00:53:55",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-09-16 15:33:09",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 14:47:15",
+            "sys_id": "012781413bc832903624ba2a85e45a91",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Sukhra.Hemchand",
+            "sys_created_on": "2025-09-16 00:45:53",
+            "percentage": "0",
+            "original_breach_time": "2025-09-16 00:45:53",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "",
+            "end_time": "2025-09-16 15:33:08",
+            "sys_mod_count": "12",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/fefbe26fc38322d0021caddc7a0131d5",
+                "value": "fefbe26fc38322d0021caddc7a0131d5"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-09-16 00:45:53",
+            "business_duration": "1970-01-01 14:47:15",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/3695418d3b8832903624ba2a85e45aac",
+                "value": "3695418d3b8832903624ba2a85e45aac"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-09-16 00:45:53",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-09-24 13:57:22",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 00:15:52",
+            "sys_id": "28654db33b40b2103624ba2a85e45afc",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-09-24 13:41:30",
+            "percentage": "0",
+            "original_breach_time": "2025-09-24 13:41:29",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "",
+            "end_time": "2025-09-24 13:57:21",
+            "sys_mod_count": "6",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/fefbe26fc38322d0021caddc7a0131d5",
+                "value": "fefbe26fc38322d0021caddc7a0131d5"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-09-24 13:41:29",
+            "business_duration": "1970-01-01 00:15:52",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/895441f73b00b2103624ba2a85e45ae4",
+                "value": "895441f73b00b2103624ba2a85e45ae4"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-09-24 13:41:29",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-08-24 16:25:26",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 01:04:22",
+            "sys_id": "2ce235f13be762103624ba2a85e45a43",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-08-24 15:21:03",
+            "percentage": "0",
+            "original_breach_time": "2025-08-24 15:21:03",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "",
+            "end_time": "2025-08-24 16:25:25",
+            "sys_mod_count": "8",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/fefbe26fc38322d0021caddc7a0131d5",
+                "value": "fefbe26fc38322d0021caddc7a0131d5"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-08-24 15:21:03",
+            "business_duration": "1970-01-01 01:04:22",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/f4b235b13be762103624ba2a85e45a4d",
+                "value": "f4b235b13be762103624ba2a85e45a4d"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-24 15:21:03",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-09-26 20:26:42",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 00:17:19",
+            "sys_id": "3d51f0283bd0f25091e0703a85e45add",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-09-26 20:09:22",
+            "percentage": "0",
+            "original_breach_time": "2025-09-26 20:09:21",
+            "sys_created_by": "ryan.sanita",
+            "business_percentage": "",
+            "end_time": "2025-09-26 20:26:40",
+            "sys_mod_count": "6",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/fefbe26fc38322d0021caddc7a0131d5",
+                "value": "fefbe26fc38322d0021caddc7a0131d5"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-09-26 20:09:21",
+            "business_duration": "1970-01-01 00:17:19",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/e0707ca03bd0f25091e0703a85e45a07",
+                "value": "e0707ca03bd0f25091e0703a85e45a07"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-09-26 20:09:21",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-09-23 15:55:00",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 00:50:18",
+            "sys_id": "59decc2b3b88ba103624ba2a85e45a93",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-09-23 15:04:40",
+            "percentage": "0",
+            "original_breach_time": "2025-09-23 15:04:40",
+            "sys_created_by": "Parneyta.Parneyta",
+            "business_percentage": "",
+            "end_time": "2025-09-23 15:54:58",
+            "sys_mod_count": "5",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/fefbe26fc38322d0021caddc7a0131d5",
+                "value": "fefbe26fc38322d0021caddc7a0131d5"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-09-23 15:04:40",
+            "business_duration": "1970-01-01 00:50:18",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/d74d08233b88ba103624ba2a85e45a64",
+                "value": "d74d08233b88ba103624ba2a85e45a64"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-09-23 15:04:40",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-10-06 15:48:28",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 00:24:31",
+            "sys_id": "5eef4ba73b5cfe103624ba2a85e45a9a",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-10-06 15:23:57",
+            "percentage": "0",
+            "original_breach_time": "2025-10-06 15:23:56",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "",
+            "end_time": "2025-10-06 15:48:27",
+            "sys_mod_count": "9",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/fefbe26fc38322d0021caddc7a0131d5",
+                "value": "fefbe26fc38322d0021caddc7a0131d5"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-10-06 15:23:56",
+            "business_duration": "1970-01-01 00:24:31",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/9afd4b6f3b1cfe103624ba2a85e45ab1",
+                "value": "9afd4b6f3b1cfe103624ba2a85e45ab1"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-10-06 15:23:56",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-10-03 13:16:09",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 00:46:27",
+            "sys_id": "6c4b8baa3b94ba9091e0703a85e45a44",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-10-03 12:29:42",
+            "percentage": "0",
+            "original_breach_time": "2025-10-03 12:29:41",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "",
+            "end_time": "2025-10-03 13:16:08",
+            "sys_mod_count": "13",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/fefbe26fc38322d0021caddc7a0131d5",
+                "value": "fefbe26fc38322d0021caddc7a0131d5"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-10-03 12:29:41",
+            "business_duration": "1970-01-01 00:46:27",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/8aca076a3b94ba9091e0703a85e45a5e",
+                "value": "8aca076a3b94ba9091e0703a85e45a5e"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-10-03 12:29:41",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-09-11 16:36:58",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 00:17:08",
+            "sys_id": "81fc2a233b7fe21491e0703a85e45a60",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-09-11 16:19:49",
+            "percentage": "0",
+            "original_breach_time": "2025-09-11 16:19:48",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "",
+            "end_time": "2025-09-11 16:36:56",
+            "sys_mod_count": "5",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/fefbe26fc38322d0021caddc7a0131d5",
+                "value": "fefbe26fc38322d0021caddc7a0131d5"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-09-11 16:19:48",
+            "business_duration": "1970-01-01 00:17:08",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/078cee273b3fe21491e0703a85e45a9b",
+                "value": "078cee273b3fe21491e0703a85e45a9b"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-09-11 16:19:48",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-10-07 12:46:15",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 16:28:09",
+            "sys_id": "8b3350bb3b1432503624ba2a85e45a02",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Sukhra.Hemchand",
+            "sys_created_on": "2025-10-06 20:18:05",
+            "percentage": "0",
+            "original_breach_time": "2025-10-06 20:18:05",
+            "sys_created_by": "Edward.Vuong",
+            "business_percentage": "",
+            "end_time": "2025-10-07 12:46:14",
+            "sys_mod_count": "11",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/fefbe26fc38322d0021caddc7a0131d5",
+                "value": "fefbe26fc38322d0021caddc7a0131d5"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-10-06 20:18:05",
+            "business_duration": "1970-01-01 06:46:14",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/424158f73b1432503624ba2a85e45a5e",
+                "value": "424158f73b1432503624ba2a85e45a5e"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-10-06 20:18:05",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Europe/Berlin",
+            "sys_updated_on": "2025-09-07 19:07:56",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 00:02:00",
+            "sys_id": "8b9ce29e3bf326d091e0703a85e45a98",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-09-07 19:05:55",
+            "percentage": "0",
+            "original_breach_time": "2025-09-07 19:05:55",
+            "sys_created_by": "Kerrutt.Denis",
+            "business_percentage": "",
+            "end_time": "2025-09-07 19:07:55",
+            "sys_mod_count": "4",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/fefbe26fc38322d0021caddc7a0131d5",
+                "value": "fefbe26fc38322d0021caddc7a0131d5"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-09-07 19:05:55",
+            "business_duration": "1970-01-01 00:00:00",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/f51c625e3bf326d091e0703a85e45a56",
+                "value": "f51c625e3bf326d091e0703a85e45a56"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-09-07 19:05:55",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-08-28 17:55:54",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 00:43:31",
+            "sys_id": "92b2fa0b3b6bae103624ba2a85e45a54",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-08-28 17:12:22",
+            "percentage": "0",
+            "original_breach_time": "2025-08-28 17:12:22",
+            "sys_created_by": "Rosemary.Cosentino",
+            "business_percentage": "",
+            "end_time": "2025-08-28 17:55:53",
+            "sys_mod_count": "5",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/fefbe26fc38322d0021caddc7a0131d5",
+                "value": "fefbe26fc38322d0021caddc7a0131d5"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-08-28 17:12:22",
+            "business_duration": "1970-01-01 00:43:31",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/369fa6c33b6bae103624ba2a85e45ad7",
+                "value": "369fa6c33b6bae103624ba2a85e45ad7"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-28 17:12:22",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-09-08 18:18:25",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 05:41:44",
+            "sys_id": "9b1d1a623b7fe6103624ba2a85e45a55",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "AlBaghdadi.Haider",
+            "sys_created_on": "2025-09-08 12:36:42",
+            "percentage": "0",
+            "original_breach_time": "2025-09-08 12:36:41",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "",
+            "end_time": "2025-09-08 18:18:25",
+            "sys_mod_count": "11",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/fefbe26fc38322d0021caddc7a0131d5",
+                "value": "fefbe26fc38322d0021caddc7a0131d5"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-09-08 12:36:41",
+            "business_duration": "1970-01-01 05:41:44",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/00db9aea3bfbe6103624ba2a85e45ace",
+                "value": "00db9aea3bfbe6103624ba2a85e45ace"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-09-08 12:36:41",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-08-22 23:04:03",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 00:42:53",
+            "sys_id": "bedf78953ba726143624ba2a85e45ae2",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-08-22 22:21:09",
+            "percentage": "0",
+            "original_breach_time": "2025-08-22 22:21:09",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "",
+            "end_time": "2025-08-22 23:04:02",
+            "sys_mod_count": "4",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/fefbe26fc38322d0021caddc7a0131d5",
+                "value": "fefbe26fc38322d0021caddc7a0131d5"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/220af00d1b0c54109ef6dceacd4bcb1e",
+                "value": "220af00d1b0c54109ef6dceacd4bcb1e"
+            },
+            "start_time": "2025-08-22 22:21:09",
+            "business_duration": "1970-01-01 00:00:00",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/051fbc153ba726143624ba2a85e45a9d",
+                "value": "051fbc153ba726143624ba2a85e45a9d"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-08-22 22:21:09",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-09-09 17:19:36",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 23:11:09",
+            "sys_id": "c309efee3bb32ad091e0703a85e45acd",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-09-08 18:08:27",
+            "percentage": "0",
+            "original_breach_time": "2025-09-08 18:08:27",
+            "sys_created_by": "Michael.Janowski",
+            "business_percentage": "",
+            "end_time": "2025-09-09 17:19:36",
+            "sys_mod_count": "13",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/fefbe26fc38322d0021caddc7a0131d5",
+                "value": "fefbe26fc38322d0021caddc7a0131d5"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-09-08 18:08:27",
+            "business_duration": "1970-01-01 23:11:09",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/4928a7263bb32ad091e0703a85e45a72",
+                "value": "4928a7263bb32ad091e0703a85e45a72"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-09-08 18:08:27",
+            "has_breached": "false"
+        },
+        {
+            "pause_duration": "",
+            "pause_time": "",
+            "timezone": "Canada/Eastern",
+            "sys_updated_on": "2025-10-06 20:14:31",
+            "business_time_left": "1970-01-01 00:00:00",
+            "duration": "1970-01-01 00:43:34",
+            "sys_id": "e878043f3bd032503624ba2a85e45a56",
+            "time_left": "1970-01-01 00:00:00",
+            "sys_updated_by": "Kerrutt.Denis",
+            "sys_created_on": "2025-10-06 19:30:57",
+            "percentage": "0",
+            "original_breach_time": "2025-10-06 19:30:56",
+            "sys_created_by": "John.Simon",
+            "business_percentage": "",
+            "end_time": "2025-10-06 20:14:30",
+            "sys_mod_count": "7",
+            "active": "false",
+            "business_pause_duration": "",
+            "sla": {
+                "link": "https://scbmtest.service-now.com/api/now/table/contract_sla/fefbe26fc38322d0021caddc7a0131d5",
+                "value": "fefbe26fc38322d0021caddc7a0131d5"
+            },
+            "sys_tags": "",
+            "schedule": {
+                "link": "https://scbmtest.service-now.com/api/now/table/cmn_schedule/ae0af00d1b0c54109ef6dceacd4bcb23",
+                "value": "ae0af00d1b0c54109ef6dceacd4bcb23"
+            },
+            "start_time": "2025-10-06 19:30:56",
+            "business_duration": "1970-01-01 00:43:34",
+            "task": {
+                "link": "https://scbmtest.service-now.com/api/now/table/task/a997c8733bd032503624ba2a85e45aaa",
+                "value": "a997c8733bd032503624ba2a85e45aaa"
+            },
+            "stage": "completed",
+            "planned_end_time": "2025-10-06 19:30:56",
+            "has_breached": "false"
+        }
+    ]
+}

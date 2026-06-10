@@ -4,15 +4,12 @@ from airflow.operators.python import PythonOperator
 
 from etl_core.api.servicenow_api import ServiceNowAPIClient
 from etl_core.loaders.postgres_jsonb import PostgresJSONBLoader
+from etl_core.api.config import APIConfig
 
 
 # ----------------------------
 # CONFIG
 # ----------------------------
-TABLE_NAME = "sn_customerservice_case"
-BRONZE_TABLE = "raw_incidents"
-
-
 default_args = {
     "owner": "data-engineering",
     "retries": 2,
@@ -30,78 +27,91 @@ dag = DAG(
     start_date=datetime(2026, 5, 1),
     schedule="@daily",
     catchup=False,
-    tags=["servicenow", "bronze", "ingestion"],
+    tags=["servicenow", "bronze", "ingestion", "multi-table"],
 )
 
 
 # ----------------------------
-# TASK 1: EXTRACT + LOAD (combined logic inside task)
+# TASK 1: EXTRACT + LOAD
 # ----------------------------
-def extract_and_load(**context):
+def extract_and_load(sn_table, bronze_table, query_filter, fields=None, **context):
     """
     Single-flow ingestion:
     Extract from ServiceNow → Load directly into PostgreSQL bronze
     """
 
-    print("[PIPELINE] Starting extraction...")
+    print(f"[PIPELINE] Starting extraction for {sn_table}...")
 
     client = ServiceNowAPIClient()
     records = client.fetch_all_records(
-        table=TABLE_NAME,
-        account_query=None
+        table=sn_table,
+        query_filter=query_filter,
+        fields=fields
     )
 
-    print(f"[PIPELINE] Extracted {len(records)} records")
+    print(f"[PIPELINE] Extracted {len(records)} records for {sn_table}")
 
-    print("[PIPELINE] Loading into PostgreSQL bronze...")
+    print(f"[PIPELINE] Loading into PostgreSQL bronze table {bronze_table}...")
 
     loader = PostgresJSONBLoader(host="postgres")
 
-    loader.create_bronze_table(BRONZE_TABLE)
+    loader.create_bronze_table(bronze_table)
 
     loaded = loader.load_records(
         records=records,
-        table_name=BRONZE_TABLE,
+        source_table=sn_table,
+        table_name=bronze_table,
         extraction_run_id=context["run_id"],
-        #truncate_first=False
     )
 
-    print(f"[PIPELINE] Loaded {loaded} records into bronze")
-
-
-extract_load_task = PythonOperator(
-    task_id="extract_and_load",
-    python_callable=extract_and_load,
-    dag=dag,
-)
+    print(f"[PIPELINE] Loaded {loaded} records into bronze table {bronze_table}")
 
 
 # ----------------------------
 # TASK 2: VERIFY
 # ----------------------------
-def verify_load(**context):
+def verify_load(bronze_table, **context):
     """
     Simple verification step
     """
 
     loader = PostgresJSONBLoader(host="postgres")
 
-    count = loader.get_record_count(BRONZE_TABLE)
+    count = loader.get_record_count(bronze_table)
 
-    print(f"[VERIFY] Bronze table contains {count} records")
+    print(f"[VERIFY] Bronze table {bronze_table} contains {count} records")
 
     if count == 0:
-        raise ValueError("No data found in bronze layer!")
-
-
-verify_task = PythonOperator(
-    task_id="verify_bronze_load",
-    python_callable=verify_load,
-    dag=dag,
-)
+        raise ValueError(f"No data found in bronze layer for {bronze_table}!")
 
 
 # ----------------------------
-# DEPENDENCIES
+# DEPENDENCIES (Dynamic Generation)
 # ----------------------------
-extract_load_task >> verify_task
+for sn_table, config in APIConfig.TABLES_CONFIG.items():
+    bronze_table = config["bronze_table"]
+    query_filter = config.get("query_filter")
+    fields = config.get("fields")
+    
+    extract_load_task = PythonOperator(
+        task_id=f"extract_and_load_{sn_table}",
+        python_callable=extract_and_load,
+        op_kwargs={
+            "sn_table": sn_table,
+            "bronze_table": bronze_table,
+            "query_filter": query_filter,
+            "fields": fields
+        },
+        dag=dag,
+    )
+
+    verify_task = PythonOperator(
+        task_id=f"verify_{sn_table}_load",
+        python_callable=verify_load,
+        op_kwargs={
+            "bronze_table": bronze_table
+        },
+        dag=dag,
+    )
+
+    extract_load_task >> verify_task

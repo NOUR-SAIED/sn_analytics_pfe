@@ -51,7 +51,7 @@ class PostgresJSONBLoader:
         create_sql = sql.SQL("""
             CREATE TABLE IF NOT EXISTS {} (
                 id BIGSERIAL PRIMARY KEY,
-                source_table TEXT NOT NULL DEFAULT 'sn_customerservice_case',
+                source_table TEXT NOT NULL,
                 sys_id TEXT NOT NULL UNIQUE,
                 record_json JSONB NOT NULL,
                 loaded_at TIMESTAMPTZ DEFAULT NOW(),
@@ -77,6 +77,7 @@ class PostgresJSONBLoader:
     def load_records(
         self,
         records: List[Dict[str, Any]],
+        source_table: str,
         table_name: str = "raw_incidents",
         extraction_run_id: Optional[str] = None,
     ) -> int:
@@ -104,7 +105,7 @@ class PostgresJSONBLoader:
                 continue
 
             rows.append((
-                "sn_customerservice_case",
+                source_table,
                 str(sys_id),
                 Json(record),
                 extraction_run_id,

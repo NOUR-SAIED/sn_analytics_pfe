@@ -5,4 +5,5 @@ __pycache__/
 logs/
 .github/
 .vscode/
-*.egg-info/ # Ignore Python package metadata
+etl_core.egg-info # Ignore Python package metadata
+propmts/

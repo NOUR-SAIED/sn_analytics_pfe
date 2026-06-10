@@ -1,9 +1,8 @@
 """
-Airflow DAG: Bronze → Silver (flattening step).
+Airflow DAG: Bronze -> Silver (flattening step).
 
-Transforms bronze JSONB records into flattened silver tables.
-This is the ONE-TIME flatten — only bronze.raw_incidents → silver.incidents_flat.
-Do NOT add other tables here.
+Transforms bronze JSONB records into cleanly typed, flattened silver tables.
+This maps 1:1 from Bronze to Silver, skipping complex joins.
 """
 
 from datetime import datetime, timedelta
@@ -13,7 +12,7 @@ from airflow.operators.python import PythonOperator
 from etl_core.loaders.postgres_jsonb import PostgresJSONBLoader
 from etl_core.loaders.postgres_silver import PostgresSilverLoader
 from etl_core.transformers.silver import SilverTransformer
-from etl_core.config.silver_mappings import get_config
+from etl_core.config.silver_mappings import REGISTRY, get_config
 
 
 RECREATE_TABLES = True
@@ -36,11 +35,10 @@ dag = DAG(
 )
 
 
-def transform_table(bronze_table: str, **context):
-    config = get_config(bronze_table)
-    run_id = context["run_id"]
+def transform_table(config_key: str, **context):
+    config = get_config(config_key)
 
-    print(f"[PIPELINE] Starting bronze → silver for '{bronze_table}'")
+    print(f"[PIPELINE] Starting bronze -> silver for '{config.bronze_table}'")
 
     bronze_loader = PostgresJSONBLoader(host="postgres")
     bronze_records = bronze_loader.fetch_records(
@@ -62,7 +60,7 @@ def transform_table(bronze_table: str, **context):
     silver_loader = PostgresSilverLoader(host="postgres")
 
     if RECREATE_TABLES:
-        print("[PIPELINE] RECREATE_TABLES=True — dropping and recreating silver table")
+        print(f"[PIPELINE] RECREATE_TABLES=True - dropping and recreating silver.{config.target_table}")
         silver_loader.drop_table(config)
 
     silver_loader.ensure_table(config)
@@ -71,29 +69,31 @@ def transform_table(bronze_table: str, **context):
     print(f"[PIPELINE] Upserted {loaded} records into silver.{config.target_table}")
 
 
-def verify_silver(bronze_table: str, **context):
-    config = get_config(bronze_table)
+def verify_silver(config_key: str, **context):
+    config = get_config(config_key)
     loader = PostgresSilverLoader(host="postgres")
     count = loader.get_record_count(config)
 
-    print(f"[VERIFY] Silver {config.target_schema}.{config.target_table} contains {count} records")
+    print(f"[VERIFY] Silver table {config.target_schema}.{config.target_table} contains {count} records")
 
     if count == 0:
-        raise ValueError("No data found in silver layer!")
+        raise ValueError(f"No data found in silver layer for {config.target_table}!")
 
 
-transform_task = PythonOperator(
-    task_id="transform_raw_incidents_flat_to_silver",
-    python_callable=transform_table,
-    op_kwargs={"bronze_table": "raw_incidents_flat"},
-    dag=dag,
-)
+# Dynamically generate tasks for every table in our registry
+for config_key, config in REGISTRY.items():
+    transform_task = PythonOperator(
+        task_id=f"transform_{config.bronze_table}_to_silver",
+        python_callable=transform_table,
+        op_kwargs={"config_key": config_key},
+        dag=dag,
+    )
 
-verify_task = PythonOperator(
-    task_id="verify_raw_incidents_flat_silver",
-    python_callable=verify_silver,
-    op_kwargs={"bronze_table": "raw_incidents_flat"},
-    dag=dag,
-)
+    verify_task = PythonOperator(
+        task_id=f"verify_{config.target_table}",
+        python_callable=verify_silver,
+        op_kwargs={"config_key": config_key},
+        dag=dag,
+    )
 
-transform_task >> verify_task
+    transform_task >> verify_task

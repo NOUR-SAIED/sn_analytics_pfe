@@ -20,6 +20,27 @@ class APIConfig:
     # Query filter (account-specific)
     ACCOUNT_QUERY = os.getenv("SN_ACCOUNT_QUERY", "")
 
+    # Config for all tables to extract, enforcing the subsidiary filter
+    TABLES_CONFIG = {
+        "sn_customerservice_case": {
+            "bronze_table": "raw_incidents",
+            "query_filter": os.getenv("SN_ACCOUNT_QUERY", "")
+        },
+        "task_sla": {
+            "bronze_table": "raw_task_sla",
+            "query_filter": os.getenv("SN_TASK_SLA_QUERY", "sla=6e4aa021c36c6e50021caddc7a0131b1^ORsla=fefbe26fc38322d0021caddc7a0131d5")
+        },
+        "sys_user": {
+            "bronze_table": "raw_sys_user",
+            "query_filter": os.getenv("SN_SYS_USER_QUERY", "company=4bcd89671b557f4063c43113dd4bcb10"),
+            "fields": "sys_id,name,u_personal_id,user_name,u_stockroom,mobile_phone,first_name,email,last_name"
+        },
+        "contract_sla": {
+            "bronze_table": "raw_contract_sla",
+            "query_filter": os.getenv("SN_CONTRACT_SLA_QUERY", "nameLIKEtpa")
+        }
+    }
+
     # API behavior
     TIMEOUT_SEC = int(os.getenv("SN_TIMEOUT_SEC", "30"))
     MAX_RETRIES = int(os.getenv("SN_MAX_RETRIES", "3"))

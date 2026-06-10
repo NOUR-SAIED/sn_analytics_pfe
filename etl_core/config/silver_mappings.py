@@ -99,10 +99,10 @@ def coded(source, code_type="TEXT", code_column=None, label_column=None):
 
 # -- Table configurations ------------------------------------------------------
 
-RAW_INCIDENTS_FLAT = SilverTableConfig(
+SN_CUSTOMERSERVICE_CASE = SilverTableConfig(
     bronze_table="raw_incidents",
     target_schema="silver",
-    target_table="incidents_flat",
+    target_table="sn_customerservice_case",
     source_table_name="sn_customerservice_case",
     fields=[
         # -- Identity
@@ -130,7 +130,7 @@ RAW_INCIDENTS_FLAT = SilverTableConfig(
         f_text("contact_type",        pick="display_value"),
 
         # -- Resolution
-        *coded("resolution_code"),
+        *coded("resolution_code",   code_column="resolution_code", label_column="resolution_code_label"),
         *coded("u_sub_code",          code_column="sub_code",           label_column="sub_code_label"),
         f_text("cause"),
         f_text("close_notes"),
@@ -210,114 +210,91 @@ RAW_INCIDENTS_FLAT = SilverTableConfig(
     ],
 )
 
-
-INCIDENTS = SilverTableConfig(
-    bronze_table="raw_incidents",
+SYS_USER = SilverTableConfig(
+    bronze_table="raw_sys_user",
     target_schema="silver",
-    target_table="incidents",
-    source_table_name="sn_customerservice_case",
-    source_silver_table="incidents_flat",
+    target_table="sys_user",
+    source_table_name="sys_user",
     fields=[
-        # -- Identity
-        f_text("sys_id",                                     required=True),
-        f_text("number",              column="case_number"),
-        f_text("case",                column="case_title"),
-        f_text("sys_class_name"),
-
-        # -- Lifecycle
-        *coded("state"),
-        f_bool("active"),
-        f_bool("auto_close"),
-        *coded("escalation"),
-
-        # -- Priority / Severity
-        *coded("priority",            code_type="INTEGER"),
-        *coded("urgency",             code_type="INTEGER"),
-        *coded("impact",             code_type="INTEGER"),
-
-        # -- Classification
-        *coded("category"),
-        *coded("subcategory"),
-        f_text("u_sub_category",      pick="display_value"),
-        f_text("contact_type",        pick="display_value"),
-
-        # -- Resolution
-        *coded("resolution_code"),
-        *coded("u_sub_code",          code_column="sub_code",           label_column="sub_code_label"),
-        f_text("cause"),
-        f_text("close_notes"),
-
-        # -- SLA
-        f_bool("made_sla"),
-        f_bool("u_sla_breached"),
-        f_ts("sla_due"),
-
-        # -- People FK
-        f_text("assigned_to",         column="assigned_to_sys_id"),
-        f_text("opened_by",           column="opened_by_sys_id"),
-        f_text("resolved_by",         column="resolved_by_sys_id"),
-        f_text("u_owned_by",          column="owned_by_sys_id"),
-        f_text("u_last_assignee",     column="last_assignee_sys_id"),
-        f_text("contact",             column="contact_sys_id"),
-        f_text("sys_created_by"),
-        f_text("sys_updated_by"),
-
-        # -- Teams FK
-        f_text("assignment_group",          column="assignment_group_sys_id"),
-        f_text("u_last_assignment_group",   column="last_assignment_group_sys_id"),
-
-        # -- Account FK
-        f_text("account",             column="account_sys_id"),
-        f_text("company",             column="company_sys_id"),
-
-        # -- Timestamps
-        f_ts("opened_at"),
-        f_ts("closed_at"),
-        f_ts("resolved_at"),
-        f_ts("assigned_on",          column="assigned_at"),
-        f_ts("first_response_time"),
-        f_ts("sys_created_on"),
-        f_ts("sys_updated_on"),
-        f_date("u_date_of_occurrence"),
-
-        # -- Effort & Workflow
-        f_duration("time_worked"),
-        f_int("reassignment_count"),
-        f_int("sys_mod_count"),
-
-        # -- Device FK
-        f_text("u_tpl",              column="parking_terminal_sys_id"),
-        *coded("u_asset_device_type", code_column="device_type_code",  label_column="device_type_label"),
-        f_text("u_asset_device_number", column="device_number"),
-        *coded("u_fault_category",    code_column="fault_category_code", label_column="fault_category_label"),
-
-        # -- Impact
-        *coded("u_financial_impact",  code_column="financial_impact_code",  label_column="financial_impact_label"),
-        *coded("u_operational_impact",code_column="operational_impact_code",label_column="operational_impact_label"),
-        f_text("u_service_window",    column="service_window_sys_id"),
-        f_text("u_case_evaluation",   column="case_evaluation_sys_id"),
-
-        # -- Flags
-        f_bool("knowledge"),
-        f_bool("proactive"),
-        f_bool("needs_attention"),
-        f_bool("u_best_practice_article", column="has_best_practice"),
-        f_bool("u_has_incident",          column="has_incident"),
-        f_bool("u_quality_check",         column="quality_check_done"),
-
-        # -- Reference fields
-        f_text("case_report",         column="case_report_sys_id"),
-        *coded("approval"),
-        *coded("notify"),
+        f_text("sys_id", required=True),
+        f_text("name"),
+        f_text("first_name"),
+        f_text("last_name"),
+        f_text("user_name"),
+        f_text("email"),
+        f_text("mobile_phone"),
+        f_text("u_personal_id"),
+        f_text("u_stockroom", column="stockroom_sys_id"),
+        f_text("u_stockroom", column="stockroom_name", pick="display_value"),
     ],
 )
 
+TASK_SLA = SilverTableConfig(
+    bronze_table="raw_task_sla",
+    target_schema="silver",
+    target_table="task_sla",
+    source_table_name="task_sla",
+    fields=[
+        f_text("sys_id", required=True),
+        f_text("task", column="task_sys_id"),
+        f_text("task", column="task_name", pick="display_value"),
+        f_text("sla", column="sla_sys_id"),
+        f_text("sla", column="sla_name", pick="display_value"),
+        *coded("stage"),
+        f_bool("active"),
+        f_bool("has_breached"),
+        f_ts("start_time"),
+        f_ts("end_time"),
+        f_ts("planned_end_time"),
+        f_ts("pause_time"),
+        f_ts("original_breach_time"),
+        f_ts("sys_created_on"),
+        f_ts("sys_updated_on"),
+        f_duration("duration"),
+        f_duration("business_duration"),
+        f_duration("pause_duration"),
+        f_duration("business_pause_duration"),
+        f_duration("time_left"),
+        f_duration("business_time_left"),
+        f_float("percentage"),
+        f_float("business_percentage"),
+        f_int("sys_mod_count"),
+        f_text("sys_tags"),
+        f_text("timezone"),
+        f_text("sys_created_by"),
+        f_text("sys_updated_by"),
+    ],
+)
+
+CONTRACT_SLA = SilverTableConfig(
+    bronze_table="raw_contract_sla",
+    target_schema="silver",
+    target_table="contract_sla",
+    source_table_name="contract_sla",
+    fields=[
+        f_text("sys_id", required=True),
+        f_text("name"),
+        f_bool("active"),
+        f_text("type"),
+        f_text("target"),
+        f_text("collection", column="table_name"),
+        f_text("vendor", column="vendor_sys_id"),
+        f_text("vendor", column="vendor_name", pick="display_value"),
+        f_duration("duration"),
+        f_text("schedule", column="schedule_sys_id"),
+        f_text("schedule", column="schedule_name", pick="display_value"),
+        f_text("timezone"),
+        f_bool("retroactive"),
+    ],
+)
 
 # -- Registry -- add new configs here ------------------------------------------
 
 REGISTRY: dict[str, SilverTableConfig] = {
-    "raw_incidents_flat": RAW_INCIDENTS_FLAT,
-    "raw_incidents": INCIDENTS,
+    "sn_customerservice_case": SN_CUSTOMERSERVICE_CASE,
+    "sys_user": SYS_USER,
+    "task_sla": TASK_SLA,
+    "contract_sla": CONTRACT_SLA,
 }
 
 
