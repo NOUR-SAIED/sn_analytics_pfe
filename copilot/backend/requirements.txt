@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+psycopg2-binary
+requests
+python-dotenv
+langgraph
+langchain
+langchain-ollama
+langgraph-checkpoint-sqlite
+

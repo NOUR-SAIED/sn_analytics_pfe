@@ -387,6 +387,37 @@ services:
       start_period: 30s
     restart: always
 
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    expose:
+      - "11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: always
+
+  copilot-backend:
+    build: ./copilot/backend
+    environment:
+      - DATABASE_URL_READONLY=postgresql://elt_user:1234@postgres:5432/elt_sn_db
+      - OLLAMA_URL=http://ollama:11434
+    ports:
+      - "8000:8000"
+    networks:
+      - default
+    depends_on:
+      - postgres
+      - ollama
+
+  copilot-frontend:
+    build: ./copilot/frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - default
+    depends_on:
+      - copilot-backend
+
   # # You can enable flower by adding "--profile flower" option e.g. docker-compose --profile flower up
   # # or by explicitly targeted on the command line e.g. docker-compose up flower.
   # # See: https://docs.docker.com/compose/profiles/
@@ -412,3 +443,4 @@ services:
  
 volumes:
   postgres-db-volume:
+  ollama_data:

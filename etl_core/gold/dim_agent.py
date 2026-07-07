@@ -1,30 +1,45 @@
 """
 Agent dimension builder.
 
-Source: silver.sys_user, extended with any agent sys_id referenced
-by the case table that may not appear in sys_user.
+Source: distinct agent sys_ids referenced in the case table, enriched
+with name/email/phone from silver.sys_user when available.
 """
 
 TRUNCATE_SQL = "TRUNCATE TABLE gold.dim_agent CASCADE"
 
+# ── Schema migration: add columns that didn't exist at table creation ─────
+MIGRATE_SQL = [
+    "ALTER TABLE gold.dim_agent ADD COLUMN IF NOT EXISTS email TEXT",
+    "ALTER TABLE gold.dim_agent ADD COLUMN IF NOT EXISTS mobile_phone TEXT",
+]
+
 INSERT_SQL = """
-INSERT INTO gold.dim_agent (agent_sys_id, agent_name)
-SELECT u.sys_id, COALESCE(u.name, u.sys_id)
-FROM silver.sys_user u
-
-UNION
-
-SELECT a.sys_id, COALESCE(u.name, a.sys_id)
+INSERT INTO gold.dim_agent (agent_sys_id, agent_name, email, mobile_phone)
+SELECT DISTINCT
+    a.sys_id,
+    COALESCE(u.name, a.name, a.sys_id),
+    u.email,
+    u.mobile_phone
 FROM (
-    SELECT assigned_to_sys_id AS sys_id FROM silver.sn_customerservice_case WHERE assigned_to_sys_id IS NOT NULL
+    SELECT assigned_to_sys_id AS sys_id, assigned_to_name AS name
+    FROM silver.sn_customerservice_case
+    WHERE assigned_to_sys_id IS NOT NULL
     UNION
-    SELECT opened_by_sys_id   FROM silver.sn_customerservice_case WHERE opened_by_sys_id IS NOT NULL
+    SELECT opened_by_sys_id, opened_by_name
+    FROM silver.sn_customerservice_case
+    WHERE opened_by_sys_id IS NOT NULL
     UNION
-    SELECT resolved_by_sys_id FROM silver.sn_customerservice_case WHERE resolved_by_sys_id IS NOT NULL
+    SELECT resolved_by_sys_id, resolved_by_name
+    FROM silver.sn_customerservice_case
+    WHERE resolved_by_sys_id IS NOT NULL
     UNION
-    SELECT owned_by_sys_id    FROM silver.sn_customerservice_case WHERE owned_by_sys_id IS NOT NULL
+    SELECT owned_by_sys_id, owned_by_name
+    FROM silver.sn_customerservice_case
+    WHERE owned_by_sys_id IS NOT NULL
     UNION
-    SELECT last_assignee_sys_id FROM silver.sn_customerservice_case WHERE last_assignee_sys_id IS NOT NULL
+    SELECT last_assignee_sys_id, last_assignee_name
+    FROM silver.sn_customerservice_case
+    WHERE last_assignee_sys_id IS NOT NULL
 ) a
 LEFT JOIN silver.sys_user u ON a.sys_id = u.sys_id
 """
@@ -36,6 +51,8 @@ def build() -> int:
 
     with get_connection() as conn:
         with conn.cursor() as cur:
+            for stmt in MIGRATE_SQL:
+                cur.execute(stmt)
             cur.execute(TRUNCATE_SQL)
             cur.execute(INSERT_SQL)
             count = cur.rowcount

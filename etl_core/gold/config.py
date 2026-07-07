@@ -30,6 +30,8 @@ DATE_DIM_COLUMNS = [
 AGENT_DIM_COLUMNS = [
     "agent_sys_id TEXT PRIMARY KEY",
     "agent_name TEXT NOT NULL",
+    "email TEXT",
+    "mobile_phone TEXT",
 ]
 
 ASSIGNMENT_GROUP_DIM_COLUMNS = [
