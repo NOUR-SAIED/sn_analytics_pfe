@@ -17,7 +17,11 @@ INSERT_SQL = """
 INSERT INTO gold.dim_agent (agent_sys_id, agent_name, email, mobile_phone)
 SELECT DISTINCT
     a.sys_id,
-    COALESCE(u.name, a.name, a.sys_id),
+    CASE
+        WHEN u.name IS NOT NULL AND u.name !~ '^[0-9a-f]{32}$' THEN u.name
+        WHEN a.name IS NOT NULL AND a.name !~ '^[0-9a-f]{32}$' THEN a.name
+        ELSE COALESCE(u.name, a.name, a.sys_id)
+    END AS agent_name,
     u.email,
     u.mobile_phone
 FROM (

@@ -5,7 +5,12 @@ Core case fact table. One row per customer service case, with the main workflow,
 ## Keys and joins
 - `case_id`: Business key for the case, used as the primary key.
 - `sys_id`: Unique ServiceNow identifier for the same case record.
-- Date keys: `opened_date_key`, `assigned_date_key`, `first_response_date_key`, `resolved_date_key`, `closed_date_key`, `occurrence_date_key` join to `gold.dim_date`.
+- Date keys: `opened_date_key`, `assigned_date_key`, `first_response_date_key`, `resolved_date_key`, `closed_date_key`, `occurrence_date_key` join to `gold.dim_date`. **These are `INTEGER` surrogate keys in `YYYYMMDD` form (e.g. `20250115`), not date/timestamp values** — they cannot be compared directly to `CURRENT_DATE`, intervals, or timestamps (that raises `operator does not exist: integer >= timestamp`). For relative-date filtering, join to `gold.dim_date` and filter on its `full_date` column instead, e.g.:
+  ```sql
+  SELECT COUNT(*) FROM gold.fact_case f
+  JOIN gold.dim_date d ON f.opened_date_key = d.date_key
+  WHERE d.full_date >= CURRENT_DATE - INTERVAL '30 days'
+  ```
 - Agent keys: `assigned_to_sys_id`, `opened_by_sys_id`, `resolved_by_sys_id`, `owned_by_sys_id`, `last_assignee_sys_id` join to `gold.dim_agent`.
 - Group keys: `assignment_group_sys_id`, `last_assignment_group_sys_id` join to `gold.dim_assignment_group`.
 - Terminal key: `parking_terminal_sys_id` joins to `gold.dim_terminal`.

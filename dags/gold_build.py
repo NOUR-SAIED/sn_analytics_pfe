@@ -15,7 +15,12 @@ from airflow.operators.python import PythonOperator
 from airflow.utils.dates import days_ago
 
 # -- Infrastructure imports (always safe — these modules have no DB side effects) --
-from etl_core.gold.loader import create_gold_schema, create_gold_table, table_exists
+from etl_core.gold.loader import (
+    create_gold_schema,
+    create_gold_table,
+    grant_copilot_reader_access,
+    table_exists,
+)
 from etl_core.gold.config import (
     DATE_DIM_COLUMNS,
     AGENT_DIM_COLUMNS,
@@ -46,6 +51,7 @@ def _ensure_tables(**context):
     ]:
         if not table_exists(name):
             create_gold_table(name, cols)
+    grant_copilot_reader_access()
 
 
 def _build_dim_date(**context):

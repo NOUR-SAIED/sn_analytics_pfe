@@ -147,6 +147,8 @@ services:
       - ELT_DATABASE_NAME=${ELT_DATABASE_NAME}
       - ELT_DATABASE_USERNAME=${ELT_DATABASE_USERNAME}
       - ELT_DATABASE_PASSWORD=${ELT_DATABASE_PASSWORD}
+      - COPILOT_DB_USERNAME=${COPILOT_DB_USERNAME}
+      - COPILOT_DB_PASSWORD=${COPILOT_DB_PASSWORD}
       - CELERY_BACKEND_NAME=${CELERY_BACKEND_NAME}
       - CELERY_BACKEND_USERNAME=${CELERY_BACKEND_USERNAME}
       - CELERY_BACKEND_PASSWORD=${CELERY_BACKEND_PASSWORD}
@@ -399,8 +401,11 @@ services:
   copilot-backend:
     build: ./copilot/backend
     environment:
-      - DATABASE_URL_READONLY=postgresql://elt_user:1234@postgres:5432/elt_sn_db
+      - DATABASE_URL_READONLY=postgresql://${COPILOT_DB_USERNAME}:${COPILOT_DB_PASSWORD}@postgres:5432/${ELT_DATABASE_NAME}
       - OLLAMA_URL=http://ollama:11434
+      - COPILOT_ALLOWED_ORIGINS=http://localhost:3000
+    volumes:
+      - copilot-backend-state:/app/.state
     ports:
       - "8000:8000"
     networks:
@@ -444,3 +449,4 @@ services:
 volumes:
   postgres-db-volume:
   ollama_data:
+  copilot-backend-state:
