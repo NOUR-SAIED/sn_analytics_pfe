@@ -10,3 +10,8 @@ propmts/
 CLAUDE.md
 copilot/frontend/node_modules/
 copilot/frontend/.next/
+.venv-dbt/
+dbt/target/
+dbt/logs/
+dbt/dbt_packages/
+dbt/.user.yml

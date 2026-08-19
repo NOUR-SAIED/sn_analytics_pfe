@@ -1,0 +1,5 @@
+# Kept separate from the project's root requirements.txt (etl_core's own,
+# lightweight deps) so dbt's dependency tree doesn't bleed into etl_core's
+# venv or vice versa. Installed into the Airflow image by the root
+# `dockerfile` and into a dedicated local venv (.venv-dbt/) for local runs.
+dbt-postgres==1.11.0

@@ -1,0 +1,31 @@
+name: sn_analytics
+version: "1.0.0"
+config-version: 2
+
+# This dbt project is additive, layered on top of the existing Python
+# bronze -> silver -> gold pipeline (etl_core/, dags/gold_build.py). It does
+# NOT replace or modify any existing table. See docs/dbt_onboarding.md for
+# what it's for and how it's meant to grow.
+profile: "sn_analytics"
+
+model-paths: ["models"]
+snapshot-paths: ["snapshots"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  sn_analytics:
+    staging:
+      +materialized: view
+      # No +schema override here on purpose: dbt's default generate_schema_name
+      # macro concatenates the profile's target schema with a model-level
+      # override (profile schema "dbt_scratch" + override "dbt_scratch" =
+      # "dbt_scratch_dbt_scratch"). The profile's default schema (dbt_scratch,
+      # see profiles.yml) is already correct for everything in this project so
+      # far - add a real +schema override here only when a model actually
+      # needs a different target schema than the profile default.

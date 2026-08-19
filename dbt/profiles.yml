@@ -1,0 +1,29 @@
+# dbt connection profile for this project.
+#
+# No secrets live in this file - everything comes from environment variables,
+# mirroring the same connection the existing Python pipeline uses
+# (see etl_core/gold/db.py, etl_core/loaders/postgres_silver.py):
+# host=POSTGRES_CONN_HOST, port=POSTGRES_CONN_PORT, dbname=ELT_DATABASE_NAME,
+# user=ELT_DATABASE_USERNAME, password=ELT_DATABASE_PASSWORD.
+#
+# Local run (from the Windows host, outside Docker): postgres is published on
+# host port 5432 (see docker-compose.yml `postgres.ports`), so DBT_PG_HOST
+# defaults to localhost here. When this later gets wired into Airflow
+# (running inside the docker network), override DBT_PG_HOST=postgres via the
+# task's env.
+#
+# Run with: dbt --profiles-dir . debug   (from the dbt/ directory)
+
+sn_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('DBT_PG_HOST', 'localhost') }}"
+      port: "{{ env_var('DBT_PG_PORT', '5432') | int }}"
+      user: "{{ env_var('DBT_PG_USER', 'elt_user') }}"
+      password: "{{ env_var('DBT_PG_PASSWORD') }}"
+      dbname: "{{ env_var('DBT_PG_DBNAME', 'elt_sn_db') }}"
+      schema: dbt_scratch
+      threads: 4
+      connect_timeout: 10

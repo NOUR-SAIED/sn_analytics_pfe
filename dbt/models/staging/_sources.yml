@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: silver
+    description: >
+      Existing silver-layer tables, populated by the Python pipeline in
+      etl_core/loaders/postgres_silver.py and orchestrated by
+      dags/sn_bronze_to_silver.py. dbt only reads these - it does not load
+      or own them.
+    schema: silver
+    tables:
+      - name: sn_customerservice_case
+        description: >
+          One row per ServiceNow case, upserted by sys_id (latest state
+          only, no history - see docs/dbt_onboarding.md for why the
+          snapshot in snapshots/sn_case_snapshot.sql exists).

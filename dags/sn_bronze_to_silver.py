@@ -97,3 +97,12 @@ for config_key, config in REGISTRY.items():
     )
 
     transform_task >> verify_task
+
+# NOTE: a dbt-snapshot task (history retention on sn_customerservice_case,
+# see CLAUDE.md finding #1 / docs/dbt_onboarding.md) was attempted here and
+# rolled back - installing dbt-core into this same image broke the
+# airflow-worker Celery process (dbt pulled in click 8.4.2, incompatible
+# with this project's Celery/Airflow version - the worker crash-looped on
+# startup). The dbt project itself (dbt/) is real and validated standalone;
+# it just isn't wired into this DAG yet until a safe execution path
+# (isolated venv/container) is chosen. See docs/dbt_onboarding.md.
