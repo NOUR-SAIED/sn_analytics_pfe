@@ -37,9 +37,14 @@
 |---|---|---|---|
 | `case_title` | TEXT | NULL | Case short description |
 | `sys_class_name` | TEXT | NULL | ServiceNow table class (e.g., `sn_customerservice_case`) |
-| `task_effective_number` | TEXT | NULL | ⚠️ Unknown — may be a parent case reference or legacy field |
+| `task_effective_number` | TEXT | NULL | ⚠️ Conflicting docs — see open question below |
 
-> **❓ Open question about `task_effective_number`:** Is this a reference to a parent incident? What does "effective" mean in this context ?
+> **❓ Open question about `task_effective_number`:** This file previously marked it fully unknown.
+> `docs/data_dictionary.md` describes it more confidently as *"Same as `number` in most cases. Used
+> when case is linked to a parent task"* (100% populated, cardinality 10 in that sample). The two docs
+> haven't been reconciled against each other or confirmed with a stakeholder — until someone verifies
+> the `data_dictionary.md` description against real parent/child case behavior, treat it as unresolved
+> rather than trusting either doc alone.
 
 ---
 
@@ -103,7 +108,15 @@
 | `u_sla_breached` | BOOLEAN | NULL | Custom flag — breached |
 | `sla_due` | TIMESTAMPTZ | NULL | SLA deadline timestamp |
 
-> **ℹ️ Note:** Calendar-time durations from timestamps are in `response_time_s`, `resolution_time_s`. Business-hours SLA requires `task_sla` table (not yet joined).
+> **ℹ️ Note:** Calendar-time durations from timestamps are in `response_time_s`, `resolution_time_s`.
+> Business-hours SLA is joined at the gold layer, not here: `gold.fact_case`'s `sla_pivot` CTE
+> (`etl_core/gold/fact_case.py`) pivots `silver.task_sla` joined to `silver.contract_sla` on
+> `sla_sys_id`, filtered to the two named SLA definitions in `etl_core/gold/config.py`
+> (`RESPONSE_SLA_NAME = "TPA first reaction SLA"`, `RESOLUTION_SLA_NAME = "TPA case resolution SLA"`),
+> reshaped into one row per case before joining into the fact table. This avoids join fan-out — without
+> the pivot, cases with both SLA types would double-count in every downstream `COUNT`/`SUM`. *(This
+> note previously said "not yet joined" — that was stale; the join has existed since the gold star
+> schema was built.)*
 
 ---
 

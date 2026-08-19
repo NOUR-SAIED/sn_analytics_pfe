@@ -29,6 +29,11 @@ Excluded EMPTY fields: **106** — these are always empty in the snapshot and om
 | `case` | TEXT | 100% | — | `TEST​CS0395813` | cardinality: 10 | **Case Title** — Concatenation of prefix and number. UI display field. |
 | `sys_class_name` | CHOICE | 100% | — | `sn_customerservice_case` → `Case` | `sn_customerservice_case`→`Case` | **Record Type** — Always 'sn_customerservice_case'. Confirms table type. |
 
+> **⚠️ Doc inconsistency:** `task_effective_number`'s description above ("same as `number` in most
+> cases... used when linked to a parent task") is this file's read from a 10-record sample. It has not
+> been reconciled with `docs/data_mapping.md`, which still lists it as an open, unconfirmed question.
+> Don't treat either doc as authoritative on this field until a stakeholder confirms.
+
 ## Lifecycle & Status
 
 | Field | Type | Fill | FK Table | Sample Value | All Values / Notes | Business Meaning |
