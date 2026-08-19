@@ -1,16 +1,19 @@
 """
-Test the first Airflow DAG locally (simulating task execution).
+Test the first Airflow DAG locally (structure-only smoke test).
 
-This tests the DAG logic without needing a full Airflow scheduler.
+This tests the DAG structure without needing a full Airflow scheduler.
 Useful for development and CI/CD validation.
+
+Note: this used to also run an end-to-end task-execution test via
+dags/etl_core_tasks.py, but that module was dead code (unused by any live
+DAG, and broken — it called etl_core functions with signatures that no
+longer exist). It was deleted; this file now only checks DAG structure.
 
 Run:
     python -m dags.test_dag
 """
 
 import sys
-from datetime import datetime
-from etl_core.api.config import APIConfig
 
 
 def test_dag_structure():
@@ -42,66 +45,6 @@ def test_dag_structure():
     return True
 
 
-def test_dag_execution():
-    """Test DAG tasks execute successfully (end-to-end)."""
-    from etl_core_tasks import (
-        extract_servicenow_records,
-        load_to_bronze,
-        verify_bronze_load,
-    )
-
-    print("\n" + "=" * 70)
-    print("Testing DAG Task Execution (End-to-End)")
-    print("=" * 70)
-    
-    try:
-        # Task 1: Extract
-        print("\n[1/3] Running extract_servicenow_records...")
-        records = extract_servicenow_records(
-            table_name=APIConfig.TABLE_NAME,
-            account_query=APIConfig.ACCOUNT_QUERY,
-        )
-        print(f"[OK] Extracted {len(records)} records")
-        
-        if not records:
-            print("[ERROR] No records extracted")
-            return False
-        
-        # Task 2: Load
-        print("\n[2/3] Running load_to_bronze...")
-        loaded = load_to_bronze(
-            records=records,
-            table_name="raw_incidents",
-            extraction_run_id=f"test_run_{datetime.now().isoformat()}",
-            postgres_host="localhost",  # Use localhost for local testing
-        )
-        print(f"[OK] Loaded {loaded} records")
-        
-        if loaded != len(records):
-            print(f"[WARNING] Expected {len(records)}, but loaded {loaded}")
-        
-        # Task 3: Verify
-        print("\n[3/3] Running verify_bronze_load...")
-        count = verify_bronze_load(
-            table_name="raw_incidents",
-            postgres_host="localhost",  # Use localhost for local testing
-        )
-        print(f"[OK] Verified {count} records in bronze table")
-        
-        if count == 0:
-            print("[ERROR] No records found after load")
-            return False
-        
-        print("\n[OK] All tasks executed successfully")
-        return True
-    
-    except Exception as e:
-        print(f"\n[ERROR] Task execution failed: {e}")
-        import traceback
-        traceback.print_exc()
-        return False
-
-
 def main():
     """Run all tests."""
     print("\n")
@@ -119,15 +62,7 @@ def main():
     except Exception as e:
         print(f"[FATAL] DAG structure test failed: {e}")
         results.append(("DAG Structure", False))
-    
-    # Test 2: DAG execution
-    try:
-        result = test_dag_execution()
-        results.append(("DAG Execution", result))
-    except Exception as e:
-        print(f"[FATAL] DAG execution test failed: {e}")
-        results.append(("DAG Execution", False))
-    
+
     # Summary
     print("\n" + "=" * 70)
     print("Test Summary")
