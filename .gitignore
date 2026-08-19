@@ -7,3 +7,6 @@ logs/
 .vscode/
 etl_core.egg-info # Ignore Python package metadata
 propmts/
+CLAUDE.md
+copilot/frontend/node_modules/
+copilot/frontend/.next/
