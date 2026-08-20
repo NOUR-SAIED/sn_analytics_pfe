@@ -21,3 +21,14 @@ models:
         data_tests:
           - unique
           - not_null
+
+  - name: dim_agent
+    description: >
+      One row per distinct agent sys_id referenced anywhere in the case
+      table's 5 agent-role columns (assigned_to, opened_by, resolved_by,
+      owned_by, last_assignee), enriched from silver.sys_user.
+    columns:
+      - name: agent_sys_id
+        data_tests:
+          - unique
+          - not_null

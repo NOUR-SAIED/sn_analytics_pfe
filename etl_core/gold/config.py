@@ -76,11 +76,16 @@ FACT_CASE_COLUMNS = [
     "sub_code TEXT",
     "sub_code_label TEXT",
     # -- Agent FKs
-    "assigned_to_sys_id TEXT REFERENCES gold.dim_agent(agent_sys_id)",
-    "opened_by_sys_id TEXT REFERENCES gold.dim_agent(agent_sys_id)",
-    "resolved_by_sys_id TEXT REFERENCES gold.dim_agent(agent_sys_id)",
-    "owned_by_sys_id TEXT REFERENCES gold.dim_agent(agent_sys_id)",
-    "last_assignee_sys_id TEXT REFERENCES gold.dim_agent(agent_sys_id)",
+    # No REFERENCES gold.dim_agent(agent_sys_id) here (was removed): same
+    # reason as the date FKs above - dim_agent is now built by
+    # dbt/models/gold/dim_agent.sql, which has no PRIMARY KEY, so a hard FK
+    # to it would fail on a fresh fact_case create. Covered by dbt tests
+    # instead once fact_case itself migrates (dbt/models/gold/_gold.yml).
+    "assigned_to_sys_id TEXT",
+    "opened_by_sys_id TEXT",
+    "resolved_by_sys_id TEXT",
+    "owned_by_sys_id TEXT",
+    "last_assignee_sys_id TEXT",
     # -- Assignment group FKs
     "assignment_group_sys_id TEXT REFERENCES gold.dim_assignment_group(assignment_group_sys_id)",
     "last_assignment_group_sys_id TEXT REFERENCES gold.dim_assignment_group(assignment_group_sys_id)",
