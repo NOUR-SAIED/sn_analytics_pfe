@@ -42,3 +42,11 @@ models:
         data_tests:
           - unique
           - not_null
+
+  - name: dim_terminal
+    description: One row per distinct parking terminal referenced in the case table.
+    columns:
+      - name: terminal_sys_id
+        data_tests:
+          - unique
+          - not_null

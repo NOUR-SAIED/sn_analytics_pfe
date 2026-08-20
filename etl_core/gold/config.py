@@ -94,7 +94,11 @@ FACT_CASE_COLUMNS = [
     "assignment_group_sys_id TEXT",
     "last_assignment_group_sys_id TEXT",
     # -- Terminal FK
-    "parking_terminal_sys_id TEXT REFERENCES gold.dim_terminal(terminal_sys_id)",
+    # No REFERENCES gold.dim_terminal(...) here (was removed) - same reason
+    # as every other gold dim FK above: dim_terminal is now dbt-built, no
+    # PRIMARY KEY. Covered by dbt tests instead once fact_case itself
+    # migrates (dbt/models/gold/_gold.yml).
+    "parking_terminal_sys_id TEXT",
     # -- Device (kept in fact)
     "device_type_label TEXT",
     # -- SLA metrics
