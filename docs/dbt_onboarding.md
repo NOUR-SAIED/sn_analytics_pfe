@@ -1,92 +1,118 @@
-# dbt onboarding — what's here, what's proven, what's deliberately not done yet
+# dbt in this project — what it does, what it replaced, current state
 
-This is the project's first use of dbt. It exists to fix audit finding #1 in `CLAUDE.md`: bronze and
-silver upsert by `sys_id` (latest state only), and every gold dim/fact is `TRUNCATE`+`INSERT` on every
-run — a case's status/assignment history is nowhere. dbt **snapshots** (SCD Type 2) fix that, reading
-the existing silver table as-is with no changes to `etl_core/` or the Python pipeline.
+dbt was introduced this session for two things:
 
-## What exists right now
+1. **History retention** (audit finding #1 in `CLAUDE.md`): bronze/silver upsert by `sys_id`
+   (latest state only), so a case's status/assignment history was nowhere. Fixed with a dbt
+   **snapshot**.
+2. **Replacing the hand-written SQL scattered across `etl_core/gold/*.py`** with proper, tested,
+   version-controlled dbt **models** — the actual data-engineering-best-practices goal, not just the
+   narrow history-retention slice. This migration is now **complete**: all 5 gold tables are
+   dbt-built.
 
-- `dbt/` — a dbt project, independent of the Python pipeline. Nothing in `etl_core/`, `dags/`
-  (other than a comment, see below), or any bronze/silver/gold table was changed to build this.
-- `dbt/models/staging/_sources.yml` — declares `silver.sn_customerservice_case` as a dbt source. dbt
-  only reads it, never writes to it.
-- `dbt/models/staging/_smoke_test.sql` — a trivial passthrough view, kept as a template for the next
-  staging model. Not load-bearing; delete freely.
-- `dbt/snapshots/sn_case_snapshot.sql` — the actual fix. Timestamp strategy keyed on `sys_updated_on`
-  (verified 100% populated). Writes to a **new** table, `snapshots.sn_case_snapshot`, with dbt's
-  standard `dbt_valid_from`/`dbt_valid_to` columns.
-- `dbt/requirements.txt` — pins `dbt-postgres==1.11.0`, kept separate from the root `requirements.txt`
-  on purpose (see the incident below).
-- `.venv-dbt/` (gitignored, local only) — an isolated Python venv for running dbt from the Windows
-  host. Kept separate from the existing `venv/` used for `etl_core` dev.
+## Current state, in one sentence
 
-## What's been proven (same session, no multi-day wait needed)
+`etl_core/gold/` no longer contains any table-building logic — only `db.py`/`loader.py` for the
+schema-exists check and the `copilot_reader` grant, neither of which is dbt's job. Everything that
+builds a `gold.*` table lives in `dbt/models/gold/`, runs automatically via Airflow
+(`dags/gold_build.py`), and is checked by 28 dbt tests on every run.
 
-Test data doesn't drift on its own, so validation had to simulate a change instead of waiting for one:
+## What's in `dbt/`
 
-1. `dbt debug` — connects to the real running Postgres. ✅
-2. `dbt run` on the smoke-test model — resolves `source()`, creates a real view, returns real silver
-   rows. ✅
-3. `dbt snapshot` — seeded `snapshots.sn_case_snapshot` with all 356 current case rows. ✅
-4. **The actual proof:** manually flipped one test case's `state_label` and `sys_updated_on`, reran
-   `dbt snapshot`, and confirmed exactly two versions of that row exist with correct
-   `dbt_valid_from`/`dbt_valid_to` boundaries (the old row's `valid_to` exactly matches the new row's
-   `valid_from`). Then reverted the test edit and snapshotted again — a clean 3-version history
-   resulted. This is the mechanism working correctly; it doesn't need real data to ever change to be
-   proven, only that *when* it changes, it's captured right. ✅
+- `dbt/models/staging/_sources.yml` — declares the silver tables dbt reads (`sn_customerservice_case`,
+  `sys_user`, `task_sla`, `contract_sla`). dbt only reads these, never writes to them.
+- `dbt/models/staging/_smoke_test.sql` — a trivial passthrough view kept as a template. Not
+  load-bearing.
+- `dbt/snapshots/sn_case_snapshot.sql` — SCD Type 2 history on `sn_customerservice_case`. Timestamp
+  strategy on `sys_updated_on`. Writes to `snapshots.sn_case_snapshot`. **Not yet read by anything
+  downstream** — no lifecycle-KPI gold model has been built on top of it yet; that's real new
+  capability, worth its own planning session.
+- `dbt/models/gold/*.sql` — the 5 gold star-schema tables, one file each: `dim_date`, `dim_agent`,
+  `dim_assignment_group`, `dim_terminal`, `fact_case`. Each is a direct, verified port of the Python
+  builder it replaced (see the per-table migration log below). `dbt/models/gold/_gold.yml` holds the
+  28 tests: `not_null`/`unique` on every dimension key, plus 13 `relationships` tests on `fact_case`
+  replacing the original hard FK constraints.
+- `dbt/dbt_project.yml` — `vars.response_sla_name`/`resolution_sla_name` (were Python constants in
+  `etl_core/gold/config.py`) and `vars.date_dim_start`/`date_dim_end` (were `DATE_DIM_START`/`END`).
+  Gold models get `+schema: gold` and `+tags: ["gold"]`.
+- `dbt/macros/get_custom_schema.sql` — overrides dbt's default schema-name generation, which otherwise
+  concatenates a model's `+schema` override with the profile's target schema
+  (`dbt_scratch` + `gold` → `dbt_scratch_gold`). Also adds a `DBT_GOLD_VERIFY_SUFFIX` env-var escape
+  hatch: set it to redirect every gold model into a side-by-side schema (e.g. `gold_verify`) for
+  comparison before ever touching the real `gold` schema. This is how every table in the migration was
+  verified — built into `gold_verify`, diffed row-for-row against the live table, only cut over once
+  confirmed identical.
+- `docker/dbt/Dockerfile` — a dedicated image (`python:3.11-slim` + `dbt-postgres` + `git`), with the
+  `dbt/` project baked in at build time. Deliberately has zero Airflow/Celery dependencies — see the
+  incident below for why that matters.
+- `.venv-dbt/` (gitignored, local only) — isolated Python venv for running dbt from the Windows host
+  during development/verification, separate from the `venv/` used for `etl_core`.
 
-There's a cosmetic dbt-postgres warning on every snapshot run — `Data type of snapshot table timestamp
-columns (DATETIME) doesn't match derived column 'updated_at' (DATETIMETZ)`. Checked directly with
-`\d snapshots.sn_case_snapshot`: every relevant column (`sys_updated_on`, `dbt_updated_at`,
-`dbt_valid_from`, `dbt_valid_to`) is actually `timestamp with time zone`, consistently. This is a known
-false-positive in dbt-postgres's snapshot type-check heuristic, not a real type mismatch — documented
-here so it doesn't cause alarm later.
+## How it's wired into Airflow
 
-## What's deliberately NOT done yet
+Two DAGs run dbt now, both via `DockerOperator` (a fresh, disposable container from the
+`sn_analytics-dbt` image per task run, removed when done — see the incident below for why not a
+`BashOperator` installing dbt directly into Airflow's image):
 
-- **No gold model reads from the snapshot yet.** No lifecycle-KPI fact table has been built on top of
-  `snapshots.sn_case_snapshot`. That's real new capability worth its own planning session once dbt
-  itself feels solid — not bundled into this cleanup pass.
-- **Only `sn_customerservice_case` is snapshotted.** Dims (`dim_agent`, `dim_assignment_group`) are a
-  cheap follow-on later, not required now.
-- **Not wired into Airflow yet — see the incident below.**
+- **`dags/sn_bronze_to_silver.py`** — `dbt_snapshot_sn_case` task, right after
+  `verify_sn_customerservice_case`. Runs `dbt snapshot --select sn_case_snapshot`.
+- **`dags/gold_build.py`** — `dbt_run_gold` (`dbt run --select gold`) → `dbt_test_gold`
+  (`dbt test --select gold`) → `grant_copilot_reader_access` (still Python — a Postgres `GRANT` for an
+  unrelated role, not a dbt concern). dbt's own dependency graph decides build order for the 5 gold
+  models (the 4 dims, then `fact_case`) — no manual sequencing needed, unlike the old
+  `etl_core/gold/pipeline.py`, which is now deleted.
 
-## Incident: why this isn't wired into a DAG yet
+## Incident: why dbt isn't installed into the Airflow image
 
-The plan was to add a `BashOperator` task running `dbt snapshot` in `dags/sn_bronze_to_silver.py`,
-right after the silver-load step for the case table, with `dbt-postgres` installed into the same
-custom Airflow image (`dockerfile`) that already runs the rest of this pipeline.
+Early in this session, the plan was to install `dbt-postgres` directly into the same custom Airflow
+image (`dockerfile`) that runs Celery. That broke Celery: `dbt-core` pulled in `click==8.4.2` as a
+transitive dependency, overwriting the `click` version this project's pinned Celery/Airflow (2.9.2)
+needs. `airflow-worker` — the container that executes every task in this project — crash-looped on
+startup (`celery.utils.nodenames.nodesplit` raised `AttributeError: 'NoneType' object has no attribute
+'split'`, a known symptom of Celery's click-based CLI breaking against a too-new click).
 
-That was tried, and rolled back. Installing `dbt-postgres` into that image pulled in `click==8.4.2`
-as a transitive dependency (from `dbt-core`), overwriting the `click` version the image's pinned
-Celery/Airflow (2.9.2) needs. Result: `airflow-worker` — the container that executes **every task in
-this project** — crash-looped on startup (`celery.utils.nodenames.nodesplit` raised
-`AttributeError: 'NoneType' object has no attribute 'split'`, a known symptom of Celery's click-based
-CLI breaking against a too-new click).
+Caught and reverted within the same session. The actual fix, done properly afterward: a **dedicated**
+dbt image (`docker/dbt/Dockerfile`) with zero Airflow/Celery dependencies at all, triggered from
+Airflow via `DockerOperator` over the Docker socket (mounted into `airflow-worker` only, not
+scheduler/webserver). Verified after adding the official `apache-airflow-providers-docker` package to
+Airflow's image: every dependency was already satisfied by packages already present — nothing new
+installed, `click` stayed at `8.1.7`, `airflow-worker` stayed healthy throughout.
 
-This was caught and fixed within the same session (rebuilt the image without dbt, confirmed
-`airflow-worker` returned to healthy, confirmed both live DAGs still parse with zero import errors),
-but it's a real example of why "first contact with dbt" needs to stay cautious: installing dbt's
-dependency tree into the same environment as an unrelated, sensitive service (here, Celery) is a
-genuine collision risk, not a hypothetical one.
+## Per-table gold migration log
 
-**`dags/sn_bronze_to_silver.py` currently has no dbt task** — it's back to exactly its pre-dbt state,
-plus one explanatory comment pointing here. `docker-compose.yml` does mount `./dbt:/opt/airflow/dbt`
-into the Airflow containers (harmless — it's just a bind mount, nothing is installed there), so the
-project files are visible for a manual `docker exec` run if needed, but nothing runs automatically.
+Each table was migrated the same way: build into a side-by-side `gold_verify` schema
+(`DBT_GOLD_VERIFY_SUFFIX=_verify`), diff row-for-row against the live Python-built table, cut over only
+once confirmed identical, add dbt tests, delete the Python builder, re-verify downstream consumers.
 
-### Options for wiring this in safely (not decided yet — next conversation)
+1. **`dim_date`** — zero dependencies, first migrated. 4018/4018 rows identical. Cutover dropped 6 FK
+   constraints `fact_case` had pointing at it (expected — see "constraints" below).
+2. **`dim_agent`** — 12/12 rows identical. Dropped 5 FKs from `fact_case`.
+3. **`dim_assignment_group`** — 4/4 rows identical. Dropped 2 FKs.
+4. **`dim_terminal`** — 13/13 rows identical. Dropped 1 FK.
+5. **`fact_case`** — the big one: the `sla_pivot` CTE (pivots `silver.task_sla` to avoid join fan-out)
+   plus 6 `dim_date` lookups. 356/356 rows identical (excluding `loaded_at`, a `now()` timestamp that
+   necessarily differs between build runs). Nothing references `fact_case` via FK, so no constraints
+   were dropped by this cutover.
 
-1. **A dedicated `dbt` container.** Its own lightweight image (e.g. `python:3.11-slim` +
-   `dbt-postgres` only, no Airflow/Celery in it at all), added as its own `docker-compose.yml` service.
-   Airflow triggers it via `DockerOperator` or a mounted Docker socket. Most isolated, zero risk of a
-   repeat of this incident; adds a moderate amount of new infrastructure.
-2. **`KubernetesPodOperator` / ECS-style external run** — overkill for this project's current scale
-   (single-host Docker Compose), not recommended.
-3. **Run dbt from the local `.venv-dbt/` on a schedule outside Airflow** (cron, or manually) until the
-   project is ready to invest in option 1. Simplest, but loses Airflow's retry/observability/lineage
-   for this step, and someone has to remember to run it.
+## Constraints: dbt tests instead of hard FKs — a deliberate choice, not a downgrade
 
-Recommendation when this comes back up: option 1, scoped small (the container only needs
-`dbt-postgres` and the `dbt/` folder — nothing else).
+Plain dbt `table` materialization doesn't emit `PRIMARY KEY`/`REFERENCES` DDL the way the old
+`CREATE TABLE` statements in `etl_core/gold/config.py` did. Rather than lose that integrity checking,
+`dbt/models/gold/_gold.yml` declares it as dbt tests instead: `not_null`/`unique` on every dimension
+key, `relationships` tests on all 13 of `fact_case`'s role columns (date, agent, assignment group,
+terminal). Run via `dbt test`, checked automatically on every `gold_build` DAG run — genuinely more
+coverage than the original 8 hard FK constraints had, since every role column is now checked, not just
+the ones someone remembered to add a `REFERENCES` to.
+
+## Still open / deliberately deferred
+
+- **Cube semantic layer** — not started. Sits in front of the now-dbt-built gold schema; repoints
+  Superset's SQL Lab connection and the Copilot agent's `run_sql`. Explicitly bucketed into the
+  dashboard/agent conversation, not this migration.
+- **No gold model reads from `snapshots.sn_case_snapshot` yet** — the history-retention snapshot exists
+  and is proven correct, but nothing queries it. A lifecycle-KPI fact table on top of it is real new
+  capability, not part of this migration.
+- **Dims aren't snapshotted** — only `sn_customerservice_case` has history tracking. Cheap follow-on
+  later if needed.
+- **Incremental extraction watermark** (audit finding #2) — unrelated to dbt, still not started, low
+  priority while the data is static test data.
