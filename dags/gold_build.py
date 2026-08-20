@@ -1,34 +1,37 @@
 """
 Airflow DAG — Gold layer star schema build.
 
-dim_date, dim_agent, dim_assignment_group, and dim_terminal are NOT built
-here anymore - they're dbt's job now (dbt/models/gold/), the first four
-tables migrated off this Python pipeline. See docs/dbt_onboarding.md for
-the per-table migration log. fact_case is the only gold table left here -
-the biggest, last piece (joins all 4 dbt-built dims plus the SLA pivot).
+All 5 gold tables (dim_date, dim_agent, dim_assignment_group, dim_terminal,
+fact_case) are now built by dbt - see docs/dbt_onboarding.md for the full
+per-table migration log. This DAG used to run 6 PythonOperator tasks (one
+per table, in etl_core/gold/*.py); none of that Python code exists anymore.
 
-Nothing in this DAG runs dbt yet - a dbt task exists so far only in
-dags/sn_bronze_to_silver.py (dbt_snapshot_sn_case), which builds none of
-the dims above. Running those dbt models is currently manual
-(`dbt run --select dim_date dim_agent dim_assignment_group dim_terminal`);
-wiring dbt into a DAG (likely this one, once fact_case migrates too and
-this DAG's shape settles for good) is follow-on work.
+Runs via DockerOperator, same pattern as dags/sn_bronze_to_silver.py's
+dbt_snapshot_sn_case task: a fresh, disposable container from the
+dedicated sn_analytics-dbt image (docker/dbt/Dockerfile, no Airflow/Celery
+dependencies at all) via the Docker socket mounted into airflow-worker,
+removed when done. dbt-core was tried directly in the Airflow image once
+and broke Celery (a `click` version collision) - see docs/dbt_onboarding.md
+for that postmortem; this is the fix, not a workaround.
+
+Task order: dbt run (builds/replaces all 5 tables via their own internal
+dependency graph - dbt figures out dim_date before fact_case, etc., no
+manual sequencing needed) -> dbt test (the 28 dbt tests in
+dbt/models/gold/_gold.yml - not_null/unique/relationships, replacing the
+hard PK/FK DDL constraints the old Python-created tables had) ->
+grant_copilot_reader_access (still genuinely Python's job - a Postgres
+GRANT for an unrelated role, not something dbt does).
 """
 
+import os
 from datetime import timedelta
 
 from airflow import DAG
 from airflow.operators.python import PythonOperator
+from airflow.providers.docker.operators.docker import DockerOperator
 from airflow.utils.dates import days_ago
 
-# -- Infrastructure imports (always safe — these modules have no DB side effects) --
-from etl_core.gold.loader import (
-    create_gold_schema,
-    create_gold_table,
-    grant_copilot_reader_access,
-    table_exists,
-)
-from etl_core.gold.config import FACT_CASE_COLUMNS
+from etl_core.gold.loader import create_gold_schema, grant_copilot_reader_access
 
 DEFAULT_ARGS = {
     "owner": "etl",
@@ -38,23 +41,32 @@ DEFAULT_ARGS = {
 }
 
 
-# ── Task callables ─────────────────────────────────────────────────────
-
-def _ensure_tables(**context):
-    """Create gold schema and fact_case (the only still-Python-owned table) if missing."""
+def _grant_access(**context):
+    """Ensure the gold schema exists, then grant the read-only copilot role access."""
     create_gold_schema()
-    if not table_exists("fact_case"):
-        create_gold_table("fact_case", FACT_CASE_COLUMNS)
     grant_copilot_reader_access()
 
 
-def _build_fact_case(**context):
-    from etl_core.gold import fact_case
-    count = fact_case.build()
-    context["ti"].xcom_push(key="count", value=count)
+_DBT_ENVIRONMENT = {
+    "DBT_PG_HOST": "postgres",
+    "DBT_PG_PORT": os.getenv("POSTGRES_CONN_PORT", "5432"),
+    "DBT_PG_USER": os.getenv("ELT_DATABASE_USERNAME", "elt_user"),
+    "DBT_PG_DBNAME": os.getenv("ELT_DATABASE_NAME", ""),
+}
+_DBT_PRIVATE_ENVIRONMENT = {
+    "DBT_PG_PASSWORD": os.getenv("ELT_DATABASE_PASSWORD", ""),
+}
+_DBT_DOCKER_KWARGS = dict(
+    image="sn_analytics-dbt:latest",
+    docker_url="unix://var/run/docker.sock",
+    network_mode="sn_analytics_default",
+    api_version="auto",
+    auto_remove="success",
+    mount_tmp_dir=False,  # host/container path mismatch trap - see docker/dbt/Dockerfile
+    environment=_DBT_ENVIRONMENT,
+    private_environment=_DBT_PRIVATE_ENVIRONMENT,
+)
 
-
-# ── DAG definition ─────────────────────────────────────────────────────
 
 with DAG(
     dag_id="gold_build",
@@ -64,22 +76,24 @@ with DAG(
     start_date=days_ago(1),
     catchup=False,
     max_active_runs=1,
-    tags=["gold", "star-schema"],
+    tags=["gold", "star-schema", "dbt"],
 ) as dag:
 
-    ensure_tables = PythonOperator(
-        task_id="ensure_tables",
-        python_callable=_ensure_tables,
+    dbt_run_gold = DockerOperator(
+        task_id="dbt_run_gold",
+        command=["dbt", "run", "--select", "gold"],
+        **_DBT_DOCKER_KWARGS,
     )
 
-    build_fact_case = PythonOperator(
-        task_id="build_fact_case",
-        python_callable=_build_fact_case,
+    dbt_test_gold = DockerOperator(
+        task_id="dbt_test_gold",
+        command=["dbt", "test", "--select", "gold"],
+        **_DBT_DOCKER_KWARGS,
     )
 
-    # ── Dependencies ──
-    # NOTE: all 4 gold dims fact_case joins against are now built by dbt,
-    # run manually (see module docstring) - this DAG has no automated
-    # dependency on any of them yet. Worth wiring dbt tasks + dependencies
-    # here once fact_case itself migrates and this DAG's shape settles.
-    ensure_tables >> build_fact_case
+    grant_access = PythonOperator(
+        task_id="grant_copilot_reader_access",
+        python_callable=_grant_access,
+    )
+
+    dbt_run_gold >> dbt_test_gold >> grant_access

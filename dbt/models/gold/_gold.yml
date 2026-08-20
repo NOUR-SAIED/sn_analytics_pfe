@@ -50,3 +50,63 @@ models:
         data_tests:
           - unique
           - not_null
+
+  - name: fact_case
+    description: >
+      One row per ServiceNow case (grain confirmed in the original
+      etl_core/gold/fact_case.py). SLA metrics pivoted from silver.task_sla
+      before joining to avoid fan-out. The last table migrated off the
+      Python gold pipeline - see docs/dbt_onboarding.md.
+    columns:
+      - name: case_id
+        data_tests: [unique, not_null]
+      - name: sys_id
+        data_tests: [unique, not_null]
+      # -- Date role FKs -> dim_date. relationships tests ignore nulls by
+      # default, matching the original nullable FK columns' behavior (a
+      # case with no opened_at, for example, just has a null date key).
+      - name: opened_date_key
+        data_tests:
+          - relationships: {arguments: {to: ref('dim_date'), field: date_key}}
+      - name: assigned_date_key
+        data_tests:
+          - relationships: {arguments: {to: ref('dim_date'), field: date_key}}
+      - name: first_response_date_key
+        data_tests:
+          - relationships: {arguments: {to: ref('dim_date'), field: date_key}}
+      - name: resolved_date_key
+        data_tests:
+          - relationships: {arguments: {to: ref('dim_date'), field: date_key}}
+      - name: closed_date_key
+        data_tests:
+          - relationships: {arguments: {to: ref('dim_date'), field: date_key}}
+      - name: occurrence_date_key
+        data_tests:
+          - relationships: {arguments: {to: ref('dim_date'), field: date_key}}
+      # -- Agent role FKs -> dim_agent
+      - name: assigned_to_sys_id
+        data_tests:
+          - relationships: {arguments: {to: ref('dim_agent'), field: agent_sys_id}}
+      - name: opened_by_sys_id
+        data_tests:
+          - relationships: {arguments: {to: ref('dim_agent'), field: agent_sys_id}}
+      - name: resolved_by_sys_id
+        data_tests:
+          - relationships: {arguments: {to: ref('dim_agent'), field: agent_sys_id}}
+      - name: owned_by_sys_id
+        data_tests:
+          - relationships: {arguments: {to: ref('dim_agent'), field: agent_sys_id}}
+      - name: last_assignee_sys_id
+        data_tests:
+          - relationships: {arguments: {to: ref('dim_agent'), field: agent_sys_id}}
+      # -- Assignment group role FKs -> dim_assignment_group
+      - name: assignment_group_sys_id
+        data_tests:
+          - relationships: {arguments: {to: ref('dim_assignment_group'), field: assignment_group_sys_id}}
+      - name: last_assignment_group_sys_id
+        data_tests:
+          - relationships: {arguments: {to: ref('dim_assignment_group'), field: assignment_group_sys_id}}
+      # -- Terminal FK -> dim_terminal
+      - name: parking_terminal_sys_id
+        data_tests:
+          - relationships: {arguments: {to: ref('dim_terminal'), field: terminal_sys_id}}

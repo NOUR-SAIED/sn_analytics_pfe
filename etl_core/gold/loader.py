@@ -1,7 +1,15 @@
 """
-Gold table lifecycle management.
+Gold schema/grants management.
 
-Handles CREATE SCHEMA, CREATE TABLE, TRUNCATE, INSERT for gold objects.
+create_gold_table, truncate_gold_table, and table_exists used to live
+here too, for the Python-built gold tables. Removed now that all 5 gold
+tables (dim_date, dim_agent, dim_assignment_group, dim_terminal,
+fact_case) are built by dbt (see docs/dbt_onboarding.md) - dbt's `table`
+materialization creates/replaces its own tables and their target schema
+automatically, so none of that DDL management is needed from Python
+anymore. What's left here is genuinely still Python/Airflow's job: making
+sure the schema exists before dbt's first-ever run on a fresh environment,
+and granting the read-only copilot role access - neither is a dbt concern.
 """
 
 import logging
@@ -9,7 +17,7 @@ import os
 
 from psycopg2 import sql
 
-from .config import GOLD_SCHEMA, FACT_CASE_COLUMNS
+from .config import GOLD_SCHEMA
 from .db import get_connection
 
 logger = logging.getLogger(__name__)
@@ -18,7 +26,13 @@ COPILOT_READER_ROLE = os.getenv("COPILOT_DB_USERNAME", "copilot_reader")
 
 
 def create_gold_schema() -> None:
-    """Create the gold schema if it does not exist."""
+    """Create the gold schema if it does not exist.
+
+    Belt-and-suspenders: dbt also creates the schema automatically on its
+    first run, but grant_copilot_reader_access() needs the schema to
+    already exist (GRANT USAGE ON SCHEMA fails on a schema that isn't
+    there yet), so this is called before it as a safety net.
+    """
     with get_connection() as conn:
         with conn.cursor() as cur:
             cur.execute(
@@ -26,32 +40,6 @@ def create_gold_schema() -> None:
                     sql.Identifier(GOLD_SCHEMA)
                 )
             )
-        conn.commit()
-
-
-def create_gold_table(table_name: str, columns: list[str]) -> None:
-    """Create a gold table from a list of column DDL definitions."""
-    full_name = sql.SQL("{}.{}").format(
-        sql.Identifier(GOLD_SCHEMA), sql.Identifier(table_name)
-    )
-    ddl = sql.SQL("CREATE TABLE IF NOT EXISTS {} (\n  {}\n)").format(
-        full_name,
-        sql.SQL(",\n  ").join(map(sql.SQL, columns)),
-    )
-    with get_connection() as conn:
-        with conn.cursor() as cur:
-            cur.execute(ddl)
-        conn.commit()
-
-
-def truncate_gold_table(table_name: str) -> None:
-    """Remove all rows from a gold table."""
-    full_name = sql.SQL("{}.{}").format(
-        sql.Identifier(GOLD_SCHEMA), sql.Identifier(table_name)
-    )
-    with get_connection() as conn:
-        with conn.cursor() as cur:
-            cur.execute(sql.SQL("TRUNCATE TABLE {}").format(full_name))
         conn.commit()
 
 
@@ -89,19 +77,3 @@ def grant_copilot_reader_access() -> None:
                 ).format(sql.Identifier(GOLD_SCHEMA), sql.Identifier(COPILOT_READER_ROLE))
             )
         conn.commit()
-
-
-def table_exists(table_name: str) -> bool:
-    """Check if a gold table already exists."""
-    with get_connection() as conn:
-        with conn.cursor() as cur:
-            cur.execute(
-                """
-                SELECT EXISTS (
-                    SELECT 1 FROM information_schema.tables
-                    WHERE table_schema = %s AND table_name = %s
-                )
-                """,
-                (GOLD_SCHEMA, table_name),
-            )
-            return cur.fetchone()[0]
