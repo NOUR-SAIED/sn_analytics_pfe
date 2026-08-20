@@ -1,0 +1,19 @@
+# Keeps build context (and image size) down for every service built with
+# `context: .` in docker-compose.yml (the Airflow image, the dbt image).
+venv/
+.venv-dbt/
+__pycache__/
+*.pyc
+.git/
+.github/
+logs/
+node_modules/
+copilot/frontend/node_modules/
+copilot/frontend/.next/
+
+# dbt build artifacts - regenerated on every `dbt run`/`dbt snapshot`, not
+# part of the project source.
+dbt/target/
+dbt/logs/
+dbt/dbt_packages/
+dbt/.user.yml

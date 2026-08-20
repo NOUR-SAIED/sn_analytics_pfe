@@ -2,3 +2,4 @@ requests
 psycopg2-binary
 python-dotenv
 pyyaml
+apache-airflow-providers-docker

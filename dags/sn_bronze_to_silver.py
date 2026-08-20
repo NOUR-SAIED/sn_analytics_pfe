@@ -5,9 +5,11 @@ Transforms bronze JSONB records into cleanly typed, flattened silver tables.
 This maps 1:1 from Bronze to Silver, skipping complex joins.
 """
 
+import os
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python import PythonOperator
+from airflow.providers.docker.operators.docker import DockerOperator
 
 from etl_core.loaders.postgres_jsonb import PostgresJSONBLoader
 from etl_core.loaders.postgres_silver import PostgresSilverLoader
@@ -81,6 +83,7 @@ def verify_silver(config_key: str, **context):
 
 
 # Dynamically generate tasks for every table in our registry
+verify_tasks = {}
 for config_key, config in REGISTRY.items():
     transform_task = PythonOperator(
         task_id=f"transform_{config.bronze_table}_to_silver",
@@ -97,12 +100,41 @@ for config_key, config in REGISTRY.items():
     )
 
     transform_task >> verify_task
+    verify_tasks[config_key] = verify_task
 
-# NOTE: a dbt-snapshot task (history retention on sn_customerservice_case,
-# see CLAUDE.md finding #1 / docs/dbt_onboarding.md) was attempted here and
-# rolled back - installing dbt-core into this same image broke the
-# airflow-worker Celery process (dbt pulled in click 8.4.2, incompatible
-# with this project's Celery/Airflow version - the worker crash-looped on
-# startup). The dbt project itself (dbt/) is real and validated standalone;
-# it just isn't wired into this DAG yet until a safe execution path
-# (isolated venv/container) is chosen. See docs/dbt_onboarding.md.
+
+# History retention (CLAUDE.md finding #1 / docs/dbt_onboarding.md):
+# bronze/silver both upsert-by-sys_id, so a case's status/assignment
+# history is only ever captured if we snapshot it here, right after
+# silver is verified fresh. Purely additive - snapshots.sn_case_snapshot
+# is a new table; nothing downstream reads it yet.
+#
+# Runs via DockerOperator, NOT installed into this image: dbt-core was
+# tried directly in this image once and broke Celery (a `click` version
+# collision - see docs/dbt_onboarding.md for the postmortem). This task
+# instead launches a fresh, disposable container from the dedicated
+# sn_analytics-dbt image (docker/dbt/Dockerfile, has no Airflow/Celery
+# dependencies at all) via the Docker socket mounted into airflow-worker,
+# and removes it when done.
+dbt_snapshot_case = DockerOperator(
+    task_id="dbt_snapshot_sn_case",
+    image="sn_analytics-dbt:latest",
+    docker_url="unix://var/run/docker.sock",
+    network_mode="sn_analytics_default",
+    api_version="auto",
+    auto_remove="success",
+    mount_tmp_dir=False,  # avoid host/container path mismatches - see docker/dbt/Dockerfile
+    command=["dbt", "snapshot", "--select", "sn_case_snapshot"],
+    environment={
+        "DBT_PG_HOST": "postgres",
+        "DBT_PG_PORT": os.getenv("POSTGRES_CONN_PORT", "5432"),
+        "DBT_PG_USER": os.getenv("ELT_DATABASE_USERNAME", "elt_user"),
+        "DBT_PG_DBNAME": os.getenv("ELT_DATABASE_NAME", ""),
+    },
+    private_environment={
+        "DBT_PG_PASSWORD": os.getenv("ELT_DATABASE_PASSWORD", ""),
+    },
+    dag=dag,
+)
+
+verify_tasks["sn_customerservice_case"] >> dbt_snapshot_case

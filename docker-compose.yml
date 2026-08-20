@@ -132,6 +132,19 @@ x-superset-common:
     - ./docker/superset/superset_config.py:/app/pythonpath/superset_config.py
  
 services:
+  # dbt runner: NOT a long-running service. This entry exists only so
+  # `docker compose build dbt` builds the image (docker/dbt/Dockerfile).
+  # Airflow's DockerOperator starts a fresh container from this image per
+  # task run and removes it when done (see dags/sn_bronze_to_silver.py and
+  # dags/gold_build.py). The `profiles` key keeps `docker compose up` from
+  # starting it as an always-on container - it has nothing to stay up for.
+  dbt:
+    build:
+      context: .
+      dockerfile: docker/dbt/Dockerfile
+    image: sn_analytics-dbt:latest
+    profiles: ["build-only"]
+
   postgres:
     container_name: postgres
     image: postgres:13
@@ -225,6 +238,30 @@ services:
     <<: *airflow-common
     command: celery worker
     container_name: airflow-worker
+    # NOTE on volumes: YAML's `<<:` merge is shallow per top-level key, so
+    # explicitly setting `volumes:` here (to add the Docker socket) would
+    # otherwise silently REPLACE the whole list inherited from
+    # x-airflow-common, not append to it - hence repeating that list here.
+    # Docker socket: lets this container launch the dedicated dbt image
+    # (docker/dbt/Dockerfile) via DockerOperator instead of installing dbt
+    # into this image directly (that was tried once and broke Celery - see
+    # docs/dbt_onboarding.md). Scoped to airflow-worker only, not
+    # airflow-scheduler/airflow-webserver, since only the worker actually
+    # executes tasks under CeleryExecutor. This does give this one
+    # container real ability to start/stop other containers on the host -
+    # a standard tradeoff for local Airflow+Docker setups, not a free one.
+    volumes:
+      - ./etl_core:/opt/airflow/etl_core
+      - ./config:/opt/airflow/config
+      - ./dags:/opt/airflow/dags
+      - ./sql:/opt/airflow/sql:ro
+      - ./data:/opt/airflow/data
+      - ./include:/opt/airflow/include
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+      - ./tests:/opt/airflow/tests
+      - ./dbt:/opt/airflow/dbt
+      - /var/run/docker.sock:/var/run/docker.sock
     healthcheck:
       test:
         - "CMD-SHELL"
