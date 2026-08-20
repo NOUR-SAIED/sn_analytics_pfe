@@ -7,14 +7,15 @@ Each dimension and the fact table get their own task for:
   - Clear dependency graph in the Airflow UI
   - No single point of failure
 
-dim_date and dim_agent are NOT built here anymore - they're dbt's job now
-(dbt/models/gold/dim_date.sql, dim_agent.sql), the first two tables
-migrated off this Python pipeline. See docs/dbt_onboarding.md for the
-per-table migration log. Nothing in this DAG runs dbt yet - a dbt task
-exists so far only in dags/sn_bronze_to_silver.py (dbt_snapshot_sn_case),
-which builds neither. Running these two dbt models is currently manual
-(`dbt run --select dim_date dim_agent`); wiring dbt into a DAG (likely
-this one, once more gold tables migrate to dbt) is follow-on work.
+dim_date, dim_agent, and dim_assignment_group are NOT built here anymore -
+they're dbt's job now (dbt/models/gold/), the first three tables migrated
+off this Python pipeline. See docs/dbt_onboarding.md for the per-table
+migration log. Nothing in this DAG runs dbt yet - a dbt task exists so far
+only in dags/sn_bronze_to_silver.py (dbt_snapshot_sn_case), which builds
+none of these. Running these dbt models is currently manual
+(`dbt run --select dim_date dim_agent dim_assignment_group`); wiring dbt
+into a DAG (likely this one, once more gold tables migrate to dbt) is
+follow-on work.
 """
 
 from datetime import timedelta
@@ -31,7 +32,6 @@ from etl_core.gold.loader import (
     table_exists,
 )
 from etl_core.gold.config import (
-    ASSIGNMENT_GROUP_DIM_COLUMNS,
     TERMINAL_DIM_COLUMNS,
     FACT_CASE_COLUMNS,
 )
@@ -50,19 +50,12 @@ def _ensure_tables(**context):
     """Create gold schema and all still-Python-owned tables if they don't exist."""
     create_gold_schema()
     for name, cols in [
-        ("dim_assignment_group", ASSIGNMENT_GROUP_DIM_COLUMNS),
         ("dim_terminal", TERMINAL_DIM_COLUMNS),
         ("fact_case", FACT_CASE_COLUMNS),
     ]:
         if not table_exists(name):
             create_gold_table(name, cols)
     grant_copilot_reader_access()
-
-
-def _build_dim_assignment_group(**context):
-    from etl_core.gold import dim_assignment_group
-    count = dim_assignment_group.build()
-    context["ti"].xcom_push(key="count", value=count)
 
 
 def _build_dim_terminal(**context):
@@ -95,11 +88,6 @@ with DAG(
         python_callable=_ensure_tables,
     )
 
-    build_dim_assignment_group = PythonOperator(
-        task_id="build_dim_assignment_group",
-        python_callable=_build_dim_assignment_group,
-    )
-
     build_dim_terminal = PythonOperator(
         task_id="build_dim_terminal",
         python_callable=_build_dim_terminal,
@@ -111,17 +99,10 @@ with DAG(
     )
 
     # ── Dependencies ──
-    # NOTE: gold.dim_date and gold.dim_agent are dependencies of fact_case's
-    # date-role and agent-role columns too, but both are now built by dbt,
-    # run manually (see module docstring) - this DAG has no automated
-    # dependency on either yet. Worth wiring dbt tasks + dependencies here
-    # once more gold tables migrate and this DAG's shape settles.
-    ensure_tables >> [
-        build_dim_assignment_group,
-        build_dim_terminal,
-    ]
-
-    [
-        build_dim_assignment_group,
-        build_dim_terminal,
-    ] >> build_fact_case
+    # NOTE: gold.dim_date, gold.dim_agent, and gold.dim_assignment_group are
+    # dependencies of fact_case's date/agent/group-role columns too, but all
+    # three are now built by dbt, run manually (see module docstring) - this
+    # DAG has no automated dependency on any of them yet. Worth wiring dbt
+    # tasks + dependencies here once more gold tables migrate and this DAG's
+    # shape settles.
+    ensure_tables >> build_dim_terminal >> build_fact_case

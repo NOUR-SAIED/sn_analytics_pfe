@@ -87,8 +87,12 @@ FACT_CASE_COLUMNS = [
     "owned_by_sys_id TEXT",
     "last_assignee_sys_id TEXT",
     # -- Assignment group FKs
-    "assignment_group_sys_id TEXT REFERENCES gold.dim_assignment_group(assignment_group_sys_id)",
-    "last_assignment_group_sys_id TEXT REFERENCES gold.dim_assignment_group(assignment_group_sys_id)",
+    # No REFERENCES gold.dim_assignment_group(...) here (was removed) - same
+    # reason as the agent/date FKs above: dim_assignment_group is now dbt-
+    # built, no PRIMARY KEY. Covered by dbt tests instead once fact_case
+    # itself migrates (dbt/models/gold/_gold.yml).
+    "assignment_group_sys_id TEXT",
+    "last_assignment_group_sys_id TEXT",
     # -- Terminal FK
     "parking_terminal_sys_id TEXT REFERENCES gold.dim_terminal(terminal_sys_id)",
     # -- Device (kept in fact)

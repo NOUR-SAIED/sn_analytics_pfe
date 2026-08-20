@@ -32,3 +32,13 @@ models:
         data_tests:
           - unique
           - not_null
+
+  - name: dim_assignment_group
+    description: >
+      One row per distinct assignment group referenced in the case table's
+      2 group-role columns (assignment_group, last_assignment_group).
+    columns:
+      - name: assignment_group_sys_id
+        data_tests:
+          - unique
+          - not_null
