@@ -5,6 +5,7 @@ __pycache__/
 logs/
 .github/
 .vscode/
+.claude/
 etl_core.egg-info # Ignore Python package metadata
 propmts/
 CLAUDE.md
