@@ -15,7 +15,7 @@ from etl_core.transformers.silver import SilverTransformer
 from etl_core.config.silver_mappings import REGISTRY, get_config
 
 
-RECREATE_TABLES = True
+RECREATE_TABLES = False
 
 
 default_args = {
