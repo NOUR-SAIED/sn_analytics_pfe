@@ -11,21 +11,14 @@ GOLD_SCHEMA = "gold"
 RESPONSE_SLA_NAME = "TPA first reaction SLA"
 RESOLUTION_SLA_NAME = "TPA case resolution SLA"
 
-# ── dim_date range ─────────────────────────────────────────────────────
-DATE_DIM_START = "2020-01-01"
-DATE_DIM_END = "2030-12-31"
-
 # ── Table column definitions ───────────────────────────────────────────
-
-DATE_DIM_COLUMNS = [
-    "date_key INTEGER PRIMARY KEY",
-    "full_date DATE NOT NULL",
-    "year INTEGER NOT NULL",
-    "month INTEGER NOT NULL",
-    "day INTEGER NOT NULL",
-    "week INTEGER NOT NULL",
-    "weekday INTEGER NOT NULL",
-]
+#
+# dim_date is NOT defined here anymore - it moved to dbt (the first table
+# migrated in the etl_core/gold -> dbt migration, see
+# docs/dbt_onboarding.md). Its date range now lives as vars.date_dim_start/
+# date_dim_end in dbt/dbt_project.yml, and its columns are just whatever
+# dbt/models/gold/dim_date.sql selects - dbt creates the table from that,
+# no DDL list needed the way the still-Python-owned tables below require.
 
 AGENT_DIM_COLUMNS = [
     "agent_sys_id TEXT PRIMARY KEY",
@@ -49,12 +42,18 @@ FACT_CASE_COLUMNS = [
     "sys_id TEXT NOT NULL UNIQUE",
     "case_number TEXT",
     # -- Date foreign keys
-    "opened_date_key INTEGER REFERENCES gold.dim_date(date_key)",
-    "assigned_date_key INTEGER REFERENCES gold.dim_date(date_key)",
-    "first_response_date_key INTEGER REFERENCES gold.dim_date(date_key)",
-    "resolved_date_key INTEGER REFERENCES gold.dim_date(date_key)",
-    "closed_date_key INTEGER REFERENCES gold.dim_date(date_key)",
-    "occurrence_date_key INTEGER REFERENCES gold.dim_date(date_key)",
+    # No REFERENCES gold.dim_date(date_key) here (was removed): dim_date is
+    # now built by dbt/models/gold/dim_date.sql, which - like every plain
+    # dbt `table` materialization - doesn't emit a PRIMARY KEY, so a hard FK
+    # to it would fail if fact_case is ever created fresh. Row-level
+    # integrity here is covered by dbt tests instead (see
+    # dbt/models/gold/_gold.yml) once fact_case itself migrates to dbt.
+    "opened_date_key INTEGER",
+    "assigned_date_key INTEGER",
+    "first_response_date_key INTEGER",
+    "resolved_date_key INTEGER",
+    "closed_date_key INTEGER",
+    "occurrence_date_key INTEGER",
     # -- Workflow
     "state_code TEXT",
     "state_label TEXT",

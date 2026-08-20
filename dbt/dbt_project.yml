@@ -2,10 +2,12 @@ name: sn_analytics
 version: "1.0.0"
 config-version: 2
 
-# This dbt project is additive, layered on top of the existing Python
-# bronze -> silver -> gold pipeline (etl_core/, dags/gold_build.py). It does
-# NOT replace or modify any existing table. See docs/dbt_onboarding.md for
-# what it's for and how it's meant to grow.
+# Bronze and silver stay exactly as populated today by etl_core/ - dbt only
+# reads silver as a source. Gold is being migrated TABLE BY TABLE from the
+# Python builders in etl_core/gold/*.py into the models/gold/ dbt models
+# below (see docs/dbt_onboarding.md for the migration log and status per
+# table). Table/column names are kept identical throughout the migration so
+# Superset and the Copilot agent never notice which one built a given table.
 profile: "sn_analytics"
 
 model-paths: ["models"]
@@ -18,14 +20,26 @@ clean-targets:
   - "target"
   - "dbt_packages"
 
+# Business-config knobs pulled out of buried SQL (previously Python
+# constants in etl_core/gold/config.py) - referenced in models via
+# {{ var('response_sla_name') }} etc.
+vars:
+  response_sla_name: "TPA first reaction SLA"
+  resolution_sla_name: "TPA case resolution SLA"
+  date_dim_start: "2020-01-01"
+  date_dim_end: "2030-12-31"
+
 models:
   sn_analytics:
     staging:
       +materialized: view
-      # No +schema override here on purpose: dbt's default generate_schema_name
-      # macro concatenates the profile's target schema with a model-level
-      # override (profile schema "dbt_scratch" + override "dbt_scratch" =
-      # "dbt_scratch_dbt_scratch"). The profile's default schema (dbt_scratch,
-      # see profiles.yml) is already correct for everything in this project so
-      # far - add a real +schema override here only when a model actually
-      # needs a different target schema than the profile default.
+      # No +schema override: this should land in the profile's default
+      # target schema (dbt_scratch, see profiles.yml), which is correct
+      # for a scratch/staging model.
+    gold:
+      +materialized: table
+      +schema: gold
+      +tags: ["gold"]
+      # +schema here resolves to exactly "gold" (not "dbt_scratch_gold")
+      # because of the generate_schema_name override in
+      # macros/get_custom_schema.sql - see that file for why.

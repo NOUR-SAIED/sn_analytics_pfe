@@ -6,6 +6,15 @@ Each dimension and the fact table get their own task for:
   - Independent retry on failure
   - Clear dependency graph in the Airflow UI
   - No single point of failure
+
+dim_date is NOT built here anymore - it's dbt's job now
+(dbt/models/gold/dim_date.sql), the first table migrated off this Python
+pipeline. See docs/dbt_onboarding.md for the per-table migration log.
+Nothing in this DAG runs dbt yet - a dbt task exists so far only in
+dags/sn_bronze_to_silver.py (dbt_snapshot_sn_case), which does not build
+dim_date either. Running gold.dim_date's dbt model is currently manual
+(`dbt run --select dim_date`); wiring it into a DAG (likely this one, once
+more gold tables migrate to dbt) is follow-on work.
 """
 
 from datetime import timedelta
@@ -22,7 +31,6 @@ from etl_core.gold.loader import (
     table_exists,
 )
 from etl_core.gold.config import (
-    DATE_DIM_COLUMNS,
     AGENT_DIM_COLUMNS,
     ASSIGNMENT_GROUP_DIM_COLUMNS,
     TERMINAL_DIM_COLUMNS,
@@ -40,10 +48,9 @@ DEFAULT_ARGS = {
 # ── Task callables ─────────────────────────────────────────────────────
 
 def _ensure_tables(**context):
-    """Create gold schema and all tables if they don't exist."""
+    """Create gold schema and all still-Python-owned tables if they don't exist."""
     create_gold_schema()
     for name, cols in [
-        ("dim_date", DATE_DIM_COLUMNS),
         ("dim_agent", AGENT_DIM_COLUMNS),
         ("dim_assignment_group", ASSIGNMENT_GROUP_DIM_COLUMNS),
         ("dim_terminal", TERMINAL_DIM_COLUMNS),
@@ -52,12 +59,6 @@ def _ensure_tables(**context):
         if not table_exists(name):
             create_gold_table(name, cols)
     grant_copilot_reader_access()
-
-
-def _build_dim_date(**context):
-    from etl_core.gold import dim_date
-    count = dim_date.build()
-    context["ti"].xcom_push(key="count", value=count)
 
 
 def _build_dim_agent(**context):
@@ -102,11 +103,6 @@ with DAG(
         python_callable=_ensure_tables,
     )
 
-    build_dim_date = PythonOperator(
-        task_id="build_dim_date",
-        python_callable=_build_dim_date,
-    )
-
     build_dim_agent = PythonOperator(
         task_id="build_dim_agent",
         python_callable=_build_dim_agent,
@@ -128,15 +124,19 @@ with DAG(
     )
 
     # ── Dependencies ──
+    # NOTE: gold.dim_date is a dependency of fact_case's date-role columns
+    # too, but it's now built by dbt, run manually (see module docstring) -
+    # this DAG has no automated dependency on that yet. In practice dim_date
+    # rarely changes (fixed calendar range), so this is a soft gap, not a
+    # correctness bug today; worth wiring a dbt task + dependency here once
+    # more gold tables migrate and this DAG's shape settles.
     ensure_tables >> [
-        build_dim_date,
         build_dim_agent,
         build_dim_assignment_group,
         build_dim_terminal,
     ]
 
     [
-        build_dim_date,
         build_dim_agent,
         build_dim_assignment_group,
         build_dim_terminal,

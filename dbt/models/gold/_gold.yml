@@ -1,0 +1,23 @@
+version: 2
+
+# Replaces the hard PRIMARY KEY/REFERENCES DDL the old etl_core/gold/config.py
+# column lists declared (CREATE TABLE ... PRIMARY KEY, ... REFERENCES ...).
+# Plain dbt `table` materialization doesn't emit those - this is the
+# replacement: dbt tests, run via `dbt test --select gold`, checked on every
+# pipeline run. See docs/dbt_onboarding.md for why this is the design choice
+# (not a downgrade - dbt tests are actually the more standard warehouse
+# pattern, and they run automatically instead of only existing as static DDL).
+
+models:
+  - name: dim_date
+    description: One row per calendar day (fixed range - see vars in dbt_project.yml).
+    columns:
+      - name: date_key
+        description: Surrogate key, YYYYMMDD as an integer.
+        data_tests:
+          - unique
+          - not_null
+      - name: full_date
+        data_tests:
+          - unique
+          - not_null

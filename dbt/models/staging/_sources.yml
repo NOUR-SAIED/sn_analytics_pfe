@@ -14,3 +14,12 @@ sources:
           One row per ServiceNow case, upserted by sys_id (latest state
           only, no history - see docs/dbt_onboarding.md for why the
           snapshot in snapshots/sn_case_snapshot.sql exists).
+      - name: sys_user
+        description: ServiceNow user records, used to enrich gold.dim_agent.
+      - name: task_sla
+        description: >
+          Up to 2 rows per case (one per SLA type) - long/narrow, pivoted
+          wide in models/gold/fact_case.sql before joining into the fact
+          table, same as the original etl_core/gold/fact_case.py did.
+      - name: contract_sla
+        description: SLA definitions (names, targets) referenced by task_sla.
