@@ -46,7 +46,14 @@ select distinct
     case
         when u.name is not null and u.name !~ '^[0-9a-f]{32}$' then u.name
         when a.name is not null and a.name !~ '^[0-9a-f]{32}$' then a.name
-        else coalesce(u.name, a.name, a.sys_id)
+        -- Both silver.sys_user and the case table's own denormalized name
+        -- fell back to the raw sys_id - confirmed (2026-08-25) this means
+        -- ServiceNow itself never resolved a display name for this user
+        -- (sys_user query returned zero rows for them; likely deactivated
+        -- or outside the extraction service account's ACL scope), not a
+        -- join bug on our side. Show a readable placeholder instead of
+        -- leaking the raw 32-char hex into dashboards/the Copilot agent.
+        else 'Unknown Agent (' || right(a.sys_id, 6) || ')'
     end as agent_name,
     u.email,
     u.mobile_phone
