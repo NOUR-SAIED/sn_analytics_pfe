@@ -436,6 +436,39 @@ services:
       - ollama_data:/root/.ollama
     restart: always
 
+  # ─────────────────────────────────────────────────────────────────────────────
+  # cube    semantic layer in front of gold, on port 4000 (Playground UI + APIs)
+  #
+  # Encodes the role-playing joins (dim_date x6, dim_agent x5,
+  # dim_assignment_group x2, dim_terminal) as named dimensions/measures ONCE,
+  # in cube/model/, instead of every Superset chart or Copilot query
+  # hand-writing the same LEFT JOINs. Points at the same Postgres gold schema
+  # dbt builds - it's a read-only query layer, doesn't own any data itself.
+  # ─────────────────────────────────────────────────────────────────────────────
+  cube:
+    image: cubejs/cube:latest
+    container_name: cube
+    environment:
+      - CUBEJS_DB_TYPE=postgres
+      - CUBEJS_DB_HOST=${POSTGRES_CONN_HOST}
+      - CUBEJS_DB_PORT=${POSTGRES_CONN_PORT}
+      - CUBEJS_DB_NAME=${ELT_DATABASE_NAME}
+      - CUBEJS_DB_USER=${ELT_DATABASE_USERNAME}
+      - CUBEJS_DB_PASS=${ELT_DATABASE_PASSWORD}
+      - CUBEJS_API_SECRET=${CUBEJS_API_SECRET}
+      # Dev mode turns on the Playground UI (http://localhost:4000) for
+      # exploring/validating the model. Turn off before this is anything
+      # other than a local dev box.
+      - CUBEJS_DEV_MODE=true
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./cube/model:/cube/conf/model
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: always
+
   copilot-backend:
     build: ./copilot/backend
     environment:

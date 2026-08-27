@@ -1,0 +1,295 @@
+## Cases cube — the semantic layer's version of `ds_cases_main` (the SQL Lab
+## dataset behind most of the Superset dashboard). Same joins, same grain
+## (one row per case), but defined ONCE here instead of copy-pasted into every
+## chart's SQL. This is meant to be the single place Superset *and* the
+## Copilot agent both query, so they can never resolve a role-playing join
+## (which agent? which date? which group?) differently from each other.
+##
+## fact_case itself does NOT join dim_agent/dim_assignment_group/dim_terminal
+## (see dbt/models/gold/fact_case.sql) - it carries raw sys_ids through and
+## relies on dbt `relationships` tests instead of real FKs. So, same as the
+## hand-written SQL Lab query, those joins happen here in the cube's own SQL.
+##
+## Role-playing coverage - this intentionally goes further than the current
+## ds_cases_main dataset: all 6 dim_date roles, all 5 dim_agent roles, and
+## both dim_assignment_group roles are modeled (ds_cases_main only exposes
+## opened/resolved/closed dates and the current assigned-to agent). The extra
+## roles (first_response_date, assigned_date, occurrence_date, opened_by,
+## resolved_by, owned_by, last_assignee, last_assignment_group) are exactly
+## the fields flagged as unused-but-available during the dashboard review -
+## Cube is where they get surfaced as real, named dimensions.
+
+cubes:
+  - name: Cases
+    sql: >
+      SELECT
+        fc.case_id,
+        fc.case_number,
+        fc.sys_created_on,
+
+        fc.state_code,
+        fc.state_label,
+        fc.priority_code,
+        fc.priority_label,
+        fc.urgency_code,
+        fc.urgency_label,
+        fc.impact_code,
+        fc.impact_label,
+        fc.category_label,
+        fc.subcategory_label,
+        fc.cause,
+        fc.resolution_code_label,
+        fc.device_type_label,
+
+        fc.response_sla_duration,
+        fc.response_sla_percentage,
+        fc.response_sla_has_breached,
+        fc.resolution_sla_duration,
+        fc.resolution_sla_percentage,
+        fc.resolution_sla_has_breached,
+
+        fc.reassignment_count,
+        fc.time_worked,
+
+        -- Date roles (6)
+        d_opened.full_date       AS opened_date,
+        d_assigned.full_date     AS assigned_date,
+        d_first_resp.full_date   AS first_response_date,
+        d_resolved.full_date     AS resolved_date,
+        d_closed.full_date       AS closed_date,
+        d_occurrence.full_date   AS occurrence_date,
+
+        -- Agent roles (5) - COALESCE to 'Unassigned' here, once, so this
+        -- exact bug (raw NULL/sys_id leaking into a chart) can't recur for
+        -- any future consumer of this cube. dim_agent itself already turns
+        -- unresolvable ServiceNow users into 'Unknown Agent (xxxxxx)'
+        -- (see dbt/models/gold/dim_agent.sql); this only covers the case of
+        -- no agent assigned at all.
+        COALESCE(ag_assigned.agent_name, 'Unassigned') AS assigned_to_agent_name,
+        ag_opened.agent_name     AS opened_by_agent_name,
+        ag_resolved.agent_name   AS resolved_by_agent_name,
+        ag_owned.agent_name      AS owned_by_agent_name,
+        ag_last.agent_name       AS last_assignee_agent_name,
+
+        -- Group roles (2)
+        grp_current.assignment_group_name AS assignment_group_name,
+        grp_last.assignment_group_name    AS last_assignment_group_name,
+
+        -- Terminal
+        t.terminal_name
+
+      FROM gold.fact_case fc
+
+      LEFT JOIN gold.dim_date d_opened
+        ON fc.opened_date_key = d_opened.date_key
+      LEFT JOIN gold.dim_date d_assigned
+        ON fc.assigned_date_key = d_assigned.date_key
+      LEFT JOIN gold.dim_date d_first_resp
+        ON fc.first_response_date_key = d_first_resp.date_key
+      LEFT JOIN gold.dim_date d_resolved
+        ON fc.resolved_date_key = d_resolved.date_key
+      LEFT JOIN gold.dim_date d_closed
+        ON fc.closed_date_key = d_closed.date_key
+      LEFT JOIN gold.dim_date d_occurrence
+        ON fc.occurrence_date_key = d_occurrence.date_key
+
+      LEFT JOIN gold.dim_agent ag_assigned
+        ON fc.assigned_to_sys_id = ag_assigned.agent_sys_id
+      LEFT JOIN gold.dim_agent ag_opened
+        ON fc.opened_by_sys_id = ag_opened.agent_sys_id
+      LEFT JOIN gold.dim_agent ag_resolved
+        ON fc.resolved_by_sys_id = ag_resolved.agent_sys_id
+      LEFT JOIN gold.dim_agent ag_owned
+        ON fc.owned_by_sys_id = ag_owned.agent_sys_id
+      LEFT JOIN gold.dim_agent ag_last
+        ON fc.last_assignee_sys_id = ag_last.agent_sys_id
+
+      LEFT JOIN gold.dim_assignment_group grp_current
+        ON fc.assignment_group_sys_id = grp_current.assignment_group_sys_id
+      LEFT JOIN gold.dim_assignment_group grp_last
+        ON fc.last_assignment_group_sys_id = grp_last.assignment_group_sys_id
+
+      LEFT JOIN gold.dim_terminal t
+        ON fc.parking_terminal_sys_id = t.terminal_sys_id
+
+    data_source: default
+    description: >
+      One row per ServiceNow case, matching gold.fact_case's grain. All
+      role-playing joins (dates, agents, groups) are resolved here so every
+      consumer (Superset, the Copilot agent) sees the same names for the
+      same sys_ids.
+
+    measures:
+      - name: total_cases
+        sql: case_id
+        type: count_distinct
+        description: Total number of cases (COUNT DISTINCT case_id, matches the dashboard's "Total Cases" tile).
+
+      - name: avg_response_sla_duration
+        sql: response_sla_duration
+        type: avg
+        description: >
+          Average response SLA duration across cases where a response SLA
+          applied. Unit inherited from silver.task_sla.duration - not yet
+          independently verified against ServiceNow's documentation, flagged
+          here rather than guessed.
+
+      - name: avg_resolution_sla_duration
+        sql: resolution_sla_duration
+        type: avg
+        description: Average resolution SLA duration (same unit caveat as avg_response_sla_duration).
+
+      - name: median_resolution_sla_duration
+        sql: "PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY {CUBE}.resolution_sla_duration)"
+        type: number
+        description: Median resolution SLA duration - matches the dashboard's "Median Resolution Time" tile more closely than an average would (resistant to outlier cases).
+
+      - name: response_sla_breach_rate
+        sql: "CASE WHEN {CUBE}.response_sla_has_breached THEN 1 ELSE 0 END"
+        type: avg
+        format: percent
+        description: Share of cases (with a response SLA applied) that breached it.
+
+      - name: resolution_sla_breach_rate
+        sql: "CASE WHEN {CUBE}.resolution_sla_has_breached THEN 1 ELSE 0 END"
+        type: avg
+        format: percent
+        description: Share of cases (with a resolution SLA applied) that breached it.
+
+      - name: avg_reassignment_count
+        sql: reassignment_count
+        type: avg
+        description: Average number of times a case was reassigned - a process-cost signal, not currently charted on the dashboard.
+
+      - name: total_reassignments
+        sql: reassignment_count
+        type: sum
+
+      - name: avg_time_worked
+        sql: time_worked
+        type: avg
+
+    dimensions:
+      - name: case_id
+        sql: case_id
+        type: string
+        primary_key: true
+
+      - name: case_number
+        sql: case_number
+        type: string
+
+      - name: state_label
+        sql: state_label
+        type: string
+
+      - name: priority_label
+        sql: priority_label
+        type: string
+
+      - name: urgency_label
+        sql: urgency_label
+        type: string
+
+      - name: impact_label
+        sql: impact_label
+        type: string
+
+      - name: category_label
+        sql: category_label
+        type: string
+
+      - name: subcategory_label
+        sql: subcategory_label
+        type: string
+
+      - name: cause
+        sql: cause
+        type: string
+
+      - name: resolution_code_label
+        sql: resolution_code_label
+        type: string
+
+      - name: device_type_label
+        sql: device_type_label
+        type: string
+
+      - name: response_sla_has_breached
+        sql: response_sla_has_breached
+        type: boolean
+
+      - name: resolution_sla_has_breached
+        sql: resolution_sla_has_breached
+        type: boolean
+
+      - name: reassignment_count
+        sql: reassignment_count
+        type: number
+
+      # -- Agent roles (5) --
+      - name: assigned_to_agent_name
+        sql: assigned_to_agent_name
+        type: string
+        description: Agent currently assigned to the case ('Unassigned' if none).
+
+      - name: opened_by_agent_name
+        sql: opened_by_agent_name
+        type: string
+
+      - name: resolved_by_agent_name
+        sql: resolved_by_agent_name
+        type: string
+
+      - name: owned_by_agent_name
+        sql: owned_by_agent_name
+        type: string
+
+      - name: last_assignee_agent_name
+        sql: last_assignee_agent_name
+        type: string
+        description: Last agent the case was assigned to before its current state - compare against assigned_to_agent_name to spot reassignment/handoff.
+
+      # -- Group roles (2) --
+      - name: assignment_group_name
+        sql: assignment_group_name
+        type: string
+
+      - name: last_assignment_group_name
+        sql: last_assignment_group_name
+        type: string
+        description: Compare against assignment_group_name to spot cross-team escalation.
+
+      - name: terminal_name
+        sql: terminal_name
+        type: string
+
+      # -- Date roles (6), all exposed as time dimensions so Cube's own
+      # granularity bucketing (day/week/month/...) works on every one of them.
+      - name: sys_created_on
+        sql: sys_created_on
+        type: time
+
+      - name: opened_date
+        sql: opened_date
+        type: time
+
+      - name: assigned_date
+        sql: assigned_date
+        type: time
+
+      - name: first_response_date
+        sql: first_response_date
+        type: time
+
+      - name: resolved_date
+        sql: resolved_date
+        type: time
+
+      - name: closed_date
+        sql: closed_date
+        type: time
+
+      - name: occurrence_date
+        sql: occurrence_date
+        type: time
