@@ -435,6 +435,19 @@ services:
     volumes:
       - ollama_data:/root/.ollama
     restart: always
+    # GPU passthrough — Docker Desktop's `nvidia` runtime was already
+    # registered (confirmed via `docker info`), the container just never
+    # asked for it. This is the entire reason inference was CPU-only despite
+    # having an RTX GPU on the host. With 4GB VRAM, a 7B q4_K_M model won't
+    # fully fit - Ollama automatically splits layers between GPU/CPU
+    # ("partial offload"), which still meaningfully beats pure CPU.
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
 
   # ─────────────────────────────────────────────────────────────────────────────
   # cube    semantic layer in front of gold, on port 4000 (Playground UI + APIs)

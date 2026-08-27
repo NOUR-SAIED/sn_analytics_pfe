@@ -23,8 +23,14 @@ STATE_DIR = Path(os.getenv("COPILOT_STATE_DIR", "/app/.state"))
 STATE_DB_PATH = STATE_DIR / "checkpoints.sqlite"
 
 # Overall wall-clock budget for one /api/ask call, regardless of step count.
-# This model runs on CPU-only Ollama in local dev (~60-90s per inference step,
-# confirmed via `ollama ps` showing 100% CPU processor), and a typical question
-# needs 3-5 steps (list_tables -> describe_table x1-2 -> run_sql -> final), so
-# the budget needs real headroom rather than a short "safety" timeout.
+# Ollama now has GPU passthrough (see docker-compose.yml `ollama` service -
+# was previously undetected/unused despite the host having an RTX GPU, fixed
+# 2026-08-27). `ollama ps` shows this model split 56%/44% CPU/GPU (a 5.1GB
+# model doesn't fully fit in the ~3.2GB VRAM available, so it's partial
+# offload, not full GPU), and a single inference call now completes in ~2.5s
+# instead of the ~60-90s/step this comment used to document for CPU-only.
+# 480s was sized for the old CPU-only path across a typical 3-5 step question
+# (list_tables -> describe_table x1-2 -> run_sql -> final) - now generous
+# headroom rather than a tight budget. Left unchanged rather than guessed
+# down without re-timing a real multi-step question end to end.
 AGENT_TIMEOUT_SECONDS = int(os.getenv("COPILOT_AGENT_TIMEOUT_SECONDS", "480"))
