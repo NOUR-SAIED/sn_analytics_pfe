@@ -4,7 +4,17 @@ import { cn } from '../../lib/utils';
 
 const ScrollArea = forwardRef(({ className, children, ...props }, ref) => (
   <ScrollAreaPrimitive.Root ref={ref} className={cn('relative overflow-hidden', className)} {...props}>
-    <ScrollAreaPrimitive.Viewport className="h-full w-full rounded-[inherit]">{children}</ScrollAreaPrimitive.Viewport>
+    <ScrollAreaPrimitive.Viewport className="h-full w-full rounded-[inherit]">
+      {/* Radix wraps this in its own internal `display: table` div (needed
+          for its scroll-size measurement), and a table-display box sizes to
+          its content instead of being constrained by its parent - so any
+          truncated text inside never actually hits a width ceiling to clip
+          against, and silently pushes the whole ScrollArea wider than its
+          box. w-0 + min-w-full forces it back to "exactly the viewport's
+          width" regardless of content, without breaking Radix's own
+          measurement. This one fix covers every ScrollArea in the app. */}
+      <div className="w-0 min-w-full">{children}</div>
+    </ScrollAreaPrimitive.Viewport>
     <ScrollBar />
     <ScrollAreaPrimitive.Corner />
   </ScrollAreaPrimitive.Root>

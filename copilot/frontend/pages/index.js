@@ -210,15 +210,15 @@ export default function Home() {
 
 				<div className="flex min-w-0 flex-1 flex-col">
 					<header className="flex items-center justify-between gap-3 border-b border-border px-4 py-3">
-						<div className="flex items-center gap-2">
+						<div className="flex min-w-0 items-center gap-2">
 							<MobileSidebar
 								conversations={conversations}
 								activeId={activeId}
 								onSelect={setActiveId}
 								onNewChat={handleNewChat}
 							/>
-							<div>
-								<p className="text-sm font-semibold leading-none">
+							<div className="min-w-0">
+								<p className="truncate text-sm font-semibold leading-none">
 									{activeConversation?.title || 'Gold-layer analysis'}
 								</p>
 								<p className="text-xs text-muted-foreground">Ask questions in plain English</p>
