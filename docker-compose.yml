@@ -487,6 +487,7 @@ services:
     environment:
       - DATABASE_URL_READONLY=postgresql://${COPILOT_DB_USERNAME}:${COPILOT_DB_PASSWORD}@postgres:5432/${ELT_DATABASE_NAME}
       - OLLAMA_URL=http://ollama:11434
+      - CUBE_URL=http://cube:4000
       - COPILOT_ALLOWED_ORIGINS=http://localhost:3000
     volumes:
       - copilot-backend-state:/app/.state
@@ -497,6 +498,7 @@ services:
     depends_on:
       - postgres
       - ollama
+      - cube
 
   copilot-frontend:
     build: ./copilot/frontend

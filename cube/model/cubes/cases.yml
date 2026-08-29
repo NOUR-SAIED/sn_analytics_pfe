@@ -145,16 +145,26 @@ cubes:
         description: Median resolution SLA duration - matches the dashboard's "Median Resolution Time" tile more closely than an average would (resistant to outlier cases).
 
       - name: response_sla_breach_rate
-        sql: "CASE WHEN {CUBE}.response_sla_has_breached THEN 1 ELSE 0 END"
+        # No ELSE branch is deliberate: a case with no response SLA applied
+        # has response_sla_has_breached = NULL, and neither WHEN clause
+        # matches NULL, so this returns NULL for it - which Postgres's AVG()
+        # then excludes from both the sum and the count. An ELSE 0 here
+        # (the original version) would silently count "doesn't apply" as
+        # "didn't breach", diluting the rate with cases the question doesn't
+        # even apply to. Found by testing the Copilot agent for real: its
+        # answer for Critical-priority breach rate (23.33%) didn't match a
+        # hand-verified number from earlier in this session (24.6%, computed
+        # correctly over applicable cases only) - this is why.
+        sql: "CASE WHEN {CUBE}.response_sla_has_breached THEN 1 WHEN NOT {CUBE}.response_sla_has_breached THEN 0 END"
         type: avg
         format: percent
-        description: Share of cases (with a response SLA applied) that breached it.
+        description: Share of cases WITH A RESPONSE SLA APPLIED that breached it (cases with no response SLA at all are excluded, not counted as non-breaches).
 
       - name: resolution_sla_breach_rate
-        sql: "CASE WHEN {CUBE}.resolution_sla_has_breached THEN 1 ELSE 0 END"
+        sql: "CASE WHEN {CUBE}.resolution_sla_has_breached THEN 1 WHEN NOT {CUBE}.resolution_sla_has_breached THEN 0 END"
         type: avg
         format: percent
-        description: Share of cases (with a resolution SLA applied) that breached it.
+        description: Share of cases WITH A RESOLUTION SLA APPLIED that breached it (cases with no resolution SLA at all are excluded, not counted as non-breaches).
 
       - name: avg_reassignment_count
         sql: reassignment_count

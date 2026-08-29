@@ -10,6 +10,13 @@ DATABASE_URL_READONLY = os.getenv("DATABASE_URL_READONLY", "")
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://ollama:11434")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen2.5-coder:7b-instruct-q4_K_M")
 
+# Cube (semantic layer in front of gold) REST API - see cube/model/cubes/*.yml
+# for what's actually modeled. Cube is dev-mode only right now (see
+# docker-compose.yml `cube` service), which disables its own auth checks, so
+# no token is sent. Revisit if/when Cube moves out of dev mode - it would
+# then need a JWT signed with CUBEJS_API_SECRET, not just the raw secret.
+CUBE_URL = os.getenv("CUBE_URL", "http://cube:4000")
+
 # Comma-separated list of origins allowed to call this API.
 COPILOT_ALLOWED_ORIGINS = [
     origin.strip()

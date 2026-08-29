@@ -11,10 +11,11 @@ import re
 from pathlib import Path
 
 import psycopg2
+import requests
 from psycopg2 import sql
 from langchain_core.tools import tool
 
-from .config import DATABASE_URL_READONLY, SCHEMA_DOCS_DIR
+from .config import CUBE_URL, DATABASE_URL_READONLY, SCHEMA_DOCS_DIR
 
 
 _FORBIDDEN_SQL_RE = re.compile(
@@ -71,6 +72,174 @@ def _qualify_gold_tables(query: str) -> str:
 		pattern = re.compile(rf"(?<!\.)\b{re.escape(table_name)}\b")
 		qualified_query = pattern.sub(f"gold.{table_name}", qualified_query)
 	return qualified_query
+
+
+def _fetch_cube_meta() -> dict:
+	"""GET the Cube semantic layer's self-describing catalog. Not cached - this
+	is a fast same-network call, and always-fresh beats a stale cache if the
+	cube model changes (correctness over a micro-optimization here)."""
+	resp = requests.get(f"{CUBE_URL}/cubejs-api/v1/meta", timeout=10)
+	resp.raise_for_status()
+	return resp.json()
+
+
+def _compact_catalog(meta: dict) -> list[dict]:
+	"""Cube's raw /meta payload carries a lot of frontend-oriented fields
+	(drillMembers, isVisible, aggType, ...) that only add tokens without
+	helping the model pick the right member name. Slim it to what the agent
+	actually needs: the exact name to reference, and why it exists. Kept as
+	structured data (not text) since _valid_member_names also consumes it -
+	list_cube_metrics is the one place that renders it down to text, since
+	only that path is actually going into the model's limited context."""
+
+	def _slim(members: list[dict]) -> list[dict]:
+		out = []
+		for m in members:
+			entry = {"name": m["name"], "type": m.get("type")}
+			if m.get("description"):
+				entry["description"] = m["description"]
+			if m.get("format"):
+				entry["format"] = m["format"]
+			out.append(entry)
+		return out
+
+	return [
+		{
+			"cube": c["name"],
+			"description": c.get("description"),
+			"measures": _slim(c.get("measures", [])),
+			"dimensions": _slim(c.get("dimensions", [])),
+		}
+		for c in meta.get("cubes", [])
+	]
+
+
+def _valid_member_names(catalog: list[dict]) -> set[str]:
+	names: set[str] = set()
+	for c in catalog:
+		names.update(m["name"] for m in c["measures"])
+		names.update(m["name"] for m in c["dimensions"])
+	return names
+
+
+def _one_line(text: str, max_len: int = 130) -> str:
+	"""Collapse a (possibly multi-sentence) description to one short line.
+	This model runs with a 4096-token context window (auto-sized from the
+	host's 4GB VRAM - see docker-compose.yml `ollama` service); the full
+	pretty-printed JSON catalog measured ~1700 tokens on its own, over 40% of
+	the entire budget for one tool result. That's what was actually causing
+	the model to run out of room and emit truncated, unparseable JSON on its
+	*next* turn - not a flaw in the model's reasoning. Plain text with short
+	descriptions and no redundant fields (the raw catalog's "title" is just
+	a title-cased copy of "name" - dropped entirely, it added tokens with no
+	information the model didn't already have) is a large, direct fix.
+	"""
+	one_line = " ".join(text.split())
+	return one_line if len(one_line) <= max_len else one_line[: max_len - 1] + "…"
+
+
+def _format_catalog_text(catalog: list[dict]) -> str:
+	lines: list[str] = []
+	for c in catalog:
+		lines.append(f"CUBE {c['cube']}" + (f" - {_one_line(c['description'])}" if c.get("description") else ""))
+		lines.append("  measures:")
+		for m in c["measures"]:
+			desc = f" — {_one_line(m['description'])}" if m.get("description") else ""
+			lines.append(f"    {m['name']} ({m['type']}){desc}")
+		lines.append("  dimensions:")
+		for d in c["dimensions"]:
+			desc = f" — {_one_line(d['description'])}" if d.get("description") else ""
+			lines.append(f"    {d['name']} ({d['type']}){desc}")
+	return "\n".join(lines)
+
+
+@tool
+def list_cube_metrics() -> str:
+	"""List every measure and dimension available through the Cube semantic layer, each with its exact name and a one-line description. ALWAYS call this before run_cube_query if you are not already sure of the exact member names - there are no joins to write, Cube already resolved them; you only need the right names."""
+	try:
+		return _format_catalog_text(_compact_catalog(_fetch_cube_meta()))
+	except requests.RequestException as exc:
+		return f"Error reaching Cube: {exc}"
+	except Exception as exc:  # noqa: BLE001 - return readable error text
+		return f"Error listing Cube metrics: {exc}"
+
+
+@tool
+def run_cube_query(
+	measures: list[str] | None = None,
+	dimensions: list[str] | None = None,
+	filters: list[dict] | None = None,
+	time_dimensions: list[dict] | None = None,
+	limit: int = 500,
+) -> str:
+	"""Run a structured query against the Cube semantic layer - the preferred way to answer any question about cases, agents, terminals, or SLAs. No SQL, no joins to write; Cube already resolved every join.
+
+	measures: e.g. ["Cases.total_cases", "Cases.response_sla_breach_rate"]
+	dimensions: e.g. ["Cases.assigned_to_agent_name"] - group-by fields. To see the
+	  distinct values of one dimension (like sampling a column), query it alone
+	  with no measures.
+	filters: e.g. [{"member": "Cases.priority_label", "operator": "equals", "values": ["1 - Critical"]}]
+	  operator is one of: equals, notEquals, contains, notContains, gt, gte, lt, lte, set, notSet
+	time_dimensions: e.g. [{"dimension": "Cases.opened_date", "granularity": "month"}] -
+	  use this (not a plain filter) to bucket a time field by day/week/month/quarter/year,
+	  or to restrict a date range via {"dimension": "...", "dateRange": ["2025-01-01", "2025-12-31"]}
+
+	Call list_cube_metrics first if you are not sure of the exact member names -
+	an unrecognized name is rejected before Cube is even called.
+	"""
+	try:
+		measures = measures or []
+		dimensions = dimensions or []
+		filters = filters or []
+		time_dimensions = time_dimensions or []
+
+		if not measures and not dimensions:
+			return "Invalid query: provide at least one measure or one dimension."
+
+		# Deterministic pre-flight check - no LLM call spent finding out a
+		# hallucinated member name was wrong. Cheap, same-network, always-fresh.
+		valid_names = _valid_member_names(_compact_catalog(_fetch_cube_meta()))
+		requested = set(measures) | set(dimensions)
+		requested.update(f["member"] for f in filters if "member" in f)
+		requested.update(td["dimension"] for td in time_dimensions if "dimension" in td)
+		unknown = requested - valid_names
+		if unknown:
+			return (
+				f"Unknown Cube member(s): {sorted(unknown)}. "
+				"Call list_cube_metrics to see the exact available names."
+			)
+
+		query = {
+			"measures": measures,
+			"dimensions": dimensions,
+			"filters": filters,
+			"timeDimensions": time_dimensions,
+			"limit": min(limit, 5000),
+		}
+		resp = requests.post(f"{CUBE_URL}/cubejs-api/v1/load", json={"query": query}, timeout=15)
+		if resp.status_code >= 400:
+			try:
+				err = resp.json().get("error", resp.text)
+			except ValueError:
+				err = resp.text
+			return f"Cube rejected the query: {err}"
+
+		return json.dumps(resp.json().get("data", []), default=str)
+	except requests.RequestException as exc:
+		return f"Error reaching Cube: {exc}"
+	except Exception as exc:  # noqa: BLE001 - return readable error text
+		return f"Error running Cube query: {exc}"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Fallback tools - raw SQL against gold.* and its hand-maintained markdown
+# docs. Cube only models `fact_case` today (see cube/model/cubes/cases.yml);
+# nothing built on the SCD2 snapshot or anything outside that grain exists as
+# a cube yet. Kept available for that gap, not as the first choice - the
+# system prompt in agent.py steers the model to try the Cube tools above
+# first, since those can't misuse a role-playing join the way hand-written
+# SQL can.
+# ─────────────────────────────────────────────────────────────────────────────
 
 
 @tool

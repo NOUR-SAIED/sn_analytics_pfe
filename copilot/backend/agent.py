@@ -23,11 +23,23 @@ from langgraph.graph.message import MessagesState
 from pydantic import ValidationError
 
 from .config import OLLAMA_MODEL, OLLAMA_URL, STATE_DB_PATH
-from .tools import describe_table, list_tables, run_sql, sample_values
+from .tools import (
+    describe_table,
+    list_cube_metrics,
+    list_tables,
+    run_cube_query,
+    run_sql,
+    sample_values,
+)
 
 RECURSION_LIMIT = 20
 
-_TOOLS = [list_tables, describe_table, sample_values, run_sql]
+# Cube tools first - they're the intended default path (see tools.py's
+# "Fallback tools" section comment for why the raw-SQL/markdown tools stay
+# available rather than being removed). Order here doesn't control the
+# model's choices by itself; the system prompt below is what actually steers
+# it - this ordering just keeps the two tiers visually grouped in _TOOL_DEFS.
+_TOOLS = [list_cube_metrics, run_cube_query, list_tables, describe_table, sample_values, run_sql]
 _TOOL_MAP = {t.name: t for t in _TOOLS}
 
 _TOOL_DEFS = "\n\n".join(
@@ -36,22 +48,65 @@ _TOOL_DEFS = "\n\n".join(
     for t in _TOOLS
 )
 
-_SYSTEM_PROMPT = f"""You are a senior analytics engineer. You have access to the following tools:
+_SYSTEM_PROMPT = f"""You are a senior analytics engineer for a parking-terminal customer support team. You have access to the following tools:
 
 {_TOOL_DEFS}
 
+Strategy:
+1. For anything about cases, agents, terminals, priorities, categories, or SLAs: use `list_cube_metrics` + `run_cube_query`. Cube already resolved every join (dates, agents, assignment groups) - you never write a join yourself, you only need the right member name.
+2. Call `list_cube_metrics` whenever you are not already certain of the exact member names for this conversation - an unrecognized name is rejected before it even reaches Cube, so check first rather than guess.
+3. Only reach for `list_tables` / `describe_table` / `sample_values` / `run_sql` (raw SQL against the warehouse) if the question needs something Cube doesn't model - confirm that by checking `list_cube_metrics` first, don't assume.
+
+Two worked examples of the run_cube_query shape:
+
+Q: "What's our SLA breach rate by month?"
+TOOL_CALL: {{"name": "run_cube_query", "arguments": {{"measures": ["Cases.response_sla_breach_rate"], "time_dimensions": [{{"dimension": "Cases.opened_date", "granularity": "month"}}]}}}}
+
+Q: "Which agent has the most open cases?"
+TOOL_CALL: {{"name": "run_cube_query", "arguments": {{"measures": ["Cases.total_cases"], "dimensions": ["Cases.assigned_to_agent_name"], "filters": [{{"member": "Cases.state_label", "operator": "notEquals", "values": ["Closed", "Cancelled"]}}]}}}}
+
 Rules:
-- Always start by exploring — call `list_tables` first, then `describe_table` on relevant tables before writing SQL.
 - When you need to call a tool, respond with EXACTLY this JSON format on its own line:
   TOOL_CALL: {{"name": "<tool_name>", "arguments": {{...}}}}
 - After you receive the tool result, continue the conversation.
 - When you have enough information to answer, provide a clear concise answer in plain English.
 - Never make up tool results — always call the tool.
-- Keep SQL queries simple and focused. Use fully-qualified table names (e.g. `gold.fact_case`).
+- If you do use the fallback SQL tools: keep queries simple and focused, use fully-qualified table names (e.g. `gold.fact_case`).
 - If you get stuck, explain what is missing.
 """
 
 _TOOL_CALL_RE = re.compile(r"TOOL_CALL:\s*(\{.*\})", re.DOTALL)
+
+
+def _repair_truncated_json(text: str) -> str:
+    """Best-effort repair for a JSON object cut off mid-generation - an
+    observed real failure mode on this local model (verified 2026-08-27):
+    it can run out of output budget one or two closing brackets short of
+    valid JSON, especially for a `run_cube_query` call with nested filters.
+    Only ever APPENDS the closers a naive bracket-depth scan says are
+    missing - it never guesses at missing keys/values, so genuinely
+    malformed (not just truncated) JSON still correctly fails to parse
+    afterwards, and _parse_tool_call falls through to None exactly as before.
+    """
+    closers: list[str] = []
+    in_string = False
+    escaped = False
+    for ch in text:
+        if in_string:
+            if escaped:
+                escaped = False
+            elif ch == "\\":
+                escaped = True
+            elif ch == '"':
+                in_string = False
+            continue
+        if ch == '"':
+            in_string = True
+        elif ch in "{[":
+            closers.append("}" if ch == "{" else "]")
+        elif ch in "}]" and closers and closers[-1] == ch:
+            closers.pop()
+    return text + "".join(reversed(closers))
 
 _llm = ChatOllama(
     model=OLLAMA_MODEL,
@@ -65,8 +120,13 @@ def _parse_tool_call(text: str) -> dict | None:
     m = _TOOL_CALL_RE.search(text or "")
     if not m:
         return None
+    raw = m.group(1)
     try:
-        return json.loads(m.group(1))
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        pass
+    try:
+        return json.loads(_repair_truncated_json(raw))
     except json.JSONDecodeError:
         return None
 
