@@ -1,0 +1,92 @@
+## CaseStatusHistory — closes the gap flagged in cases.yml and CLAUDE.md:
+## Cube previously only modeled fact_case's grain (one row per case, latest
+## state only). This cube sits on top of gold.fact_case_status_history
+## (dbt model over snapshots.sn_case_snapshot, the SCD2 history captured by
+## dbt/snapshots/sn_case_snapshot.sql) so lifecycle/time-per-stage questions
+## are queryable through the same semantic layer as everything else, instead
+## of needing hand-written SQL against the snapshot table.
+##
+## Grain here is case-STAGE, not case: one row per contiguous period a case
+## spent with one state_label. Joined back to Cases (many-to-one on case_id)
+## so a question can combine this cube's duration measures with Cases'
+## dimensions - e.g. "average time in each state, broken down by priority".
+##
+## Data-maturity note, stated plainly rather than left to be discovered:
+## as of when this cube was added, the underlying snapshot has captured
+## almost no organic state changes yet (the daily snapshot task has only
+## run a handful of times) - one case has real multi-version history, and
+## even that includes a manual test edit. Query results will mostly show
+## one open-ended "current state" row per case until more daily snapshot
+## runs accumulate real transitions. That's expected for a freshly-started
+## SCD2 history, not a modeling bug - this cube is built and tested now so
+## the data is captured and query-ready as that history builds up, rather
+## than bolted on later once someone notices months of history were never
+## recorded.
+
+cubes:
+  - name: CaseStatusHistory
+    sql_table: gold.fact_case_status_history
+    description: >
+      One row per (case, contiguous period spent in one state) - case-stage
+      grain, not case grain. Use this for "how long do cases spend in each
+      status" questions; use Cases for "how many cases" questions.
+
+    joins:
+      - name: Cases
+        relationship: many_to_one
+        sql: "{CUBE}.case_id = {Cases}.case_id"
+
+    measures:
+      - name: stage_occurrences
+        sql: stage_id
+        type: count_distinct
+        description: Number of stage periods (not cases) matching the current filters.
+
+      - name: avg_stage_duration_hours
+        sql: "{CUBE}.stage_duration_seconds / 3600.0"
+        type: avg
+        description: Average time spent per stage period, in hours. Filter by state_label to get "average time in Assigned", etc.
+
+      - name: median_stage_duration_hours
+        sql: "PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY {CUBE}.stage_duration_seconds / 3600.0)"
+        type: number
+        description: Median stage duration in hours - resistant to the outlier stages a straight average would be dominated by.
+
+      - name: total_stage_duration_hours
+        sql: "{CUBE}.stage_duration_seconds / 3600.0"
+        type: sum
+        description: Total time accumulated in the filtered stage(s), in hours.
+
+    dimensions:
+      - name: stage_id
+        sql: stage_id
+        type: string
+        primary_key: true
+
+      - name: case_id
+        sql: case_id
+        type: string
+
+      - name: state_label
+        sql: state_label
+        type: string
+        description: The state this stage period represents (e.g. New, Assigned, Resolved, Closed).
+
+      - name: stage_started_at
+        sql: stage_started_at
+        type: time
+
+      - name: stage_ended_at
+        sql: stage_ended_at
+        type: time
+        description: NULL while the stage is still current - see is_current_stage.
+
+      - name: is_current_stage
+        sql: is_current_stage
+        type: boolean
+        description: True for the case's present state (the still-open-ended period); false for every historical stage it already passed through.
+
+      - name: stage_sequence
+        sql: stage_sequence
+        type: number
+        description: 1-based ordinal position of this stage within the case's lifecycle (1 = the case's first recorded state).

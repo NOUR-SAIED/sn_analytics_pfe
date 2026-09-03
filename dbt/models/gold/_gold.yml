@@ -110,3 +110,23 @@ models:
       - name: parking_terminal_sys_id
         data_tests:
           - relationships: {arguments: {to: ref('dim_terminal'), field: terminal_sys_id}}
+
+  - name: fact_case_status_history
+    description: >
+      One row per (case, contiguous period spent in one state_label) - built
+      on top of snapshots.sn_case_snapshot (SCD2), NOT on fact_case. Grain is
+      case-stage, not case - a case with 4 state changes has 4 rows here.
+      Closes the "snapshot not read downstream" gap tracked in CLAUDE.md.
+    columns:
+      - name: stage_id
+        description: dbt_scd_id from the snapshot - already unique per state period, reused as-is rather than inventing a new key.
+        data_tests: [unique, not_null]
+      - name: case_id
+        description: Same sys_id as fact_case.case_id, just at stage grain instead of case grain.
+        data_tests:
+          - not_null
+          - relationships: {arguments: {to: ref('fact_case'), field: case_id}}
+      - name: state_label
+        data_tests: [not_null]
+      - name: stage_started_at
+        data_tests: [not_null]

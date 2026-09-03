@@ -233,12 +233,15 @@ def run_cube_query(
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Fallback tools - raw SQL against gold.* and its hand-maintained markdown
-# docs. Cube only models `fact_case` today (see cube/model/cubes/cases.yml);
-# nothing built on the SCD2 snapshot or anything outside that grain exists as
-# a cube yet. Kept available for that gap, not as the first choice - the
-# system prompt in agent.py steers the model to try the Cube tools above
-# first, since those can't misuse a role-playing join the way hand-written
-# SQL can.
+# docs. Cube now models both fact_case (cube/model/cubes/cases.yml) and the
+# SCD2 lifecycle history (cube/model/cubes/case_status_history.yml, over
+# gold.fact_case_status_history), joined to each other - the "nothing built
+# on the snapshot" gap this comment used to describe is closed. What's left
+# outside Cube's coverage is simply anything not modeled as a cube yet (a
+# future gold table would need its own cube too). Kept available for that,
+# not as the first choice - the system prompt in agent.py steers the model
+# to try the Cube tools above first, since those can't misuse a role-playing
+# join the way hand-written SQL can.
 # ─────────────────────────────────────────────────────────────────────────────
 
 
