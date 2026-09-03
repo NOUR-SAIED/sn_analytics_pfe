@@ -40,13 +40,17 @@ export function ChatMessage({ message }) {
       <Card className={cn('max-w-[80%] flex-1 animate-fade-up', message.isError && 'border-destructive/40')}>
         <CardContent className="p-4">
           {message.loading && !message.content ? (
-            <TypingDots />
+            // Once the trace has its first step, the (now auto-expanded)
+            // ToolTrace below is the "something is happening" indicator -
+            // showing both it and bouncing dots at once is redundant. The
+            // dots only cover the brief gap before that first tool call.
+            message.trace?.length ? null : <TypingDots />
           ) : (
             <div className="prose prose-sm max-w-none text-foreground dark:prose-invert prose-p:leading-relaxed prose-pre:bg-muted prose-p:my-1 prose-ul:my-1">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.content || ''}</ReactMarkdown>
             </div>
           )}
-          <ToolTrace trace={message.trace} />
+          <ToolTrace trace={message.trace} loading={message.loading} />
         </CardContent>
       </Card>
     </div>

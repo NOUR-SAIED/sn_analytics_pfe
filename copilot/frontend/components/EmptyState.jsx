@@ -2,10 +2,10 @@ import { Sparkles } from 'lucide-react';
 import { Button } from './ui/button';
 
 const SUGGESTIONS = [
-  'How many cases were opened in the last 30 days?',
-  'Which assignment groups have the most breached SLAs?',
-  'Show me the top 10 agents by resolved case count.',
-  'What is the average resolution time by priority?',
+  'What is our response SLA breach rate by priority level?',
+  'Which agent has the best SLA performance?',
+  'Which terminal has the highest incident risk?',
+  'How many cases are currently unassigned?',
 ];
 
 export function EmptyState({ onSuggestion }) {
