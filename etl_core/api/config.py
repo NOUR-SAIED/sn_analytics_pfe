@@ -33,7 +33,7 @@ class APIConfig:
         "sys_user": {
             "bronze_table": "raw_sys_user",
             "query_filter": os.getenv("SN_SYS_USER_QUERY", "company=4bcd89671b557f4063c43113dd4bcb10"),
-            "fields": "sys_id,name,u_personal_id,user_name,u_stockroom,mobile_phone,first_name,email,last_name"
+            "fields": "sys_id,name,u_personal_id,user_name,u_stockroom,mobile_phone,first_name,email,last_name,sys_updated_on"
         },
         "contract_sla": {
             "bronze_table": "raw_contract_sla",
