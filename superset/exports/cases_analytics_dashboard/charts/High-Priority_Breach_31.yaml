@@ -1,0 +1,42 @@
+slice_name: High-Priority Breach
+description: null
+certified_by: null
+certification_details: null
+viz_type: big_number_total
+params:
+  datasource: 19__table
+  viz_type: big_number_total
+  metric:
+    expressionType: SQL
+    sqlExpression: 100.0 * SUM(CASE WHEN response_sla_has_breached = TRUE THEN 1 ELSE
+      0 END) / COUNT(*)
+    column: null
+    aggregate: null
+    datasourceWarning: false
+    hasCustomLabel: false
+    label: High-Priority Breach
+    optionName: metric_zwdugrevyk8
+  adhoc_filters:
+  - expressionType: SIMPLE
+    subject: priority_label
+    operator: ==
+    comparator: 2 - High
+    clause: WHERE
+    isExtra: false
+    isNew: true
+  header_font_size: 0.4
+  subheader_font_size: 0.15
+  subtitle: "2-High priority \u2014 worse than Critical (24.6%)"
+  subtitle_font_size: 0.15
+  y_axis_format: SMART_NUMBER
+  color_picker:
+    r: 208
+    g: 59
+    b: 59
+    a: 1
+  extra_form_data: {}
+query_context: null
+cache_timeout: null
+uuid: eaf181c2-4610-4bdc-97b5-72dceed6a23f
+version: 1.0.0
+dataset_uuid: 00ad6814-8226-4fc0-94b6-f80aa640cf9e

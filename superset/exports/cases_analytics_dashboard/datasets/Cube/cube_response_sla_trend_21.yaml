@@ -1,0 +1,86 @@
+table_name: cube_response_sla_trend
+main_dttm_col: opened_month
+currency_code_column: null
+description: null
+default_endpoint: null
+offset: 0
+cache_timeout: null
+catalog: db
+schema: null
+sql: SELECT DATE_TRUNC('month', opened_date) AS opened_month, MEASURE(total_cases)
+  AS total_cases, MEASURE(response_sla_breach_rate) AS response_sla_breach_rate, MEASURE(resolution_sla_breach_rate)
+  AS resolution_sla_breach_rate FROM cases GROUP BY 1 ORDER BY 1
+params: null
+template_params: null
+filter_select_enabled: true
+fetch_values_predicate: null
+extra: null
+normalize_columns: false
+always_filter_main_dttm: false
+folders: null
+uuid: 7bf2d29d-b7fd-4eaa-bc96-6281143a5a45
+metrics:
+- metric_name: count
+  verbose_name: COUNT(*)
+  metric_type: count
+  expression: COUNT(*)
+  description: null
+  d3format: null
+  currency: null
+  extra: null
+  warning_text: null
+columns:
+- column_name: opened_month
+  verbose_name: null
+  is_dttm: true
+  is_active: true
+  type: DATETIME
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: response_sla_breach_rate
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: FLOAT
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: resolution_sla_breach_rate
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: FLOAT
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: total_cases
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: LONGINTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+version: 1.0.0
+database_uuid: 9c8515f2-1a8a-470e-ad19-92b0ee54135e

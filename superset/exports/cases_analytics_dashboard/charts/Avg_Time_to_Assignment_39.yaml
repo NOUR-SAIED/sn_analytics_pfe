@@ -1,0 +1,25 @@
+slice_name: Avg Time to Assignment
+description: null
+certified_by: null
+certification_details: null
+viz_type: big_number_total
+params:
+  datasource: 22__table
+  viz_type: big_number_total
+  metric:
+    expressionType: SQL
+    sqlExpression: AVG(EXTRACT(EPOCH FROM (assigned_date - opened_date))/86400.0)
+    label: Avg Days to Assign
+    optionName: metric_3qu449qf00f
+  adhoc_filters: []
+  header_font_size: 0.4
+  subheader_font_size: 0.15
+  subtitle: "days, opened \u2192 assigned (319/356 cases)"
+  subtitle_font_size: 0.15
+  y_axis_format: SMART_NUMBER
+  extra_form_data: {}
+query_context: null
+cache_timeout: null
+uuid: 3e92dae1-7e32-47f1-aabf-f6359fcc3174
+version: 1.0.0
+dataset_uuid: ead4705f-a8f8-4bb1-9817-b94668a3b053

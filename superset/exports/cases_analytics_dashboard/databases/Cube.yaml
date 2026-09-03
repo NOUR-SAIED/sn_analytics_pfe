@@ -1,0 +1,18 @@
+database_name: Cube
+sqlalchemy_uri: postgresql://cube:XXXXXXXXXX@cube:15432/db
+cache_timeout: null
+expose_in_sqllab: true
+allow_run_async: false
+allow_ctas: false
+allow_cvas: false
+allow_dml: false
+allow_file_upload: false
+extra:
+  metadata_params: {}
+  engine_params: {}
+  metadata_cache_timeout: {}
+  schemas_allowed_for_file_upload: []
+impersonate_user: false
+configuration_method: sqlalchemy_form
+uuid: 9c8515f2-1a8a-470e-ad19-92b0ee54135e
+version: 1.0.0

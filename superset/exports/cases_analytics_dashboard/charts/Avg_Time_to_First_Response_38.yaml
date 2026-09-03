@@ -1,0 +1,25 @@
+slice_name: Avg Time to First Response
+description: null
+certified_by: null
+certification_details: null
+viz_type: big_number_total
+params:
+  datasource: 22__table
+  viz_type: big_number_total
+  metric:
+    expressionType: SQL
+    sqlExpression: AVG(EXTRACT(EPOCH FROM (first_response_date - opened_date))/86400.0)
+    label: Avg Days to Response
+    optionName: metric_rai3nqtkr
+  adhoc_filters: []
+  header_font_size: 0.4
+  subheader_font_size: 0.15
+  subtitle: "days, opened \u2192 first agent response (306/356 cases)"
+  subtitle_font_size: 0.15
+  y_axis_format: SMART_NUMBER
+  extra_form_data: {}
+query_context: null
+cache_timeout: null
+uuid: b0882197-137d-4e0e-9066-ff7418d4a414
+version: 1.0.0
+dataset_uuid: ead4705f-a8f8-4bb1-9817-b94668a3b053

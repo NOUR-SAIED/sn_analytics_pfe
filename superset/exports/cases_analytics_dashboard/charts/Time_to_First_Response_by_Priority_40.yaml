@@ -1,0 +1,48 @@
+slice_name: Time to First Response by Priority
+description: null
+certified_by: null
+certification_details: null
+viz_type: echarts_timeseries_bar
+params:
+  datasource: 22__table
+  viz_type: echarts_timeseries_bar
+  x_axis: priority_label
+  metrics:
+  - expressionType: SQL
+    sqlExpression: AVG(EXTRACT(EPOCH FROM (first_response_date - opened_date))/86400.0)
+    label: Avg Days to Response
+    optionName: metric_resp_by_priority
+  groupby: []
+  adhoc_filters:
+  - expressionType: SIMPLE
+    subject: first_response_date
+    operator: IS NOT NULL
+    comparator: null
+    clause: WHERE
+    isExtra: false
+    isNew: true
+  row_limit: 10
+  truncate_metric: true
+  show_empty_columns: true
+  comparison_type: values
+  annotation_layers: []
+  forecastEnabled: false
+  orientation: vertical
+  sort_series_type: sum
+  sort_series_ascending: true
+  color_scheme: supersetAndPresetColors
+  show_value: true
+  only_total: true
+  show_legend: false
+  legendType: scroll
+  legendOrientation: top
+  x_axis_time_format: smart_date
+  x_axis_number_format: ~g
+  y_axis_format: SMART_NUMBER
+  rich_tooltip: true
+  extra_form_data: {}
+query_context: null
+cache_timeout: null
+uuid: f6fa1ddd-223a-47d3-a19e-ad6bdeb127d7
+version: 1.0.0
+dataset_uuid: ead4705f-a8f8-4bb1-9817-b94668a3b053

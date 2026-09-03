@@ -1,0 +1,144 @@
+slice_name: Inflow vs Outflow (Process Flow)
+description: null
+certified_by: null
+certification_details: null
+viz_type: echarts_area
+params:
+  datasource: 19__table
+  viz_type: echarts_area
+  slice_id: 15
+  matrixify_enable: false
+  matrixify_mode_columns: disabled
+  matrixify_dimension_selection_mode_columns: members
+  matrixify_dimension_columns:
+    dimension: ''
+    values: []
+  matrixify_topn_value_columns: 10
+  matrixify_all_sort_by_columns: a_to_z
+  matrixify_topn_order_columns: true
+  matrixify_show_column_headers: true
+  matrixify_fit_columns_dynamically: true
+  matrixify_mode_rows: disabled
+  matrixify_dimension_selection_mode_rows: members
+  matrixify_dimension_rows:
+    dimension: ''
+    values: []
+  matrixify_topn_value_rows: 10
+  matrixify_all_sort_by_rows: a_to_z
+  matrixify_topn_order_rows: true
+  matrixify_show_row_labels: true
+  matrixify_row_height: 300
+  matrixify_charts_per_row: 4
+  matrixify_cell_title_template: ''
+  x_axis: opened_date
+  time_grain_sqla: P1M
+  xAxisForceCategorical: false
+  x_axis_sort_asc: true
+  metrics:
+  - aggregate: COUNT
+    column:
+      advanced_data_type: null
+      changed_on: '2026-06-30T10:08:00.216857'
+      column_name: case_id
+      created_on: '2026-06-30T10:08:00.043665'
+      description: null
+      expression: ''
+      extra: null
+      filterable: true
+      groupby: true
+      id: 235
+      is_active: true
+      is_dttm: false
+      python_date_format: null
+      type: STRING
+      type_generic: 1
+      uuid: 00f5fe5b-8f32-4f0f-9ab5-6bc5de4efbeb
+      verbose_name: null
+    datasourceWarning: false
+    expressionType: SIMPLE
+    hasCustomLabel: false
+    label: COUNT(case_id)
+    optionName: metric_u345k4v1j3e_bmx1xa2ugj
+    sqlExpression: null
+  - aggregate: null
+    column: null
+    datasourceWarning: false
+    expressionType: SQL
+    hasCustomLabel: false
+    label: COUNT(CASE WHEN resolved_date IS NOT NULL THEN 1 END)
+    optionName: metric_1xxkp4oblcd_kllc7nczi3
+    sqlExpression: COUNT(CASE WHEN resolved_date IS NOT NULL THEN 1 END)
+  groupby: []
+  adhoc_filters:
+  - clause: WHERE
+    comparator: No filter
+    expressionType: SIMPLE
+    operator: TEMPORAL_RANGE
+    subject: opened_date
+  group_others_when_limit_reached: false
+  order_desc: true
+  row_limit: 1000
+  truncate_metric: true
+  show_empty_columns: true
+  comparison_type: values
+  annotation_layers: []
+  forecastEnabled: false
+  forecastPeriods: 10
+  forecastInterval: 0.8
+  x_axis_title: ''
+  x_axis_title_margin: 0
+  y_axis_title: ''
+  y_axis_title_margin: 0
+  y_axis_title_position: Left
+  sort_series_type: sum
+  sort_series_ascending: false
+  color_scheme: presetColors
+  time_shift_color: true
+  seriesType: line
+  opacity: 0.2
+  show_value: true
+  stack: null
+  only_total: true
+  percentage_threshold: 0
+  show_extra_controls: true
+  markerEnabled: false
+  markerSize: 6
+  minorTicks: true
+  zoomable: false
+  show_legend: true
+  legendType: scroll
+  legendOrientation: top
+  x_axis_time_format: smart_date
+  x_axis_number_format: ~g
+  xAxisLabelRotation: 0
+  xAxisLabelInterval: auto
+  force_max_interval: false
+  rich_tooltip: true
+  showTooltipTotal: true
+  showTooltipPercentage: false
+  tooltipSortByMetric: false
+  tooltipTimeFormat: smart_date
+  y_axis_format: SMART_NUMBER
+  logAxis: false
+  minorSplitLine: false
+  truncateXAxis: true
+  truncateYAxis: false
+  y_axis_bounds:
+  - null
+  - null
+  echart_options: '{}'
+  extra_form_data: {}
+  dashboards:
+  - 3
+query_context: '{"datasource":{"id":19,"type":"table"},"force":false,"queries":[{"filters":[{"col":"opened_date","op":"TEMPORAL_RANGE","val":"No
+  filter"}],"extras":{"time_grain_sqla":"P1M","having":"","where":""},"applied_time_extras":{},"columns":[{"timeGrain":"P1M","columnType":"BASE_AXIS","sqlExpression":"opened_date","label":"opened_date","expressionType":"SQL","isColumnReference":true}],"metrics":[{"aggregate":"COUNT","column":{"advanced_data_type":null,"changed_on":"2026-06-30T10:08:00.216857","column_name":"case_id","created_on":"2026-06-30T10:08:00.043665","description":null,"expression":"","extra":null,"filterable":true,"groupby":true,"id":235,"is_active":true,"is_dttm":false,"python_date_format":null,"type":"STRING","type_generic":1,"uuid":"00f5fe5b-8f32-4f0f-9ab5-6bc5de4efbeb","verbose_name":null},"datasourceWarning":false,"expressionType":"SIMPLE","hasCustomLabel":false,"label":"COUNT(case_id)","optionName":"metric_u345k4v1j3e_bmx1xa2ugj","sqlExpression":null},{"aggregate":null,"column":null,"datasourceWarning":false,"expressionType":"SQL","hasCustomLabel":false,"label":"COUNT(CASE
+  WHEN resolved_date IS NOT NULL THEN 1 END)","optionName":"metric_1xxkp4oblcd_kllc7nczi3","sqlExpression":"COUNT(CASE
+  WHEN resolved_date IS NOT NULL THEN 1 END)"}],"orderby":[[{"aggregate":"COUNT","column":{"advanced_data_type":null,"changed_on":"2026-06-30T10:08:00.216857","column_name":"case_id","created_on":"2026-06-30T10:08:00.043665","description":null,"expression":"","extra":null,"filterable":true,"groupby":true,"id":235,"is_active":true,"is_dttm":false,"python_date_format":null,"type":"STRING","type_generic":1,"uuid":"00f5fe5b-8f32-4f0f-9ab5-6bc5de4efbeb","verbose_name":null},"datasourceWarning":false,"expressionType":"SIMPLE","hasCustomLabel":false,"label":"COUNT(case_id)","optionName":"metric_u345k4v1j3e_bmx1xa2ugj","sqlExpression":null},false]],"annotation_layers":[],"row_limit":1000,"series_columns":[],"series_limit":0,"group_others_when_limit_reached":false,"order_desc":true,"url_params":{},"custom_params":{},"custom_form_data":{},"time_offsets":[],"post_processing":[{"operation":"pivot","options":{"index":["opened_date"],"columns":[],"aggregates":{"COUNT(case_id)":{"operator":"mean"},"COUNT(CASE
+  WHEN resolved_date IS NOT NULL THEN 1 END)":{"operator":"mean"}},"drop_missing_columns":false}},{"operation":"flatten"}]}],"form_data":{"datasource":"19__table","viz_type":"echarts_area","slice_id":15,"matrixify_enable":false,"matrixify_mode_columns":"disabled","matrixify_dimension_selection_mode_columns":"members","matrixify_dimension_columns":{"dimension":"","values":[]},"matrixify_topn_value_columns":10,"matrixify_all_sort_by_columns":"a_to_z","matrixify_topn_order_columns":true,"matrixify_show_column_headers":true,"matrixify_fit_columns_dynamically":true,"matrixify_mode_rows":"disabled","matrixify_dimension_selection_mode_rows":"members","matrixify_dimension_rows":{"dimension":"","values":[]},"matrixify_topn_value_rows":10,"matrixify_all_sort_by_rows":"a_to_z","matrixify_topn_order_rows":true,"matrixify_show_row_labels":true,"matrixify_row_height":300,"matrixify_charts_per_row":4,"matrixify_cell_title_template":"","x_axis":"opened_date","time_grain_sqla":"P1M","xAxisForceCategorical":false,"x_axis_sort_asc":true,"metrics":[{"aggregate":"COUNT","column":{"advanced_data_type":null,"changed_on":"2026-06-30T10:08:00.216857","column_name":"case_id","created_on":"2026-06-30T10:08:00.043665","description":null,"expression":"","extra":null,"filterable":true,"groupby":true,"id":235,"is_active":true,"is_dttm":false,"python_date_format":null,"type":"STRING","type_generic":1,"uuid":"00f5fe5b-8f32-4f0f-9ab5-6bc5de4efbeb","verbose_name":null},"datasourceWarning":false,"expressionType":"SIMPLE","hasCustomLabel":false,"label":"COUNT(case_id)","optionName":"metric_u345k4v1j3e_bmx1xa2ugj","sqlExpression":null},{"aggregate":null,"column":null,"datasourceWarning":false,"expressionType":"SQL","hasCustomLabel":false,"label":"COUNT(CASE
+  WHEN resolved_date IS NOT NULL THEN 1 END)","optionName":"metric_1xxkp4oblcd_kllc7nczi3","sqlExpression":"COUNT(CASE
+  WHEN resolved_date IS NOT NULL THEN 1 END)"}],"groupby":[],"adhoc_filters":[{"clause":"WHERE","comparator":"No
+  filter","expressionType":"SIMPLE","operator":"TEMPORAL_RANGE","subject":"opened_date"}],"group_others_when_limit_reached":false,"order_desc":true,"row_limit":1000,"truncate_metric":true,"show_empty_columns":true,"comparison_type":"values","annotation_layers":[],"forecastEnabled":false,"forecastPeriods":10,"forecastInterval":0.8,"x_axis_title":"","x_axis_title_margin":0,"y_axis_title":"","y_axis_title_margin":0,"y_axis_title_position":"Left","sort_series_type":"sum","sort_series_ascending":false,"color_scheme":"presetColors","time_shift_color":true,"seriesType":"line","opacity":0.2,"show_value":true,"stack":null,"only_total":true,"percentage_threshold":0,"show_extra_controls":true,"markerEnabled":false,"markerSize":6,"minorTicks":true,"zoomable":false,"show_legend":true,"legendType":"scroll","legendOrientation":"top","x_axis_time_format":"smart_date","x_axis_number_format":"~g","xAxisLabelRotation":0,"xAxisLabelInterval":"auto","force_max_interval":false,"rich_tooltip":true,"showTooltipTotal":true,"showTooltipPercentage":false,"tooltipSortByMetric":false,"tooltipTimeFormat":"smart_date","y_axis_format":"SMART_NUMBER","logAxis":false,"minorSplitLine":false,"truncateXAxis":true,"truncateYAxis":false,"y_axis_bounds":[null,null],"echart_options":"{}","extra_form_data":{},"dashboards":[3],"force":false,"result_format":"json","result_type":"full"},"result_format":"json","result_type":"full"}'
+cache_timeout: null
+uuid: 3dc5cb3b-08d1-434c-94ad-78a751a88dc2
+version: 1.0.0
+dataset_uuid: 00ad6814-8226-4fc0-94b6-f80aa640cf9e

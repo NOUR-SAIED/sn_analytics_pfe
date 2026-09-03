@@ -1,0 +1,56 @@
+slice_name: Backlog Aging
+description: null
+certified_by: null
+certification_details: null
+viz_type: echarts_timeseries_bar
+params:
+  datasource: 19__table
+  viz_type: echarts_timeseries_bar
+  x_axis:
+    label: Age Bucket
+    expressionType: SQL
+    columnType: BASE_AXIS
+    sqlExpression: CASE WHEN CURRENT_DATE - opened_date <= 7 THEN '0-7 days' WHEN
+      CURRENT_DATE - opened_date <= 30 THEN '8-30 days' WHEN CURRENT_DATE - opened_date
+      <= 90 THEN '31-90 days' ELSE '90+ days' END
+  metrics:
+  - expressionType: SQL
+    sqlExpression: COUNT(*)
+    label: Open Cases
+    optionName: metric_backlog_age
+  groupby: []
+  adhoc_filters:
+  - expressionType: SIMPLE
+    subject: state_label
+    operator: NOT IN
+    comparator:
+    - Closed
+    - Cancelled
+    clause: WHERE
+    isExtra: false
+    isNew: true
+  row_limit: 20
+  truncate_metric: true
+  show_empty_columns: true
+  comparison_type: values
+  annotation_layers: []
+  forecastEnabled: false
+  orientation: vertical
+  sort_series_type: sum
+  sort_series_ascending: true
+  color_scheme: supersetAndPresetColors
+  show_value: true
+  only_total: true
+  show_legend: false
+  legendType: scroll
+  legendOrientation: top
+  x_axis_time_format: smart_date
+  x_axis_number_format: ~g
+  y_axis_format: SMART_NUMBER
+  rich_tooltip: true
+  extra_form_data: {}
+query_context: null
+cache_timeout: null
+uuid: 8e3f79a3-17ab-417e-bb0a-1c6648fe6c66
+version: 1.0.0
+dataset_uuid: 00ad6814-8226-4fc0-94b6-f80aa640cf9e

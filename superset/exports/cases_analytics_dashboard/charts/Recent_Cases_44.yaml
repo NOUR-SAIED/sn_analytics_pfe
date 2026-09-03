@@ -1,0 +1,37 @@
+slice_name: Recent Cases
+description: null
+certified_by: null
+certification_details: null
+viz_type: table
+params:
+  datasource: 19__table
+  viz_type: table
+  query_mode: raw
+  all_columns:
+  - case_number
+  - opened_date
+  - priority_label
+  - state_label
+  - agent_name
+  - terminal_name
+  - device_type_label
+  - response_sla_has_breached
+  metrics: []
+  adhoc_filters: []
+  order_by_cols:
+  - '["opened_date", false]'
+  row_limit: 15
+  server_page_length: 15
+  include_time: false
+  table_timestamp_format: '%Y-%m-%d'
+  show_cell_bars: false
+  color_pn: true
+  extra_form_data: {}
+query_context: '{"datasource":{"id":19,"type":"table"},"force":false,"queries":[{"filters":[],"extras":{"having":"","where":""},"applied_time_extras":{},"columns":["case_number","opened_date","priority_label","state_label","agent_name","terminal_name",{"expressionType":"SQL","label":"Device
+  Type","sqlExpression":"COALESCE(device_type_label, ''Unknown'')"},"response_sla_has_breached"],"orderby":[["opened_date",false]],"annotation_layers":[],"row_limit":15,"series_limit":0,"group_others_when_limit_reached":false,"order_desc":true,"url_params":{},"custom_params":{},"custom_form_data":{},"post_processing":[],"time_offsets":[]}],"form_data":{"adhoc_filters":[],"color_pn":true,"columns":["case_number","opened_date","priority_label","state_label","agent_name","terminal_name",{"expressionType":"SQL","label":"Device
+  Type","sqlExpression":"COALESCE(device_type_label, ''Unknown'')"},"response_sla_has_breached"],"datasource":"19__table","extra_form_data":{},"include_time":false,"metrics":[],"order_by_cols":["[\"opened_date\",
+  false]"],"query_mode":"raw","row_limit":15,"server_page_length":15,"show_cell_bars":false,"slice_id":44,"table_timestamp_format":"%Y-%m-%d","viz_type":"table","force":false,"result_format":"json","result_type":"full"},"result_format":"json","result_type":"full"}'
+cache_timeout: null
+uuid: 5c466655-f29f-4157-ba35-268e5b8fe94e
+version: 1.0.0
+dataset_uuid: 00ad6814-8226-4fc0-94b6-f80aa640cf9e

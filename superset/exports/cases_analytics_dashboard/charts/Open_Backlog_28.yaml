@@ -1,0 +1,43 @@
+slice_name: Open Backlog
+description: null
+certified_by: null
+certification_details: null
+viz_type: big_number_total
+params:
+  datasource: 19__table
+  viz_type: big_number_total
+  metric:
+    expressionType: SQL
+    sqlExpression: COUNT(*)
+    column: null
+    aggregate: null
+    datasourceWarning: false
+    hasCustomLabel: false
+    label: Open Backlog
+    optionName: metric_159cnysga5o
+  adhoc_filters:
+  - expressionType: SIMPLE
+    subject: state_label
+    operator: NOT IN
+    comparator:
+    - Closed
+    - Cancelled
+    clause: WHERE
+    isExtra: false
+    isNew: true
+  header_font_size: 0.4
+  subheader_font_size: 0.15
+  subtitle: cases not Closed/Cancelled
+  subtitle_font_size: 0.15
+  y_axis_format: SMART_NUMBER
+  color_picker:
+    r: 250
+    g: 178
+    b: 25
+    a: 1
+  extra_form_data: {}
+query_context: null
+cache_timeout: null
+uuid: 2e393680-74ff-4aa2-958c-db7b2c2a06ae
+version: 1.0.0
+dataset_uuid: 00ad6814-8226-4fc0-94b6-f80aa640cf9e

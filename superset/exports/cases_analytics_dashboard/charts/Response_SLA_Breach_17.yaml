@@ -1,0 +1,52 @@
+slice_name: Response SLA Breach
+description: null
+certified_by: null
+certification_details: null
+viz_type: big_number_total
+params:
+  datasource: 19__table
+  viz_type: big_number_total
+  metric:
+    expressionType: SQL
+    sqlExpression: 100.0 * SUM(CASE WHEN response_sla_has_breached = TRUE THEN 1 ELSE
+      0 END) / COUNT(*)
+    column: null
+    aggregate: null
+    datasourceWarning: false
+    hasCustomLabel: false
+    label: Response SLA Breach %
+    optionName: metric_response_sla_breach_fixed
+  adhoc_filters:
+  - expressionType: SIMPLE
+    subject: opened_date
+    operator: TEMPORAL_RANGE
+    comparator: No filter
+    clause: WHERE
+    sqlExpression: null
+    isExtra: false
+    isNew: false
+    datasourceWarning: false
+    filterOptionName: filter_lb8cu6t0qh_mvgf6oi4tc
+  header_font_size: 0.4
+  subheader_font_size: 0.15
+  subtitle: "all-time \xB7 % of cases with response SLA applied"
+  subtitle_font_size: 0.15
+  y_axis_format: SMART_NUMBER
+  color_picker:
+    r: 224
+    g: 67
+    b: 85
+    a: 1
+  extra_form_data: {}
+query_context: '{"datasource":{"id":19,"type":"table"},"force":false,"queries":[{"filters":[{"col":"opened_date","op":"TEMPORAL_RANGE","val":"No
+  filter"}],"extras":{"time_grain_sqla":"P1Y","having":"","where":""},"applied_time_extras":{},"columns":[{"timeGrain":"P1Y","columnType":"BASE_AXIS","sqlExpression":"opened_date","label":"opened_date","expressionType":"SQL","isColumnReference":true}],"metrics":[{"expressionType":"SQL","sqlExpression":"100.0
+  * SUM(CASE WHEN response_sla_has_breached = TRUE THEN 1 ELSE 0 END) / COUNT(*)\r\n","column":null,"aggregate":null,"datasourceWarning":false,"hasCustomLabel":false,"label":"100.0
+  * SUM(CASE WHEN response_sla_has_breached = TRUE THEN 1 ELSE 0 END) / COUNT(*)\r\n","optionName":"metric_n8dml95le3_kd9drbw856e"}],"annotation_layers":[],"series_limit":0,"group_others_when_limit_reached":false,"order_desc":true,"url_params":{},"custom_params":{},"custom_form_data":{},"post_processing":[{"operation":"pivot","options":{"index":["opened_date"],"columns":[],"aggregates":{"100.0
+  * SUM(CASE WHEN response_sla_has_breached = TRUE THEN 1 ELSE 0 END) / COUNT(*)\r\n":{"operator":"mean"}},"drop_missing_columns":true}},{"operation":"flatten"}]}],"form_data":{"datasource":"19__table","viz_type":"big_number","matrixify_enable":false,"matrixify_mode_columns":"disabled","matrixify_dimension_selection_mode_columns":"members","matrixify_dimension_columns":{"dimension":"","values":[]},"matrixify_topn_value_columns":10,"matrixify_all_sort_by_columns":"a_to_z","matrixify_topn_order_columns":true,"matrixify_show_column_headers":true,"matrixify_fit_columns_dynamically":true,"matrixify_mode_rows":"disabled","matrixify_dimension_selection_mode_rows":"members","matrixify_dimension_rows":{"dimension":"","values":[]},"matrixify_topn_value_rows":10,"matrixify_all_sort_by_rows":"a_to_z","matrixify_topn_order_rows":true,"matrixify_show_row_labels":true,"matrixify_row_height":300,"matrixify_charts_per_row":4,"matrixify_cell_title_template":"","x_axis":"opened_date","time_grain_sqla":"P1Y","aggregation":"LAST_VALUE","metric":{"expressionType":"SQL","sqlExpression":"100.0
+  * SUM(CASE WHEN response_sla_has_breached = TRUE THEN 1 ELSE 0 END) / COUNT(*)\r\n","column":null,"aggregate":null,"datasourceWarning":false,"hasCustomLabel":false,"label":"100.0
+  * SUM(CASE WHEN response_sla_has_breached = TRUE THEN 1 ELSE 0 END) / COUNT(*)\r\n","optionName":"metric_n8dml95le3_kd9drbw856e"},"adhoc_filters":[{"expressionType":"SIMPLE","subject":"opened_date","operator":"TEMPORAL_RANGE","comparator":"No
+  filter","clause":"WHERE","sqlExpression":null,"isExtra":false,"isNew":false,"datasourceWarning":false,"filterOptionName":"filter_lb8cu6t0qh_mvgf6oi4tc"}],"show_timestamp":false,"show_trend_line":true,"start_y_axis_at_zero":true,"color_picker":{"r":224,"g":67,"b":85,"a":1},"header_font_size":0.4,"subheader_font_size":0.15,"subtitle":"%","subtitle_font_size":0.15,"show_metric_name":false,"show_x_axis":false,"show_y_axis":false,"y_axis_format":"SMART_NUMBER","time_format":"smart_date","force_timestamp_formatting":false,"rolling_type":"None","extra_form_data":{},"dashboards":[],"force":false,"result_format":"json","result_type":"full"},"result_format":"json","result_type":"full"}'
+cache_timeout: null
+uuid: 470c2ea5-ffe4-47e4-b05d-c695d58349b7
+version: 1.0.0
+dataset_uuid: 00ad6814-8226-4fc0-94b6-f80aa640cf9e

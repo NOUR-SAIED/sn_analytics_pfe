@@ -1,0 +1,637 @@
+table_name: ds_cases_main
+main_dttm_col: opened_date
+currency_code_column: null
+description: null
+default_endpoint: null
+offset: 0
+cache_timeout: null
+catalog: elt_sn_db
+schema: null
+sql: "SELECT\r\n    -- =====================\r\n    -- Identifiers\r\n    -- =====================\r\
+  \n    fc.case_id,\r\n    fc.case_number,\r\n\r\n    -- =====================\r\n\
+  \    -- Time (role-playing)\r\n    -- =====================\r\n    fc.sys_created_on,\r\
+  \n\r\n    od.full_date AS opened_date,\r\n    rd.full_date AS resolved_date,\r\n\
+  \    cd.full_date AS closed_date,\r\n\r\n    od.year AS opened_year,\r\n    od.month\
+  \ AS opened_month,\r\n    od.week AS opened_week,\r\n    od.weekday AS opened_weekday,\r\
+  \n\r\n    rd.year AS resolved_year,\r\n    rd.month AS resolved_month,\r\n    rd.week\
+  \ AS resolved_week,\r\n\r\n    cd.year AS closed_year,\r\n    cd.month AS closed_month,\r\
+  \n\r\n    EXTRACT(HOUR FROM fc.sys_created_on) AS created_hour,\r\n    EXTRACT(DOW\
+  \ FROM fc.sys_created_on) AS created_day_of_week,\r\n\r\n    -- =====================\r\
+  \n    -- CORE DIMENSIONS (for workload analysis)\r\n    -- =====================\r\
+  \n    COALESCE(ag.agent_name, 'Unassigned') AS agent_name,\r\n    ag.agent_sys_id,\r\
+  \n\r\n    grp.assignment_group_name,\r\n    grp.assignment_group_sys_id,\r\n\r\n\
+  \    t.terminal_name,\r\n    t.terminal_sys_id,\r\n\r\n    fc.state_label,\r\n \
+  \   fc.priority_label,\r\n    fc.urgency_label,\r\n    fc.impact_label,\r\n    fc.category_label,\r\
+  \n    fc.subcategory_label,\r\n    fc.device_type_label,\r\n    fc.resolution_code_label,\r\
+  \n    fc.cause,\r\n\r\n    -- =====================\r\n    -- SLA raw metrics\r\n\
+  \    -- =====================\r\n    fc.response_sla_duration,\r\n    fc.resolution_sla_duration,\r\
+  \n\r\n    fc.response_sla_has_breached,\r\n    fc.resolution_sla_has_breached,\r\
+  \n\r\n    fc.response_sla_percentage,\r\n    fc.resolution_sla_percentage,\r\n\r\
+  \n    -- =====================\r\n    -- Operational workload signals\r\n    --\
+  \ =====================\r\n    fc.reassignment_count,\r\n    fc.time_worked,\r\n\
+  \r\n    -- =====================\r\n    -- IMPORTANT: workload-ready flag\r\n  \
+  \  -- =====================\r\n    1 AS case_count\r\n\r\nFROM gold.fact_case fc\r\
+  \n\r\nLEFT JOIN gold.dim_date od\r\n    ON fc.opened_date_key = od.date_key\r\n\r\
+  \nLEFT JOIN gold.dim_date rd\r\n    ON fc.resolved_date_key = rd.date_key\r\n\r\n\
+  LEFT JOIN gold.dim_date cd\r\n    ON fc.closed_date_key = cd.date_key\r\n\r\nLEFT\
+  \ JOIN gold.dim_agent ag\r\n    ON fc.assigned_to_sys_id = ag.agent_sys_id\r\n\r\
+  \nLEFT JOIN gold.dim_assignment_group grp\r\n    ON fc.assignment_group_sys_id =\
+  \ grp.assignment_group_sys_id\r\n\r\nLEFT JOIN gold.dim_terminal t\r\n    ON fc.parking_terminal_sys_id\
+  \ = t.terminal_sys_id;"
+params: null
+template_params: null
+filter_select_enabled: true
+fetch_values_predicate: null
+extra: null
+normalize_columns: false
+always_filter_main_dttm: false
+folders: null
+uuid: 00ad6814-8226-4fc0-94b6-f80aa640cf9e
+metrics:
+- metric_name: count
+  verbose_name: COUNT(*)
+  metric_type: count
+  expression: COUNT(*)
+  description: null
+  d3format: null
+  currency: null
+  extra:
+    warning_markdown: ''
+  warning_text: null
+columns:
+- column_name: response_sla_has_breached
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: BOOLEAN
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: resolution_sla_has_breached
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: BOOLEAN
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: response_sla_percentage
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: DECIMAL
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: resolution_sla_percentage
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: DECIMAL
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: sys_created_on
+  verbose_name: null
+  is_dttm: true
+  is_active: true
+  type: DATETIMETZ
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: closed_date
+  verbose_name: null
+  is_dttm: true
+  is_active: true
+  type: DATE
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: resolved_date
+  verbose_name: null
+  is_dttm: true
+  is_active: true
+  type: DATE
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: opened_date
+  verbose_name: null
+  is_dttm: true
+  is_active: true
+  type: DATE
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: created_day_of_week
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: FLOAT
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: created_hour
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: FLOAT
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: response_sla_duration
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: LONGINTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: resolution_sla_duration
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: LONGINTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: reassignment_count
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: LONGINTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: time_worked
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: LONGINTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: case_count
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: INTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: closed_year
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: INTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: opened_weekday
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: INTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: resolved_year
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: INTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: opened_year
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: INTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: closed_month
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: INTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: resolved_week
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: INTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: opened_week
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: INTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: resolved_month
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: INTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: opened_month
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: INTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: assignment_group_sys_id
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: STRING
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: assignment_group_name
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: STRING
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: device_type_label
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: STRING
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: resolution_code_label
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: STRING
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: agent_sys_id
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: STRING
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: terminal_sys_id
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: STRING
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: subcategory_label
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: STRING
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: category_label
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: STRING
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: impact_label
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: STRING
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: state_label
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: STRING
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: agent_name
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: STRING
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: terminal_name
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: STRING
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: urgency_label
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: STRING
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: case_number
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: STRING
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: priority_label
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: STRING
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: case_id
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: STRING
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+- column_name: cause
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: STRING
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: ''
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra:
+    warning_markdown: null
+version: 1.0.0
+database_uuid: ad168725-5b49-4e30-87aa-b79a62b37160

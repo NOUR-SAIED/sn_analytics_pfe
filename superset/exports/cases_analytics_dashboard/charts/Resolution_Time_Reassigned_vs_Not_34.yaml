@@ -1,0 +1,54 @@
+slice_name: 'Resolution Time: Reassigned vs Not'
+description: null
+certified_by: null
+certification_details: null
+viz_type: echarts_timeseries_bar
+params:
+  datasource: 19__table
+  viz_type: echarts_timeseries_bar
+  x_axis:
+    label: Reassigned?
+    sqlExpression: CASE WHEN reassignment_count > 0 THEN 'Reassigned' ELSE 'Not Reassigned'
+      END
+    expressionType: SQL
+    columnType: BASE_AXIS
+  metrics:
+  - expressionType: SQL
+    sqlExpression: ROUND((PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY resolution_sla_duration)
+      / 3600.0)::numeric, 1)
+    label: Median Resolution (h)
+    optionName: metric_reassign_median
+  groupby: []
+  adhoc_filters:
+  - expressionType: SIMPLE
+    subject: opened_date
+    operator: TEMPORAL_RANGE
+    comparator: No filter
+    clause: WHERE
+    isExtra: false
+    isNew: false
+  row_limit: 1000
+  truncate_metric: true
+  show_empty_columns: true
+  comparison_type: values
+  annotation_layers: []
+  forecastEnabled: false
+  orientation: horizontal
+  sort_series_type: sum
+  sort_series_ascending: false
+  color_scheme: supersetAndPresetColors
+  show_value: true
+  only_total: true
+  show_legend: false
+  legendType: scroll
+  legendOrientation: top
+  x_axis_time_format: smart_date
+  x_axis_number_format: ~g
+  y_axis_format: SMART_NUMBER
+  rich_tooltip: true
+  extra_form_data: {}
+query_context: null
+cache_timeout: null
+uuid: d2422bbd-f8d3-42a1-b26b-f50442497d28
+version: 1.0.0
+dataset_uuid: 00ad6814-8226-4fc0-94b6-f80aa640cf9e

@@ -31,3 +31,24 @@ DATA_CACHE_CONFIG = CACHE_CONFIG
 FEATURE_FLAGS = {
     "ALERT_REPORTS": False,
 }
+
+# One categorical palette shared by every chart, so the dashboard reads as one
+# product instead of each chart having picked its own colors over time.
+# Teal-anchored to match the Copilot agent's --primary (copilot/frontend/styles/globals.css).
+EXTRA_CATEGORICAL_COLOR_SCHEMES = [
+    {
+        "id": "tpaBrand",
+        "label": "TPA Brand",
+        "description": "Teal-anchored palette matching the Copilot agent's dark theme.",
+        "colors": [
+            "#2dd4bf",  # teal (brand primary)
+            "#fb923c",  # orange
+            "#38bdf8",  # sky blue
+            "#a78bfa",  # violet
+            "#fb7185",  # rose
+            "#4ade80",  # green
+            "#eab308",  # gold
+            "#94a3b8",  # slate (neutral / unknown bucket)
+        ],
+    }
+]

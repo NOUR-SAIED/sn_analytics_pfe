@@ -1,0 +1,54 @@
+slice_name: Terminal Breach Rate
+description: null
+certified_by: null
+certification_details: null
+viz_type: echarts_timeseries_bar
+params:
+  datasource: 19__table
+  viz_type: echarts_timeseries_bar
+  x_axis: terminal_name
+  metrics:
+  - expressionType: SQL
+    sqlExpression: 100.0 * SUM(CASE WHEN response_sla_has_breached = TRUE THEN 1 ELSE
+      0 END) / COUNT(*)
+    label: Breach %
+    optionName: metric_terminal_breach
+  groupby: []
+  adhoc_filters:
+  - expressionType: SIMPLE
+    subject: opened_date
+    operator: TEMPORAL_RANGE
+    comparator: No filter
+    clause: WHERE
+    isExtra: false
+    isNew: false
+  - expressionType: SQL
+    sqlExpression: terminal_name IS NOT NULL
+    clause: WHERE
+    isExtra: false
+    isNew: true
+  row_limit: 15
+  truncate_metric: true
+  show_empty_columns: true
+  comparison_type: values
+  annotation_layers: []
+  forecastEnabled: false
+  orientation: horizontal
+  sort_series_type: sum
+  sort_series_ascending: false
+  color_scheme: supersetAndPresetColors
+  show_value: true
+  only_total: true
+  show_legend: false
+  legendType: scroll
+  legendOrientation: top
+  x_axis_time_format: smart_date
+  x_axis_number_format: ~g
+  y_axis_format: SMART_NUMBER
+  rich_tooltip: true
+  extra_form_data: {}
+query_context: null
+cache_timeout: null
+uuid: 7eb4a28b-6689-476f-9796-f8de62121274
+version: 1.0.0
+dataset_uuid: 00ad6814-8226-4fc0-94b6-f80aa640cf9e

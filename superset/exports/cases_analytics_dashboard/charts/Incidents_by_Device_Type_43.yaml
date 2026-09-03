@@ -1,0 +1,63 @@
+slice_name: Incidents by Device Type
+description: null
+certified_by: null
+certification_details: null
+viz_type: echarts_timeseries_bar
+params:
+  datasource: 19__table
+  viz_type: echarts_timeseries_bar
+  x_axis:
+    label: Device Type
+    expressionType: SQL
+    columnType: BASE_AXIS
+    sqlExpression: COALESCE(device_type_label, 'Unknown / Not Recorded')
+  metrics:
+  - expressionType: SQL
+    sqlExpression: COUNT(*)
+    label: Incidents
+    optionName: metric_device_volume
+  groupby: []
+  adhoc_filters:
+  - expressionType: SIMPLE
+    subject: opened_date
+    operator: TEMPORAL_RANGE
+    comparator: No filter
+    clause: WHERE
+    isExtra: false
+    isNew: false
+  row_limit: 15
+  truncate_metric: true
+  show_empty_columns: true
+  comparison_type: values
+  annotation_layers: []
+  forecastEnabled: false
+  orientation: horizontal
+  sort_series_type: sum
+  sort_series_ascending: false
+  color_scheme: supersetAndPresetColors
+  show_value: true
+  only_total: true
+  show_legend: false
+  legendType: scroll
+  legendOrientation: top
+  x_axis_time_format: smart_date
+  x_axis_number_format: ~g
+  y_axis_format: SMART_NUMBER
+  rich_tooltip: true
+  extra_form_data: {}
+query_context: '{"datasource":{"id":19,"type":"table"},"force":false,"queries":[{"filters":[{"col":"opened_date","op":"TEMPORAL_RANGE","val":"No
+  filter"}],"extras":{"having":"","where":""},"applied_time_extras":{},"columns":[{"columnType":"BASE_AXIS","expressionType":"SQL","label":"Device
+  Type","sqlExpression":"COALESCE(device_type_label, ''Unknown / Not Recorded'')"}],"metrics":[{"expressionType":"SQL","label":"Breach
+  %","optionName":"metric_device_breach","sqlExpression":"100.0*SUM(CASE WHEN response_sla_has_breached=TRUE
+  THEN 1 ELSE 0 END)/COUNT(*)"}],"orderby":[[{"expressionType":"SQL","label":"Breach
+  %","optionName":"metric_device_breach","sqlExpression":"100.0*SUM(CASE WHEN response_sla_has_breached=TRUE
+  THEN 1 ELSE 0 END)/COUNT(*)"},false]],"annotation_layers":[],"row_limit":15,"series_columns":[],"series_limit":0,"group_others_when_limit_reached":false,"order_desc":true,"url_params":{},"custom_params":{},"custom_form_data":{},"time_offsets":[],"post_processing":[{"operation":"pivot","options":{"index":["Device
+  Type"],"columns":[],"aggregates":{"Breach %":{"operator":"mean"}},"drop_missing_columns":false}},{"operation":"flatten"}]}],"form_data":{"adhoc_filters":[{"clause":"WHERE","comparator":"No
+  filter","expressionType":"SIMPLE","isExtra":false,"isNew":false,"operator":"TEMPORAL_RANGE","subject":"opened_date"}],"annotation_layers":[],"color_scheme":"supersetAndPresetColors","comparison_type":"values","datasource":"19__table","extra_form_data":{},"forecastEnabled":false,"groupby":[],"legendOrientation":"top","legendType":"scroll","metrics":[{"expressionType":"SQL","label":"Breach
+  %","optionName":"metric_device_breach","sqlExpression":"100.0*SUM(CASE WHEN response_sla_has_breached=TRUE
+  THEN 1 ELSE 0 END)/COUNT(*)"}],"only_total":true,"orientation":"horizontal","rich_tooltip":true,"row_limit":15,"show_empty_columns":true,"show_legend":false,"show_value":true,"slice_id":43,"sort_series_ascending":false,"sort_series_type":"sum","truncate_metric":true,"viz_type":"echarts_timeseries_bar","x_axis":{"columnType":"BASE_AXIS","expressionType":"SQL","label":"Device
+  Type","sqlExpression":"COALESCE(device_type_label, ''Unknown / Not Recorded'')"},"x_axis_number_format":"~g","x_axis_time_format":"smart_date","y_axis_format":"SMART_NUMBER","force":false,"result_format":"json","result_type":"full"},"result_format":"json","result_type":"full"}'
+cache_timeout: null
+uuid: 1af01c66-3150-437e-b0fc-36f8aba3ba92
+version: 1.0.0
+dataset_uuid: 00ad6814-8226-4fc0-94b6-f80aa640cf9e

@@ -1,0 +1,80 @@
+slice_name: Agent Performance Leaderboard
+description: null
+certified_by: null
+certification_details: null
+viz_type: table
+params:
+  datasource: 19__table
+  viz_type: table
+  query_mode: aggregate
+  groupby:
+  - agent_name
+  metrics:
+  - expressionType: SQL
+    sqlExpression: COUNT(*)
+    label: Cases
+    optionName: m_cases
+  - expressionType: SQL
+    sqlExpression: 100.0*SUM(CASE WHEN response_sla_has_breached=TRUE THEN 1 ELSE
+      0 END)/COUNT(*)
+    label: Breach %
+    optionName: m_breach
+  - expressionType: SQL
+    sqlExpression: ROUND((PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY resolution_sla_duration)/3600.0)::numeric,1)
+    label: Median Resolution (h)
+    optionName: m_res
+  - expressionType: SQL
+    sqlExpression: ROUND((100.0*SUM(CASE WHEN reassignment_count>0 THEN 1 ELSE 0 END)/COUNT(*))::numeric,1)
+    label: Reassign %
+    optionName: m_reassign
+  - expressionType: SQL
+    sqlExpression: ROUND((100.0 - (100.0*SUM(CASE WHEN response_sla_has_breached=TRUE
+      THEN 1 ELSE 0 END)/COUNT(*)))::numeric,1)
+    label: Score
+    optionName: m_score
+  adhoc_filters:
+  - expressionType: SIMPLE
+    subject: agent_name
+    operator: '!='
+    comparator: Unassigned
+    clause: WHERE
+    isExtra: false
+    isNew: true
+  - expressionType: SQL
+    sqlExpression: COUNT(*) >= 5
+    clause: HAVING
+    isExtra: false
+    isNew: true
+  row_limit: 20
+  order_desc: true
+  timeseries_limit_metric:
+    expressionType: SQL
+    sqlExpression: 100.0 - (100.0*SUM(CASE WHEN response_sla_has_breached=TRUE THEN
+      1 ELSE 0 END)/COUNT(*))
+    label: Score
+  show_cell_bars: true
+  color_pn: true
+  extra_form_data: {}
+query_context: '{"datasource":{"id":19,"type":"table"},"force":false,"queries":[{"filters":[{"col":"agent_name","op":"!=","val":"Unassigned"}],"extras":{"having":"","where":""},"applied_time_extras":{},"columns":["agent_name"],"metrics":[{"expressionType":"SQL","label":"Cases","optionName":"m_cases","sqlExpression":"COUNT(*)"},{"expressionType":"SQL","label":"Breach
+  %","optionName":"m_breach","sqlExpression":"100.0*SUM(CASE WHEN response_sla_has_breached=TRUE
+  THEN 1 ELSE 0 END)/COUNT(*)"},{"expressionType":"SQL","label":"Median Resolution
+  (h)","optionName":"m_res","sqlExpression":"ROUND((PERCENTILE_CONT(0.5) WITHIN GROUP
+  (ORDER BY resolution_sla_duration)/3600.0)::numeric,1)"},{"expressionType":"SQL","label":"Reassign
+  %","optionName":"m_reassign","sqlExpression":"ROUND((100.0*SUM(CASE WHEN reassignment_count>0
+  THEN 1 ELSE 0 END)/COUNT(*))::numeric,1)"},{"expressionType":"SQL","label":"Score","optionName":"m_score","sqlExpression":"ROUND((100.0
+  - (100.0*SUM(CASE WHEN response_sla_has_breached=TRUE THEN 1 ELSE 0 END)/COUNT(*)))::numeric,1)"}],"orderby":[[{"expressionType":"SQL","label":"Score","sqlExpression":"100.0
+  - (100.0*SUM(CASE WHEN response_sla_has_breached=TRUE THEN 1 ELSE 0 END)/COUNT(*))"},false]],"annotation_layers":[],"row_limit":20,"series_limit":0,"series_limit_metric":{"expressionType":"SQL","label":"Score","sqlExpression":"100.0
+  - (100.0*SUM(CASE WHEN response_sla_has_breached=TRUE THEN 1 ELSE 0 END)/COUNT(*))"},"group_others_when_limit_reached":false,"order_desc":true,"url_params":{},"custom_params":{},"custom_form_data":{},"post_processing":[],"time_offsets":[]}],"form_data":{"adhoc_filters":[{"clause":"WHERE","comparator":"Unassigned","expressionType":"SIMPLE","isExtra":false,"isNew":true,"operator":"!=","subject":"agent_name"}],"color_pn":true,"datasource":"19__table","extra_form_data":{},"groupby":["agent_name"],"having_filters":[{"clause":"HAVING","comparator":5,"expressionType":"SQL","isExtra":false,"isNew":true,"operator":">=","sqlExpression":"COUNT(*)
+  >= 5","subject":"COUNT(*)"}],"metrics":[{"expressionType":"SQL","label":"Cases","optionName":"m_cases","sqlExpression":"COUNT(*)"},{"expressionType":"SQL","label":"Breach
+  %","optionName":"m_breach","sqlExpression":"100.0*SUM(CASE WHEN response_sla_has_breached=TRUE
+  THEN 1 ELSE 0 END)/COUNT(*)"},{"expressionType":"SQL","label":"Median Resolution
+  (h)","optionName":"m_res","sqlExpression":"ROUND((PERCENTILE_CONT(0.5) WITHIN GROUP
+  (ORDER BY resolution_sla_duration)/3600.0)::numeric,1)"},{"expressionType":"SQL","label":"Reassign
+  %","optionName":"m_reassign","sqlExpression":"ROUND((100.0*SUM(CASE WHEN reassignment_count>0
+  THEN 1 ELSE 0 END)/COUNT(*))::numeric,1)"},{"expressionType":"SQL","label":"Score","optionName":"m_score","sqlExpression":"ROUND((100.0
+  - (100.0*SUM(CASE WHEN response_sla_has_breached=TRUE THEN 1 ELSE 0 END)/COUNT(*)))::numeric,1)"}],"order_desc":true,"query_mode":"aggregate","row_limit":20,"show_cell_bars":true,"slice_id":45,"timeseries_limit_metric":{"expressionType":"SQL","label":"Score","sqlExpression":"100.0
+  - (100.0*SUM(CASE WHEN response_sla_has_breached=TRUE THEN 1 ELSE 0 END)/COUNT(*))"},"viz_type":"table","force":false,"result_format":"json","result_type":"full"},"result_format":"json","result_type":"full"}'
+cache_timeout: null
+uuid: f760d02f-757b-4a90-9aad-70e04546772e
+version: 1.0.0
+dataset_uuid: 00ad6814-8226-4fc0-94b6-f80aa640cf9e
