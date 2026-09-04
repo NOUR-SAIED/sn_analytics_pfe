@@ -138,3 +138,36 @@ dbt_snapshot_case = DockerOperator(
 )
 
 verify_tasks["sn_customerservice_case"] >> dbt_snapshot_case
+
+# Same history-retention idea, applied to the other half of finding #1
+# ("dims are not snapshotted"): silver.sys_user is a real, independently
+# extracted source table, so an agent's name/email/phone getting changed
+# over time is meaningful history to keep, not something derived. See
+# snapshots/sys_user_snapshot.sql for why this uses a `check` strategy
+# instead of `timestamp` (no sys_updated_on column in silver.sys_user yet),
+# and why dim_assignment_group/dim_terminal don't get the same treatment
+# (no independent source table for either - they're denormalized out of
+# sn_customerservice_case, whose own history sn_case_snapshot already
+# covers).
+dbt_snapshot_sys_user = DockerOperator(
+    task_id="dbt_snapshot_sys_user",
+    image="sn_analytics-dbt:latest",
+    docker_url="unix://var/run/docker.sock",
+    network_mode="sn_analytics_default",
+    api_version="auto",
+    auto_remove="success",
+    mount_tmp_dir=False,  # avoid host/container path mismatches - see docker/dbt/Dockerfile
+    command=["dbt", "snapshot", "--select", "sys_user_snapshot"],
+    environment={
+        "DBT_PG_HOST": "postgres",
+        "DBT_PG_PORT": os.getenv("POSTGRES_CONN_PORT", "5432"),
+        "DBT_PG_USER": os.getenv("ELT_DATABASE_USERNAME", "elt_user"),
+        "DBT_PG_DBNAME": os.getenv("ELT_DATABASE_NAME", ""),
+    },
+    private_environment={
+        "DBT_PG_PASSWORD": os.getenv("ELT_DATABASE_PASSWORD", ""),
+    },
+    dag=dag,
+)
+
+verify_tasks["sys_user"] >> dbt_snapshot_sys_user

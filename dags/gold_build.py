@@ -1,10 +1,11 @@
 """
 Airflow DAG — Gold layer star schema build.
 
-All 5 gold tables (dim_date, dim_agent, dim_assignment_group, dim_terminal,
-fact_case) are now built by dbt - see docs/dbt_onboarding.md for the full
-per-table migration log. This DAG used to run 6 PythonOperator tasks (one
-per table, in etl_core/gold/*.py); none of that Python code exists anymore.
+All 6 gold tables (dim_date, dim_agent, dim_assignment_group, dim_terminal,
+fact_case, fact_case_status_history) are now built by dbt - see
+docs/dbt_onboarding.md for the full per-table migration log. This DAG used
+to run 6 PythonOperator tasks (one per table, in etl_core/gold/*.py); none
+of that Python code exists anymore.
 
 Runs via DockerOperator, same pattern as dags/sn_bronze_to_silver.py's
 dbt_snapshot_sn_case task: a fresh, disposable container from the
@@ -14,9 +15,10 @@ removed when done. dbt-core was tried directly in the Airflow image once
 and broke Celery (a `click` version collision) - see docs/dbt_onboarding.md
 for that postmortem; this is the fix, not a workaround.
 
-Task order: dbt run (builds/replaces all 5 tables via their own internal
-dependency graph - dbt figures out dim_date before fact_case, etc., no
-manual sequencing needed) -> dbt test (the 28 dbt tests in
+Task order: dbt run (builds/replaces all 6 tables via their own internal
+dependency graph - dbt figures out dim_date before fact_case,
+fact_case_status_history off the sn_case_snapshot before fact_case, etc.,
+no manual sequencing needed) -> dbt test (the 34 dbt tests in
 dbt/models/gold/_gold.yml - not_null/unique/relationships, replacing the
 hard PK/FK DDL constraints the old Python-created tables had) ->
 grant_copilot_reader_access (still genuinely Python's job - a Postgres
