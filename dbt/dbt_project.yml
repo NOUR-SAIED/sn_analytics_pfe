@@ -31,11 +31,6 @@ vars:
 
 models:
   sn_analytics:
-    staging:
-      +materialized: view
-      # No +schema override: this should land in the profile's default
-      # target schema (dbt_scratch, see profiles.yml), which is correct
-      # for a scratch/staging model.
     gold:
       +materialized: table
       +schema: gold
