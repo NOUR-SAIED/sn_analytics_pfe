@@ -67,7 +67,7 @@ def main():
         print(f"[INFO] Total records in bronze.raw_incidents: {total_in_db}")
 
         if loaded > 0:
-            print(f"\n[SUCCESS] E2E test passed!")
+            print("\n[SUCCESS] E2E test passed!")
             print(f"  - Extracted: {len(records)} records")
             print(f"  - Loaded: {loaded} records")
             print(f"  - Total in DB: {total_in_db} records")

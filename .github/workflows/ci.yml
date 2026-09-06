@@ -1,0 +1,209 @@
+name: CI/CD
+
+# WHEN this workflow runs:
+# - every push, on any branch (catches breakage the moment it happens,
+#   not just at PR time)
+# - every pull request targeting main (so a PR shows pass/fail before
+#   it's even mergeable)
+# - workflow_dispatch: a manual "Run workflow" button in the GitHub
+#   Actions tab - handy for a live demo, or re-running without a new commit.
+on:
+  push:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# If you push twice in a row, cancel the first run instead of letting both
+# finish - avoids wasting minutes/wall-clock time on a result nobody
+# needs anymore. Scoped per-branch (github.ref) so pushes to different
+# branches never cancel each other.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ---------------------------------------------------------------------
+  # JOB 1 -- lint + unit tests (the "CI" part: is the code itself sound?)
+  # ---------------------------------------------------------------------
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip" # caches pip downloads between runs, faster reruns
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt -r requirements-dev.txt
+
+      - name: Lint (ruff)
+        # Scoped to the actual deployed pipeline code, not the whole repo
+        # (exploration/*.py and root-level one-off scripts are deliberate
+        # scratch tools - see ruff.toml).
+        run: ruff check etl_core/ dags/ tests/
+
+      - name: Unit tests with coverage
+        run: |
+          pytest \
+            --cov=etl_core.transformers.silver \
+            --cov=etl_core.loaders.postgres_watermark \
+            --cov-report=term-missing \
+            --cov-fail-under=85
+        # Coverage is scoped to the pure business-logic modules
+        # (SilverTransformer's type casting/duration parsing, the
+        # watermark loader's decision logic) that unit tests can exercise
+        # in isolation. The ServiceNow API client and the Postgres bulk
+        # loaders are thin I/O wrappers around external calls - they're
+        # exercised for real in the dbt-build-test job below (which runs
+        # against a live, if throwaway, Postgres) and in the live-run
+        # verification already documented in CLAUDE.md, not via mocked
+        # unit coverage. 85% is a real, measured number (36 tests hit 93%
+        # on this scope the day this was written) with a little headroom,
+        # not an arbitrary target.
+
+  # ---------------------------------------------------------------------
+  # JOB 2 -- dbt build & test (does the actual data transformation still
+  # produce correct output?) Runs independently of job 1 so both sets of
+  # failures show up in one push instead of needing two rounds.
+  # ---------------------------------------------------------------------
+  dbt-build-test:
+    runs-on: ubuntu-latest
+    # A Postgres "service container" - GitHub Actions starts this
+    # alongside the job and tears it down after, reachable at localhost
+    # from the job's own steps. It starts completely empty every run,
+    # which is exactly why dbt/seeds/ci_only/*.csv exists.
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: elt_user
+          POSTGRES_PASSWORD: ci_password
+          POSTGRES_DB: elt_sn_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      # dbt/profiles.yml already reads exactly these env vars, defaulting
+      # to localhost/5432/elt_user/elt_sn_db - only the password needs to
+      # be set explicitly here to match the service container above.
+      DBT_PG_HOST: localhost
+      DBT_PG_PORT: "5432"
+      DBT_PG_USER: elt_user
+      DBT_PG_PASSWORD: ci_password
+      DBT_PG_DBNAME: elt_sn_db
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dbt
+        run: pip install -r dbt/requirements.txt
+
+      - name: Seed synthetic CI fixtures into silver
+        working-directory: dbt
+        # --select tag:ci_only is deliberate, not decorative - see
+        # dbt/seeds/ci_only/README.md for why a bare `dbt seed` must
+        # never be run against a real target.
+        run: dbt seed --profiles-dir . --select tag:ci_only
+
+      - name: Snapshot (SCD2 history, feeds fact_case_status_history)
+        working-directory: dbt
+        run: dbt snapshot --profiles-dir .
+
+      - name: Build the gold layer
+        working-directory: dbt
+        run: dbt run --profiles-dir . --select gold
+
+      - name: Run all 34 gold dbt tests
+        working-directory: dbt
+        run: dbt test --profiles-dir . --select gold
+
+  # ---------------------------------------------------------------------
+  # JOB 3 -- build & push versioned images (the "CD" part: Continuous
+  # *Delivery*, specifically - every merge to main produces a tested,
+  # versioned, deployable artifact in a registry. It stops there
+  # deliberately: there's no production host for this project to push a
+  # Continuous *Deployment* step to, and pretending otherwise would be
+  # dishonest. A human decides if/when/where an image actually runs.
+  # ---------------------------------------------------------------------
+  build-and-push:
+    needs: [lint-and-test, dbt-build-test]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write # needed to push to GHCR (GitHub's container registry)
+    strategy:
+      matrix:
+        # One entry per custom image this project builds (see
+        # docker-compose.yml's `build:` blocks). A matrix runs all 5 in
+        # parallel instead of 5 near-identical copy-pasted jobs.
+        include:
+          - name: airflow
+            context: .
+            dockerfile: dockerfile
+          - name: superset
+            context: docker/superset
+            dockerfile: docker/superset/Dockerfile
+          - name: dbt
+            context: .
+            dockerfile: docker/dbt/Dockerfile
+          - name: copilot-backend
+            context: copilot/backend
+            dockerfile: copilot/backend/Dockerfile
+          - name: copilot-frontend
+            context: copilot/frontend
+            dockerfile: copilot/frontend/Dockerfile
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compute lowercase image namespace
+        # GHCR requires lowercase image names; a GitHub username/org can
+        # contain uppercase letters, so this can't just be interpolated
+        # directly into the image tag below.
+        run: echo "IMAGE_NAMESPACE=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_ENV"
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          # GITHUB_TOKEN is provided automatically by GitHub Actions for
+          # every run - no secret to create or store yourself.
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build & push ${{ matrix.name }}
+        uses: docker/build-push-action@v6
+        with:
+          context: ${{ matrix.context }}
+          file: ${{ matrix.dockerfile }}
+          push: true
+          tags: |
+            ghcr.io/${{ env.IMAGE_NAMESPACE }}/sn-analytics-${{ matrix.name }}:latest
+            ghcr.io/${{ env.IMAGE_NAMESPACE }}/sn-analytics-${{ matrix.name }}:${{ github.sha }}
+          # Cache layers between runs using GitHub's own Actions cache -
+          # a second build of an unchanged image is then mostly free.
+          cache-from: type=gha,scope=${{ matrix.name }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.name }}
+
+  # ---------------------------------------------------------------------
+  # (Not yet built: an actual deploy step. This project runs entirely via
+  # Docker Compose on a personal machine with no hosting budget, so
+  # there's nothing real to auto-deploy TO yet - see CLAUDE.md's CI/CD
+  # section. If/when a target exists (a self-hosted GitHub Actions
+  # runner on that machine, or a real server over SSH), the natural next
+  # job here is: needs: build-and-push, if: <same main-only condition>,
+  # run `docker compose pull && docker compose up -d` against the images
+  # this job just pushed.)
+  # ---------------------------------------------------------------------

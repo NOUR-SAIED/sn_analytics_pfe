@@ -1,0 +1,14 @@
+task_sys_id,sla_sys_id,duration,percentage,has_breached
+case-0001,sla-response,900,50,false
+case-0001,sla-resolution,14400,80,false
+case-0002,sla-response,90000,300,true
+case-0002,sla-resolution,172800,90,false
+case-0004,sla-response,86400,250,true
+case-0004,sla-resolution,777600,220,true
+case-0005,sla-response,1800,60,false
+case-0005,sla-resolution,90000,85,false
+case-0006,sla-response,300,20,false
+case-0007,sla-response,2700,70,false
+case-0007,sla-resolution,86400,90,false
+case-0008,sla-response,600,40,false
+case-0008,sla-resolution,10800,75,false

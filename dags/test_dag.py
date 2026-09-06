@@ -35,7 +35,7 @@ def test_dag_structure():
         print(f"  {i}. {task_id}")
     
     # Verify task dependencies
-    print(f"\nTask Dependencies:")
+    print("\nTask Dependencies:")
     for task in dag.tasks:
         downstream = [t.task_id for t in task.downstream_list]
         if downstream:

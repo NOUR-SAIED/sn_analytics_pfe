@@ -176,7 +176,7 @@ class ServiceNowAPIClient:
             )
 
             if not batch:
-                print(f"(empty)")
+                print("(empty)")
                 break
 
             print(f"({len(batch)} records)")

@@ -1,0 +1,18 @@
+# Linting scope for CI's "lint-and-test" job.
+#
+# Deliberately conservative on WHICH rules: real bugs and dead code (E9
+# syntax errors, F-series pyflakes checks - unused imports/variables,
+# undefined names), not style opinions (line length, import ordering,
+# etc.) - a lint gate that nitpicks style would train you to ignore its
+# failures; one that only flags things that are actually wrong won't.
+#
+# Deliberately narrow on WHICH files: CI invokes this as
+# `ruff check etl_core/ dags/ tests/`, not a bare `ruff check .` -
+# `exploration/*.py` and root-level one-off scripts (e.g.
+# inspect_bronze.py) are scratch/dev tools, not the deployed pipeline
+# (see CLAUDE.md's note on exploration/time_kpi.py), and deliberately
+# aren't lint-gated.
+target-version = "py311"
+
+[lint]
+select = ["E9", "F", "E7", "W6"]

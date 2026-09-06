@@ -8,7 +8,7 @@ Computed fields (response_time_s, resolution_time_s, etc.)
 are deferred to the gold layer — documented in docs/gold_computed_fields.md
 """
 
-from datetime import datetime, date, timezone
+from datetime import datetime, date
 from typing import List, Dict, Any, Optional
 
 from etl_core.config.silver_mappings import SilverTableConfig, FieldMapping

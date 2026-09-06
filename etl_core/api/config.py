@@ -65,7 +65,7 @@ class APIConfig:
     @classmethod
     def log_config(cls) -> None:
         """Log configuration (masking sensitive values)."""
-        print(f"ServiceNow API Config:")
+        print("ServiceNow API Config:")
         print(f"  Base URL: {cls.BASE_URL}")
         print(f"  Username: {cls.USERNAME}")
         print(f"  Account Query: {cls.ACCOUNT_QUERY}")

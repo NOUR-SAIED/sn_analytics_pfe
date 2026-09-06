@@ -3,7 +3,11 @@ __pycache__/
 .env
 *.pyc
 logs/
-.github/
+# NOTE: .github/ used to be ignored wholesale here (lumped in with
+# .vscode/.claude editor cruft below) - that also silently ignored
+# .github/workflows/, which is exactly where GitHub Actions workflow
+# files must live to take effect. Removed so ci.yml (added 2026-09-06)
+# actually gets committed and runs.
 .vscode/
 .claude/
 etl_core.egg-info # Ignore Python package metadata
@@ -13,6 +17,8 @@ copilot/frontend/node_modules/
 copilot/frontend/.next/
 .venv-dbt/
 dbt/target/
+.coverage
+.pytest_cache/
 dbt/logs/
 dbt/dbt_packages/
 dbt/.user.yml

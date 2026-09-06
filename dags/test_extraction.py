@@ -38,15 +38,15 @@ def main():
             return
 
         # Show summary
-        print(f"\n[SUMMARY]")
+        print("\n[SUMMARY]")
         print(f"  Total Records: {len(records)}")
 
         # Show first record (full detail)
-        print(f"\n[FIRST RECORD]")
+        print("\n[FIRST RECORD]")
         print(json.dumps(records[0], indent=2, default=str))
 
         # Show key fields from first 5 records
-        print(f"\n[FIRST 5 RECORDS]")
+        print("\n[FIRST 5 RECORDS]")
         for i, rec in enumerate(records[:5], 1):
             sys_id = rec.get("sys_id")
             if isinstance(sys_id, dict):

@@ -10,7 +10,6 @@ from typing import Optional
 
 import psycopg2
 import psycopg2.extras
-from psycopg2 import sql
 
 
 def get_connection(

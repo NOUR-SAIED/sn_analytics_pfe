@@ -38,3 +38,17 @@ models:
       # +schema here resolves to exactly "gold" (not "dbt_scratch_gold")
       # because of the generate_schema_name override in
       # macros/get_custom_schema.sql - see that file for why.
+
+# seeds/ci_only/*.csv are small, entirely synthetic silver.* fixtures used
+# ONLY by the CI "dbt-build-test" GitHub Actions job, which runs against a
+# throwaway Postgres service container that starts empty every time. They
+# are tagged so a bare `dbt seed` (e.g. run locally against `dev`) does
+# NOT touch them - CI explicitly runs `dbt seed --select tag:ci_only`.
+# Never run this seed against a real target: it would insert 8 fake cases
+# on top of the real ones in silver.sn_customerservice_case. See
+# seeds/ci_only/README.md for what each row is there to test.
+seeds:
+  sn_analytics:
+    ci_only:
+      +schema: silver
+      +tags: ["ci_only"]

@@ -11,7 +11,7 @@ import psycopg2
 from psycopg2 import sql
 from psycopg2.extras import execute_values
 
-from etl_core.config.silver_mappings import SilverTableConfig, FieldMapping
+from etl_core.config.silver_mappings import SilverTableConfig
 
 
 class PostgresSilverLoader:
@@ -149,11 +149,6 @@ class PostgresSilverLoader:
 
         # Build column identifiers
         col_idents = [sql.Identifier(c) for c in columns]
-
-        # Build value placeholders
-        values_placeholder = sql.SQL("({})").format(
-            sql.SQL(", ").join(sql.Placeholder() * len(columns))
-        )
 
         # Build ON CONFLICT SET clause for non-id columns
         excluded_cols = [c for c in columns if c not in ("id", "sys_id", "bronze_id", "loaded_at", "extraction_run_id")]
