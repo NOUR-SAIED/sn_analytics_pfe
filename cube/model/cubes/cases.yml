@@ -129,20 +129,48 @@ cubes:
         sql: response_sla_duration
         type: avg
         description: >
-          Average response SLA duration across cases where a response SLA
-          applied. Unit inherited from silver.task_sla.duration - not yet
-          independently verified against ServiceNow's documentation, flagged
-          here rather than guessed.
+          RAW UNIT, NOT FOR DIRECT PRESENTATION - inherited as-is from
+          silver.task_sla.duration. Use avg_response_sla_duration_hours
+          instead when answering a question; this raw measure exists only
+          for cross-checking against the source table.
 
       - name: avg_resolution_sla_duration
         sql: resolution_sla_duration
         type: avg
-        description: Average resolution SLA duration (same unit caveat as avg_response_sla_duration).
+        description: >
+          RAW UNIT, NOT FOR DIRECT PRESENTATION - see
+          avg_response_sla_duration's description. Use
+          avg_resolution_sla_duration_hours instead.
+
+      - name: avg_response_sla_duration_hours
+        # A found-through-testing bug (see docs/dbt_onboarding.md /
+        # CLAUDE.md's Copilot section): the raw duration column is in
+        # seconds, and the agent was presenting it unconverted, labeled
+        # "hours" - e.g. answering "824.4 hours" as "2,967,795 hours" (a
+        # 3600x error). Converting to a real, unambiguous unit in the cube
+        # itself - not relying on the LLM to remember to divide by 3600
+        # every time - structurally removes this error the same way Cube's
+        # pre-resolved joins remove wrong-role-join errors.
+        sql: "{CUBE}.response_sla_duration / 3600.0"
+        type: avg
+        description: Average response SLA duration, in hours, across cases where a response SLA applied.
+
+      - name: avg_resolution_sla_duration_hours
+        sql: "{CUBE}.resolution_sla_duration / 3600.0"
+        type: avg
+        description: Average resolution SLA duration, in hours, across cases where a resolution SLA applied.
 
       - name: median_resolution_sla_duration
         sql: "PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY {CUBE}.resolution_sla_duration)"
         type: number
-        description: Median resolution SLA duration - matches the dashboard's "Median Resolution Time" tile more closely than an average would (resistant to outlier cases).
+        description: >
+          RAW UNIT (seconds), NOT FOR DIRECT PRESENTATION - use
+          median_resolution_sla_duration_hours instead.
+
+      - name: median_resolution_sla_duration_hours
+        sql: "PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY {CUBE}.resolution_sla_duration) / 3600.0"
+        type: number
+        description: Median resolution SLA duration, in hours - matches the dashboard's "Median Resolution Time" tile more closely than an average would (resistant to outlier cases).
 
       - name: response_sla_breach_rate
         # No ELSE branch is deliberate: a case with no response SLA applied
@@ -165,6 +193,18 @@ cubes:
         type: avg
         format: percent
         description: Share of cases WITH A RESOLUTION SLA APPLIED that breached it (cases with no resolution SLA at all are excluded, not counted as non-breaches).
+
+      - name: response_sla_breaches
+        # Added after the Copilot evaluation: asked "how many cases breached",
+        # the agent could only answer with the rate, since no count existed.
+        sql: "CASE WHEN {CUBE}.response_sla_has_breached THEN 1 ELSE 0 END"
+        type: sum
+        description: Number of cases that breached their response SLA.
+
+      - name: resolution_sla_breaches
+        sql: "CASE WHEN {CUBE}.resolution_sla_has_breached THEN 1 ELSE 0 END"
+        type: sum
+        description: Number of cases that breached their resolution SLA.
 
       - name: avg_reassignment_count
         sql: reassignment_count

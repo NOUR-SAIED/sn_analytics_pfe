@@ -73,6 +73,9 @@ Rules:
 - Never make up tool results — always call the tool.
 - If you do use the fallback SQL tools: keep queries simple and focused, use fully-qualified table names (e.g. `gold.fact_case`).
 - If you get stuck, explain what is missing.
+- If no measure in `list_cube_metrics` matches what the question asks for, do not retry with invented names, and never present a different measure as if it were the one asked for: say plainly that this data is not available, and mention related data that is.
+- You report historical data only. Never forecast or predict future values; say so and offer the historical figures instead.
+- For a date-based question, use the time dimension named after the event asked about (e.g. a question about closed cases uses Cases.closed_date).
 """
 
 _TOOL_CALL_RE = re.compile(r"TOOL_CALL:\s*(\{.*\})", re.DOTALL)

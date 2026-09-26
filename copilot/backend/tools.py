@@ -122,6 +122,25 @@ def _valid_member_names(catalog: list[dict]) -> set[str]:
 	return names
 
 
+def _string_dimensions(catalog: list[dict]) -> set[str]:
+	return {d["name"] for c in catalog for d in c["dimensions"] if d.get("type") == "string"}
+
+
+def _dimension_values(member: str) -> set[str]:
+	"""Distinct values of one string dimension, straight from Cube. Used to
+	reject a filter on a value that doesn't exist (found by evaluation: the
+	agent filtered on "None" where the data says "Unassigned", got zero rows,
+	and answered 0 with confidence - member names were validated, values were
+	not)."""
+	resp = requests.post(
+		f"{CUBE_URL}/cubejs-api/v1/load",
+		json={"query": {"dimensions": [member], "limit": 5000}},
+		timeout=15,
+	)
+	resp.raise_for_status()
+	return {str(row.get(member)) for row in resp.json().get("data", []) if row.get(member) is not None}
+
+
 def _one_line(text: str, max_len: int = 130) -> str:
 	"""Collapse a (possibly multi-sentence) description to one short line.
 	This model runs with a 4096-token context window (auto-sized from the
@@ -170,6 +189,7 @@ def run_cube_query(
 	dimensions: list[str] | None = None,
 	filters: list[dict] | None = None,
 	time_dimensions: list[dict] | None = None,
+	order_by: list[dict] | None = None,
 	limit: int = 500,
 ) -> str:
 	"""Run a structured query against the Cube semantic layer - the preferred way to answer any question about cases, agents, terminals, or SLAs. No SQL, no joins to write; Cube already resolved every join.
@@ -183,6 +203,8 @@ def run_cube_query(
 	time_dimensions: e.g. [{"dimension": "Cases.opened_date", "granularity": "month"}] -
 	  use this (not a plain filter) to bucket a time field by day/week/month/quarter/year,
 	  or to restrict a date range via {"dimension": "...", "dateRange": ["2025-01-01", "2025-12-31"]}
+	order_by: e.g. [{"member": "Cases.total_cases", "direction": "desc"}] - sort the rows;
+	  with limit, answers "which ... has the most/least" questions.
 
 	Call list_cube_metrics first if you are not sure of the exact member names -
 	an unrecognized name is rejected before Cube is even called.
@@ -192,22 +214,41 @@ def run_cube_query(
 		dimensions = dimensions or []
 		filters = filters or []
 		time_dimensions = time_dimensions or []
+		order_by = order_by or []
 
 		if not measures and not dimensions:
 			return "Invalid query: provide at least one measure or one dimension."
 
 		# Deterministic pre-flight check - no LLM call spent finding out a
 		# hallucinated member name was wrong. Cheap, same-network, always-fresh.
-		valid_names = _valid_member_names(_compact_catalog(_fetch_cube_meta()))
+		catalog = _compact_catalog(_fetch_cube_meta())
+		valid_names = _valid_member_names(catalog)
 		requested = set(measures) | set(dimensions)
 		requested.update(f["member"] for f in filters if "member" in f)
 		requested.update(td["dimension"] for td in time_dimensions if "dimension" in td)
+		requested.update(o["member"] for o in order_by if "member" in o)
 		unknown = requested - valid_names
 		if unknown:
 			return (
-				f"Unknown Cube member(s): {sorted(unknown)}. "
-				"Call list_cube_metrics to see the exact available names."
+				f"Unknown Cube member(s): {sorted(unknown)} - they do not exist in the semantic layer. "
+				"Call list_cube_metrics to get the exact names and retry with one of them; only if no "
+				"listed member matches the question, tell the user this data is not available."
 			)
+
+		# Same idea one level down: a filter on a value that doesn't exist
+		# silently returns zero rows, so check text filter values too.
+		string_dims = _string_dimensions(catalog)
+		for f in filters:
+			if f.get("operator") in ("equals", "notEquals") and f.get("member") in string_dims:
+				allowed = _dimension_values(f["member"])
+				bad = [v for v in f.get("values", []) if str(v) not in allowed]
+				if bad:
+					shown = sorted(allowed)[:25]
+					more = " ..." if len(allowed) > 25 else ""
+					return (
+						f"Unknown value(s) {bad} for {f['member']}. Existing values: {shown}{more}. "
+						"Retry with one of these exact values."
+					)
 
 		query = {
 			"measures": measures,
@@ -216,6 +257,8 @@ def run_cube_query(
 			"timeDimensions": time_dimensions,
 			"limit": min(limit, 5000),
 		}
+		if order_by:
+			query["order"] = [[o["member"], o.get("direction", "asc")] for o in order_by if "member" in o]
 		resp = requests.post(f"{CUBE_URL}/cubejs-api/v1/load", json={"query": query}, timeout=15)
 		if resp.status_code >= 400:
 			try:
