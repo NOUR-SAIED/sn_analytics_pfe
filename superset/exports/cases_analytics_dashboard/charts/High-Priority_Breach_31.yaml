@@ -9,7 +9,7 @@ params:
   metric:
     expressionType: SQL
     sqlExpression: 100.0 * SUM(CASE WHEN response_sla_has_breached = TRUE THEN 1 ELSE
-      0 END) / COUNT(*)
+      0 END) / NULLIF(COUNT(response_sla_has_breached), 0)
     column: null
     aggregate: null
     datasourceWarning: false
@@ -26,7 +26,7 @@ params:
     isNew: true
   header_font_size: 0.4
   subheader_font_size: 0.15
-  subtitle: "2-High priority \u2014 worse than Critical (24.6%)"
+  subtitle: 2-High priority - response SLA breach rate
   subtitle_font_size: 0.15
   y_axis_format: SMART_NUMBER
   color_picker:
