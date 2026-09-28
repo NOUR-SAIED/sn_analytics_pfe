@@ -28,7 +28,7 @@ Support teams working in ServiceNow usually can't answer questions like *"are we
 - 🔄 **Incremental extraction.** Airflow pulls cases, SLAs, users and contracts from the ServiceNow REST API every day. A watermark means each run only fetches records that changed.
 - 🥉🥈🥇 **Medallion warehouse.** Raw JSON lands in **bronze**, typed and cleaned rows in **silver**, and a **gold** star schema built with dbt, including SCD2 snapshots that record every status change.
 - 🧊 **Semantic layer.** Cube defines the business metrics (breach rate, time to first response, backlog…) once, so dashboards and the AI agent use the same definitions.
-- 📊 **Dashboards.** A 28-chart Superset dashboard covering SLA breaches, backlog aging, agent leaderboards, arrival heatmaps and more. It's kept in git as YAML.
+- 📊 **Dashboards.** A 29-chart Superset dashboard covering SLA breaches, backlog aging, agent leaderboards, arrival heatmaps and more. It's kept in git as YAML.
 - 🤖 **AI Copilot.** A chat app where you ask questions in natural language. A LangGraph agent running a **local** LLM (Ollama, no data leaves the machine) turns them into Cube queries and replies with tables.
 - ✅ **CI/CD.** GitHub Actions runs lint and unit tests, builds the whole dbt gold layer on synthetic seeds, runs the dbt tests, and pushes 5 Docker images to GHCR.
 
